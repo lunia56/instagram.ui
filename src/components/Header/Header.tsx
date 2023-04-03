@@ -1,9 +1,10 @@
 import React from 'react';
+import s from './Header.module.scss'
 
 const Header = () => {
     return (
         <header>
-            <div style={{color:'red'}}>Header</div>
+            <div className={s.header} >Instagram</div>
         </header>
     );
 };

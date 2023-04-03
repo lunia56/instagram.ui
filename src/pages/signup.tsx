@@ -8,7 +8,6 @@ const SignUpPage = () => {
     return (
         <Layout>
             <SignUp/>
-            <p>Hello world</p>
         </Layout>
 
     );
