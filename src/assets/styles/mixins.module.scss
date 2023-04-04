@@ -1,0 +1,10 @@
+@mixin myFont($fontSize,$fontWeight,$color,$font){
+  //@font-face {
+  //  font-family: 'FuturaBoldBT';
+  //  src: url('../fonts/FuturaBoldBT.ttf')
+  //}
+  font-family:  $font,sans-serif ;
+  font-weight: $fontWeight;
+  font-size:$fontSize;
+  color:$color;
+}

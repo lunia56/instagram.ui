@@ -1,5 +1,5 @@
 import {ReactNode, useState} from "react";
-import {Controller, FieldPath, useForm} from "react-hook-form";
+import {Control, Controller, FieldPath, useForm} from "react-hook-form";
 import s from './SignUp.module.scss'
 import {
     FormControl,
@@ -10,6 +10,7 @@ import {
     VStack,
     Heading,
     Box,
+    Link,
     Text,
 } from "@chakra-ui/react";
 
@@ -19,7 +20,7 @@ const SignUp = () => {
 
     const [isSubmitting, setIsSubmitting] = useState(false);
 
-    const {register, handleSubmit,watch, formState: {errors}} = useForm({mode:'onChange'});
+    const {register,control, handleSubmit,watch,  formState: {errors,isValid}} = useForm({mode:'onChange'});
     const onSubmit = (data) => {
         setIsSubmitting(true);
 
@@ -29,16 +30,16 @@ const SignUp = () => {
     };
 
     return (
-            <Box p={0} className={s.signUpBlock}>
+
+            <Box  className={s.signUpBlock}>
             <VStack spacing={10} align="stretch">
-                <Heading size="lg">Регистрация</Heading>
-                <Text>Введите данные для регистрации</Text>
+                <Heading size="lg">Sign Up</Heading>
                 <Box bg="gray.100" p={4} borderRadius="md">
                     <form onSubmit={handleSubmit(onSubmit)}>
                         <VStack spacing={4} align="stretch">
                             <FormControl isInvalid={Boolean(errors.email)}>
                                 <FormLabel>Email</FormLabel>
-                                <Input type="email" {...register("email", {
+                                <input type="email" {...register("email", {
                                     required: "Email is required",
                                     pattern: {
                                         value: /^((([0-9A-Za-z]{1}[-0-9A-z\.]{1,}[0-9A-Za-z]{1})|([0-9А-Яа-я]{1}[-0-9А-я\.]{1,}[0-9А-Яа-я]{1}))@([-A-Za-z]{1,}\.){1,2}[-A-Za-z]{2,})$/u,
@@ -52,7 +53,7 @@ const SignUp = () => {
 
                             <FormControl isInvalid={Boolean(errors.password)}>
                                 <FormLabel>Password</FormLabel>
-                                <Input type="password" {...register("password", {
+                                <input type="password" {...register("password", {
                                     required: "Field is required", minLength: {
                                         value: 6,
                                         message: 'Minimum length 6 characters'
@@ -69,7 +70,7 @@ const SignUp = () => {
 
                             <FormControl isInvalid={Boolean(errors.confirmPassword)}>
                                 <FormLabel>Confirm password</FormLabel>
-                                <Input type="password" {...register("confirmPassword", {
+                                <input type="password" {...register("confirmPassword", {
                                     required: "Field is required",
                                     validate: value => value === watch("password")
                                 })}
@@ -86,12 +87,15 @@ const SignUp = () => {
                                 isLoading={isSubmitting}
                                 loadingText="Отправка..."
                                 colorScheme="blue"
+                                disabled={!isValid}
                             >
                                 Зарегистрироваться
                             </Button>
                         </VStack>
                     </form>
                 </Box>
+                <Text>Do you have an account?</Text>
+                <Link href={'/'}>Sign In</Link>
             </VStack>
         </Box>
     );

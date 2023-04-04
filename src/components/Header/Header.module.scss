@@ -1,5 +1,12 @@
 @import "src/assets/styles/variables.module";
 .header{
-  color: $titleColor;
-  background-color:$backgroundColor;
+  background-color:transparent;
+  border: none;
+  border-bottom: #171717 solid 2px;
+  height: 50px;
+  & span {
+    color: $titleColor;
+    font-size: 30px;
+    font-weight: normal;
+  }
 }
