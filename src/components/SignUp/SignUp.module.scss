@@ -1,10 +1,46 @@
 @import "src/assets/styles/variables.module";
-.signUpBlock{
-  height: 500px;
-  background-color: $componentColor;
+
+.signUpContainer {
+  min-height: 92vh;
+  border: blue solid 1px;
   display: flex;
   justify-content: center;
   align-items: center;
-  max-width: 400px;
 
+  .signUpBlock {
+    padding: 25px 0;
+    border: red solid 1px;
+    height: 528px;
+    background-color: $componentColor;
+    display: flex;
+    justify-content: center;
+    //align-items: center;
+    min-width: 378px;
+    color: $textColor;
+
+    .formBlock {
+      border: gold solid 1px;
+      padding: 0 24px;
+      height: 100%;
+      width: 100%;
+      //display: flex;
+      //align-items: center;
+      & input{
+        width: 100%;
+      }
+      .passwordInput{
+          position: relative;
+
+        & button {
+          position: absolute;
+          top: 50%;
+          right: 0.5rem;
+          transform: translateY(-50%);
+          border: none;
+          background-color: transparent;
+          cursor: pointer;
+        }
+      }
+    }
+  }
 }
