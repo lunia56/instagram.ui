@@ -1,9 +1,7 @@
-@mixin myFont($fontSize,$fontWeight,$color,$font){
-  //@font-face {
-  //  font-family: 'FuturaBoldBT';
-  //  src: url('../fonts/FuturaBoldBT.ttf')
-  //}
+@mixin myFont($fontSize,$fontWeight,$lineHeight,$color,$font:'inter'){
+
   font-family:  $font,sans-serif ;
+  line-height: $lineHeight;
   font-weight: $fontWeight;
   font-size:$fontSize;
   color:$color;

@@ -1,8 +1,14 @@
 import {instagramInstance} from '@/services/instagramInstance';
 
-export const instagramApi = {
-    login:()=>{},
-    me:()=>{
-        instagramInstance.get('')
+export const InstagramApi = {
+    signUp:({email,password}: { email: string; password: string })=>{
+        return instagramInstance.post('users/',{
+            email,
+            password
+        })
     },
+    me:()=>{
+      return  instagramInstance.get('')
+    },
+    login:()=>{},
 }
