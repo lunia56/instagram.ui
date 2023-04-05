@@ -1,7 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="7888061d-43dc-43d7-b0f0-7666a8394e87" name="Changes" comment="" />
+    <list default="true" id="7888061d-43dc-43d7-b0f0-7666a8394e87" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/components/LogIn/LogIn.module.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/LogIn/LogIn.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/pages/login.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/styles/variables.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/styles/variables.module.scss" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -40,6 +47,8 @@
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="D:\samurai\internship\instagram.ui\src\pages" />
+      <recent name="D:\samurai\internship\instagram.ui\src\pages\api" />
+      <recent name="D:\samurai\internship\instagram.ui\src\components\LogIn" />
       <recent name="D:\samurai\internship\instagram.ui\src\components" />
     </key>
   </component>

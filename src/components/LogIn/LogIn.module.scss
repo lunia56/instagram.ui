@@ -1,0 +1,10 @@
+@import "src/assets/styles/variables.module";
+.signUpBlock{
+  height: 500px;
+  background-color: $componentColor;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  max-width: 400px;
+
+}
