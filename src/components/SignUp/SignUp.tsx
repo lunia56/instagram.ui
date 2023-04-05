@@ -193,9 +193,7 @@ const SignUp = () => {
         </Box>
     );
 }
-
-//
-// export default SignUp;
+export default SignUp;
 //
 // import { useForm, useWatch, Control } from "react-hook-form";
 //
