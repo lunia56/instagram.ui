@@ -1,15 +1,14 @@
 @import "src/assets/styles/variables.module";
+@import "src/assets/styles/mixins.module";
 
 .signUpContainer {
   min-height: 92vh;
-  border: blue solid 1px;
   display: flex;
   justify-content: center;
   align-items: center;
 
   .signUpBlock {
     padding: 25px 0;
-    border: red solid 1px;
     height: 528px;
     background-color: $componentColor;
     display: flex;
@@ -19,7 +18,7 @@
     color: $textColor;
 
     .formBlock {
-      border: gold solid 1px;
+      @include myFont(20px,700,36px,$textColor);
       padding: 0 24px;
       height: 100%;
       width: 100%;
@@ -27,19 +26,6 @@
       //align-items: center;
       & input{
         width: 100%;
-      }
-      .passwordInput{
-          position: relative;
-
-        & button {
-          position: absolute;
-          top: 50%;
-          right: 0.5rem;
-          transform: translateY(-50%);
-          border: none;
-          background-color: transparent;
-          cursor: pointer;
-        }
       }
     }
   }

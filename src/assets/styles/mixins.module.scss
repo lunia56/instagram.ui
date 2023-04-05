@@ -1,4 +1,4 @@
-@mixin myFont($fontSize,$fontWeight,$lineHeight,$color,$font){
+@mixin myFont($fontSize,$fontWeight,$lineHeight,$color,$font:'inter'){
 
   font-family:  $font,sans-serif ;
   line-height: $lineHeight;
