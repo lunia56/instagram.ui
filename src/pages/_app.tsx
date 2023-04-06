@@ -22,7 +22,7 @@ const theme = extendTheme({
         body: 'Inter',
     },
     styles: {
-        global: (props) => ({
+        global: (props: Record<string, any>) => ({
             body: {
                 bg: mode("white", "gray.800")(props),
                 color: mode("gray.800", "whiteAlpha.900")(props),
