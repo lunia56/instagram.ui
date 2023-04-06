@@ -1,6 +1,6 @@
 // import {QueryObserverResult, useQuery} from '@tanstack/react-query';
 import {InstagramApi} from '@/services/index';
-import {QueryObserverResult, useMutation, useQuery, useQueryClient} from '@tanstack/react-query';
+import {useMutation, useQuery} from '@tanstack/react-query';
 import {useRouter} from 'next/router';
 
 // export const useSignUpQuery = () => {
@@ -17,7 +17,9 @@ export const useLoginMutation = () => {
     return useMutation({
         mutationFn: InstagramApi.signUp,
         onSuccess: (res) => {
+            console.log('res ',res)
             push("/");
+            // открывается модалка
         },
     });
 };

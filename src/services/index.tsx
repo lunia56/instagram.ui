@@ -1,8 +1,9 @@
 import {instagramInstance} from '@/services/instagramInstance';
 
 export const InstagramApi = {
-    signUp:({email,password}: { email: string; password: string })=>{
-        return instagramInstance.post('users/',{
+    signUp:({login,email,password}: { login:string, email: string; password: string })=>{
+        return instagramInstance.post('auth/registration',{
+            login,
             email,
             password
         })

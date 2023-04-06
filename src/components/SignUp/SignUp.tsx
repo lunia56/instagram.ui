@@ -1,24 +1,28 @@
-import React, {ReactNode, useState} from "react";
-import {Control, Controller, FieldPath, useForm, UseFormRegisterReturn} from "react-hook-form";
+import React, {useState} from "react";
+import {Controller, useForm} from "react-hook-form";
 import s from './SignUp.module.scss'
 import SocialRegistrationForm from '@/components/SignUp/SocialRegistrationForm';
 import {
-    FormControl,
-    FormLabel,
-    FormErrorMessage,
-    Input,
-    Button,
-    VStack,
-    Heading,
     Box,
+    Button,
+    FormControl,
+    FormErrorMessage,
+    FormLabel,
+    Heading,
+    IconButton,
+    Input,
+    InputGroup,
+    InputRightElement,
     Link,
-    Text, InputGroup, InputRightElement, IconButton,
+    Text,
+    VStack,
 } from "@chakra-ui/react";
 import {AiOutlineEye, AiOutlineEyeInvisible} from 'react-icons/ai';
 import {useLoginMutation} from '@/services/hooks';
 
 
 type  FormValues = {
+    login: string
     email: string
     password: string
     confirmPassword: string
@@ -28,7 +32,7 @@ const SignUp = () => {
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [showPassword, setShowPassword] = useState(false);
 
-    const { mutate: signUp, error }=useLoginMutation()
+    const {mutate: signUp, error} = useLoginMutation()
 
     const {
         control,
@@ -37,26 +41,51 @@ const SignUp = () => {
         formState: {errors, isValid}
     } = useForm<FormValues>({mode: 'onChange'});
 
-
     const onSubmit = (data: FormValues) => {
         setIsSubmitting(true);
         signUp(data)
-        // Ваша логика отправки формы
         setIsSubmitting(false);
     };
     const handleClick = () => setShowPassword(!showPassword);
 
     return (
         <Box className={s.signUpContainer}>
-            <VStack className={s.signUpBlock} spacing={1}>
+            <VStack className={s.signUpBlock} spacing={0}>
                 <Heading size="lg">Sign Up</Heading>
                 <SocialRegistrationForm/>
                 <Box className={s.formBlock}>
                     <form onSubmit={handleSubmit(onSubmit)}>
-                        <VStack
-                            spacing={0}
-                            align="stretch"
-                        >
+                        <VStack spacing={0} align="stretch">
+                            <FormControl isInvalid={Boolean(errors.login)}>
+                                <FormLabel color={'#4C4C4C'}>Login</FormLabel>
+
+                                <Controller
+                                    control={control}
+                                    name="login"
+                                    rules={{
+                                        required: "Login is required",
+                                        minLength: {
+                                            value: 3,
+                                            message: 'Minimum length 3 characters'
+                                        }, maxLength: {
+                                            value: 20,
+                                            message: 'Maximum length 20 characters'
+                                        }
+
+                                    }}
+                                    render={({field: {onChange, value,}}) => (<>
+                                        <Input
+                                            color={'white'}
+                                            value={value}
+                                            onChange={onChange}
+                                        />
+                                    </>)}
+                                />
+                                {errors.login ? <FormErrorMessage>
+                                    <span>{errors.login.message}</span>
+                                </FormErrorMessage> : <><br/></>}
+                            </FormControl>
+
                             <FormControl isInvalid={Boolean(errors.email)}>
                                 <FormLabel color={'#4C4C4C'}>Email</FormLabel>
 
@@ -194,8 +223,7 @@ const SignUp = () => {
     );
 }
 
-//
-// export default SignUp;
+export default SignUp;
 //
 // import { useForm, useWatch, Control } from "react-hook-form";
 //
