@@ -10,15 +10,27 @@ import {useRouter} from 'next/router';
 export const useMeQuery = () => {
     return useQuery({queryKey: ['me'], queryFn: InstagramApi.me})
 }
+// export const useEmailResendingQuery = () => {
+//     return useQuery({queryKey: ['emailResend'], queryFn: InstagramApi.me})
+// }
 
 
+export const useEmailResendingMutation = () => {
+    const { push } = useRouter();
+    return useMutation({
+        mutationFn: InstagramApi.emailResent,
+        onSuccess: (res) => {
+            // push("/");
+            // открывается модалка
+        },
+    });
+};
 export const useLoginMutation = () => {
     const { push } = useRouter();
     return useMutation({
         mutationFn: InstagramApi.signUp,
         onSuccess: (res) => {
-            console.log('res ',res)
-            push("/");
+            // push("/");
             // открывается модалка
         },
     });
