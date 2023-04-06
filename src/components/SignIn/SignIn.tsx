@@ -162,7 +162,7 @@ const SignIn = () => {
                     </form>
                 </Box>
                 <Text>Don’t have an account?</Text>
-                <Link>Sign Up</Link>
+                <Link href={'/signup'}>Sign Up</Link>
             </VStack>
         </Box>
     );
