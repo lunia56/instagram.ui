@@ -16,11 +16,16 @@ const config = {
 
 const theme = extendTheme({
     config,
+    fonts: {
+        heading: "Inter",
+        body: 'Inter',
+    },
     styles: {
         global: (props) => ({
             body: {
                 bg: mode("white", "gray.800")(props),
                 color: mode("gray.800", "whiteAlpha.900")(props),
+                fontFamily:'body'
             },
         }),
     },
