@@ -14,11 +14,11 @@ const ConfirmationMessage = ({title, description, buttonTitle, onClickHandler, i
         <Box>
             <VStack
                 gap={10}>
-                <Heading letterSpacing={'3px'} fontWeight={'700'} fontSize={'20px'} lineHeight={'36px'} color={'white'}
+                <Heading letterSpacing={'1px'} fontWeight={'700'} fontSize={'20px'} lineHeight={'36px'} color={'white'}
                          mt={'35px'}> {title}</Heading>
                 font-style: normal;
 
-                <Text letterSpacing={'3px'} fontWeight={400} fontSize={'16px'} lineHeight={'24px'} fontStyle={'normal'}
+                <Text letterSpacing={'1px'} fontWeight={400} fontSize={'16px'} lineHeight={'24px'} fontStyle={'normal'}
                       color={'white'}>{description}</Text>
                 <Button
                     type="button"

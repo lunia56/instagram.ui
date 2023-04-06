@@ -1,7 +1,7 @@
 import React from 'react';
 import ConfirmationMessage from '@/components/confirmationMessage/confirmationMessage';
 import {useRouter} from 'next/router';
-import img from '../../../../public/bro.png'
+import img from '../../../../public/rafiki.png'
 import Layout from '@/components/Layout/Layout';
 import {useEmailResendingMutation, useMeQuery} from '@/services/hooks';
 
