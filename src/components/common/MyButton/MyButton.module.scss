@@ -1,0 +1,84 @@
+@import "src/assets/styles/variables.module";
+.button{
+  border-radius: 2px;
+  border: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 24px;
+  background: #FFFFFF;
+}
+.button:active {
+  background-color: #D5DAE0;
+
+}
+
+.button:hover {
+  color: #333333;
+  cursor: pointer;
+}
+
+.button:focus {
+}
+
+.disabled {
+}
+
+.secondary {
+  background: #397DF6;
+  color:#FFFFFF;
+}
+.secondary:active {
+  color: #EDF3FA;
+  background-color: #2F68CC;
+}
+
+.secondary:hover {
+  background: #73A5FF;
+}
+
+.secondary:focus {
+}
+
+
+.text {
+  color: #397DF6;
+  background-color: #333333;
+}
+.text:active {
+  color: #2F68CC;
+  background-color: #333333;
+}
+
+.text:hover {
+  color:#73A5FF;
+  background-color: #333333;
+}
+.text:focus {
+}
+
+.empty {
+  border: 1px solid #397DF6;
+  color: #397DF6;
+  background-color: #333333;
+
+}
+
+
+.empty:active {
+  color: #2F68CC;
+  background-color: #333333;
+}
+
+.empty:hover {
+  color:#73A5FF;
+  background-color: #333333;
+}
+.empty:focus {
+}
+
+.disabled {
+  opacity: 0.5;
+}

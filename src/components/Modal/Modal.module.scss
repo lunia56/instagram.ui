@@ -1,0 +1,42 @@
+@import "src/assets/styles/variables.module";
+.modalBackgraund {
+  position: fixed;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+
+  background: black;
+  opacity: 0.35;
+  z-index: 20;
+}
+.modal{
+  width: 438px;
+  height: 240px;
+  left: calc(50vw - 219px);
+  top: calc(50vh - 120px);
+  position: fixed;
+  z-index: 20;
+  background-color: #333333;
+  border-radius: 2px;
+}
+.title{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+  height: 59px;
+  border-bottom: #4C4C4C  solid 2px;
+  font-weight: 700;
+  font-size: 20px;
+  color: $titleColor;
+  & img:hover {
+    cursor: pointer;
+  }
+}
+.children {
+  padding: 0 24px;
+}
