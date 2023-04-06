@@ -1,0 +1,40 @@
+@import "src/assets/styles/variables.module";
+@import "src/assets/styles/mixins.module";
+
+.signUpContainer {
+  min-height: 92vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .signUpBlock {
+    padding: 25px 0;
+    height: 520px;
+    background-color: $componentColor;
+    display: flex;
+    justify-content: center;
+    min-width: 378px;
+    color: $textColor;
+
+    .formBlock {
+      @include myFont(20px,700,36px,$textColor);
+      padding: 0 24px;
+      height: 100%;
+      width: 100%;
+      //display: flex;
+      //align-items: center;
+      & input{
+        width: 100%;
+      }
+    }
+
+    .forgot {
+      display: flex;
+      justify-content: end;
+      font-size: 14px;
+      font-weight: 400;
+      color: #BDC1C7;
+    }
+
+  }
+}

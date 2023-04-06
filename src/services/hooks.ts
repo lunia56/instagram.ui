@@ -35,3 +35,17 @@ export const useLoginMutation = () => {
         },
     });
 };
+
+export const useSignInMutation = () => {
+    const { push } = useRouter();
+    return useMutation({
+        mutationFn: InstagramApi.signIn,
+        onSuccess: (res) => {
+            // push("/");
+            // открывается модалка
+        },
+        onError: (e) => {
+            // console.log(`ERROR:${e.}`)
+        }
+    });
+};
