@@ -9,7 +9,7 @@ export const InstagramApi = {
         })
     },
     me:()=>{
-      return  instagramInstance.get('')
+      return  instagramInstance.get('auth/me')
     },
     login:()=>{},
 }
