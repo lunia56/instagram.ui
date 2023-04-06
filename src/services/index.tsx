@@ -16,7 +16,13 @@ export const InstagramApi = {
     emailResent:(email:string)=>{
         return instagramInstance.post('auth/registration-email-resending',{email:email})
     },
-    login:()=>{},
+    signIn:({email,password}: { email: string; password: string })=>{
+        console.log(email, password)
+        return instagramInstance.post('/auth/login',{
+            email,
+            password
+        })
+    },
 }
 
 type AxiosResponseMe = {
