@@ -12,6 +12,9 @@ import {AxiosError} from 'axios';
 export const useMeQuery = () => {
     return useQuery({queryKey: ['me'], queryFn: InstagramApi.me})
 }
+export const useSignUpSocialQuery = () => {
+    return useQuery({queryKey: ['signUpSocial'], queryFn: InstagramApi.signUpSocial})
+}
 // export const useEmailResendingQuery = () => {
 //     return useQuery({queryKey: ['emailResend'], queryFn: InstagramApi.me})
 // }
@@ -27,16 +30,16 @@ export const useEmailResendingMutation = () => {
         },
     });
 };
-export const useRegisterMutation = (setError:any, onSuccessHandler:()=>void) => {
-    const {push} = useRouter();
+export const useRegisterMutation = (setError:any, onSuccessHandler:()=>void,reset:any) => {
     return useMutation({
         mutationFn: InstagramApi.signUp,
+        mutationKey:['registered'],
         onSuccess: (res) => {
-            // открывается модалка
+            debugger
+            reset()
             onSuccessHandler()
         },
         onError: (error:AxiosError) => {
-
             error.response?.status === 400 &&
             setError('login', {type: 'manual', message: 'User with this username or email is already registered'})
         }

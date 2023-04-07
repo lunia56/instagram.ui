@@ -12,6 +12,9 @@ export const InstagramApi = {
             password
         })
     },
+    signUpSocial:()=>{
+        return  instagramInstance.get<AxiosResponse<{accessToken:string}>>('auth/google')
+    },
     me:()=>{
       return  instagramInstance.get<AxiosResponse<AxiosResponseMe>>('auth/me')
     },

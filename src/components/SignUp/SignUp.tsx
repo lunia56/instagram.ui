@@ -20,7 +20,7 @@ import {
     ModalContent,
     ModalFooter,
     ModalHeader,
-    ModalOverlay,
+    ModalOverlay, Progress,
     Text,
     useToast,
     VStack,
@@ -39,56 +39,38 @@ const SignUp = () => {
 
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [showPassword, setShowPassword] = useState(false);
-    const [email, setEmail] = useState('');
-
     const [isOpen, setIsOpen] = useState(false);
+    const toast = useToast();
 
     const {
         control,
+        reset,
         handleSubmit,
         watch, setError,
         formState: {errors, isValid}
     } = useForm<FormValues>({mode: 'onChange'});
 
 
-    const {mutate: signUp, isError, error} = useRegisterMutation(setError,
-        () => setIsOpen(true)
+    const {mutate:signUp, isError, error,variables,isLoading} = useRegisterMutation(setError,
+        () => setIsOpen(true),
+        reset
     )
-    const toast = useToast();
 
-    const onClose = () => setIsOpen(false);
+    const onCloseModal = () => setIsOpen(false);
 
     const onSubmit = (data: FormValues) => {
         setIsSubmitting(true);
-        setEmail(data.email)
+        // setEmail(data.email)
         signUp(data)
         setIsSubmitting(false);
 
     };
-    const handleClick = () => setShowPassword(!showPassword);
+    const handleClickShowPassword = () => setShowPassword(!showPassword);
 
     return (
         <>
-            <Modal isOpen={isOpen} onClose={onClose} isCentered={true}>
-                <ModalOverlay borderRadius={'0%'}/>
-                <ModalContent bg={'#333333'} color={'white'} borderRadius={'0%'}>
-                    <ModalHeader> Email sent <ModalCloseButton/></ModalHeader>
-                    <ModalBody>
-                        <p>We have sent a link to confirm your email to {email}</p>
-                    </ModalBody>
-                    <ModalFooter>
+            {isLoading && <Progress size='xs' isIndeterminate color='gray.800' bg='gray.800'/>}
 
-                        <Button colorScheme="blue" borderRadius={'0%'} onClick={onClose}>OK</Button>
-                    </ModalFooter>
-                </ModalContent>
-            </Modal>
-            {isError  && toast({
-                title: 'Ошибка!',
-                description: error.message,
-                status: 'error',
-                duration: 5000,
-                isClosable: true,
-            })}
             <Box className={s.signUpContainer}>
                 <VStack className={s.signUpBlock} spacing={1}>
                     <Heading size="lg">Sign Up</Heading>
@@ -185,7 +167,7 @@ const SignUp = () => {
                                                         border={'none'}
                                                         _hover={{border: 'none', background: 'transparent'}}
                                                         aria-label={showPassword ? "Скрыть пароль" : "Показать пароль"}
-                                                        onClick={handleClick}
+                                                        onClick={handleClickShowPassword}
                                                         icon={showPassword ?
                                                             <AiOutlineEye size={'20px'} color={'white'}/> :
                                                             <AiOutlineEyeInvisible size={'20px'} color={'white'}/>}
@@ -226,7 +208,7 @@ const SignUp = () => {
                                                         border={'none'}
                                                         _hover={{border: 'none', background: 'transparent'}}
                                                         aria-label={showPassword ? "Скрыть пароль" : "Показать пароль"}
-                                                        onClick={handleClick}
+                                                        onClick={handleClickShowPassword}
                                                         icon={showPassword ?
                                                             <AiOutlineEye size={'20px'} color={'white'}/> :
                                                             <AiOutlineEyeInvisible size={'20px'} color={'white'}/>}
@@ -262,6 +244,27 @@ const SignUp = () => {
                     <Link href={'/'}>Sign In</Link>
                 </VStack>
             </Box>
+            <Modal isOpen={isOpen} onClose={onCloseModal} isCentered={true} motionPreset="slideInBottom" blockScrollOnMount trapFocus >
+                <ModalOverlay borderRadius={'0%'}/>
+                <ModalContent bg={'#333333'} color={'white'} borderRadius={'0%'}>
+                    <ModalHeader> Email sent <ModalCloseButton/></ModalHeader>
+                    <ModalBody>
+                        <p>We have sent a link to confirm your email to {variables?.email}</p>
+                    </ModalBody>
+                    <ModalFooter>
+
+                        <Button colorScheme="blue" borderRadius={'0%'} onClick={onCloseModal}>OK</Button>
+                    </ModalFooter>
+                </ModalContent>
+            </Modal>
+            {isError  && toast({
+                title: 'Ошибка!',
+                description: error.message,
+                status: 'error',
+                duration: 3000,
+                isClosable: true,
+                position:'bottom-left'
+            })}
         </>
     );
 }

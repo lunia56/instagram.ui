@@ -1,7 +1,10 @@
 import {Box, Link} from '@chakra-ui/react';
 import React from 'react';
+import {useSignUpSocialQuery} from '@/services/hooks';
 
 const SocialRegistrationForm = () => {
+const {data:signUpSocial}=useSignUpSocialQuery()
+
     return (
 
         <Box  display={'flex'} >
