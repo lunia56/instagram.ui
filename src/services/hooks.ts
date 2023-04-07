@@ -35,7 +35,6 @@ export const useRegisterMutation = (setError:any, onSuccessHandler:()=>void,rese
         mutationFn: InstagramApi.signUp,
         mutationKey:['registered'],
         onSuccess: (res) => {
-            debugger
             reset()
             onSuccessHandler()
         },

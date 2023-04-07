@@ -5,6 +5,11 @@ import {useSignUpSocialQuery} from '@/services/hooks';
 const SocialRegistrationForm = () => {
 const {data:signUpSocial}=useSignUpSocialQuery()
 
+    const fn=()=>{
+        // data
+    }
+
+
     return (
 
         <Box  display={'flex'} >
