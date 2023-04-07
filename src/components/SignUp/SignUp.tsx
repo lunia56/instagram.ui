@@ -39,6 +39,7 @@ const SignUp = () => {
 
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [showPassword, setShowPassword] = useState(false);
+    const [email, setEmail] = useState('');
 
     const [isOpen, setIsOpen] = useState(false);
 
@@ -48,22 +49,18 @@ const SignUp = () => {
         watch, setError,
         formState: {errors, isValid}
     } = useForm<FormValues>({mode: 'onChange'});
+
+
     const {mutate: signUp, isError, error} = useRegisterMutation(setError,
-        ()=>setIsOpen(true)
+        () => setIsOpen(true)
     )
     const toast = useToast();
 
     const onClose = () => setIsOpen(false);
-    const onOpen = () => setIsOpen(true);
+
     const onSubmit = (data: FormValues) => {
         setIsSubmitting(true);
-        toast({
-            title: 'Успешно!',
-            description: 'Форма успешно отправлена',
-            status: 'success',
-            duration: 5000,
-            isClosable: true,
-        });
+        setEmail(data.email)
         signUp(data)
         setIsSubmitting(false);
 
@@ -72,198 +69,199 @@ const SignUp = () => {
 
     return (
         <>
-            <button onClick={onOpen}>Hello</button>
-            <Modal isOpen={isOpen} onClose={onClose}  isCentered={true} >
+            <Modal isOpen={isOpen} onClose={onClose} isCentered={true}>
                 <ModalOverlay borderRadius={'0%'}/>
-                <ModalContent bg={'#333333'} color={'white'} borderRadius={'0%'} >
-                    <ModalHeader> Email sent <ModalCloseButton /></ModalHeader>
+                <ModalContent bg={'#333333'} color={'white'} borderRadius={'0%'}>
+                    <ModalHeader> Email sent <ModalCloseButton/></ModalHeader>
                     <ModalBody>
-                        <p>We have sent a link to confirm your email to /epam@epam.com/</p>
+                        <p>We have sent a link to confirm your email to {email}</p>
                     </ModalBody>
                     <ModalFooter>
 
-                        <Button colorScheme="blue" borderRadius={'0%'}onClick={onClose}>OK</Button>
+                        <Button colorScheme="blue" borderRadius={'0%'} onClick={onClose}>OK</Button>
                     </ModalFooter>
                 </ModalContent>
             </Modal>
-            {isError &&  toast({
+            {isError  && toast({
                 title: 'Ошибка!',
                 description: error.message,
                 status: 'error',
                 duration: 5000,
                 isClosable: true,
             })}
-        <Box className={s.signUpContainer}>
-            <VStack className={s.signUpBlock} spacing={0}>
-                <Heading size="lg">Sign Up</Heading>
-                <SocialRegistrationForm/>
-                <Box className={s.formBlock}>
-                    <form onSubmit={handleSubmit(onSubmit)}>
-                        <VStack spacing={0} align="stretch">
-                            <FormControl isInvalid={Boolean(errors.login)}>
-                                <FormLabel color={'#4C4C4C'}>Username</FormLabel>
+            <Box className={s.signUpContainer}>
+                <VStack className={s.signUpBlock} spacing={1}>
+                    <Heading size="lg">Sign Up</Heading>
+                    <SocialRegistrationForm/>
+                    <Box className={s.formBlock}>
+                        <form onSubmit={handleSubmit(onSubmit)}>
+                            <VStack spacing={0} align="stretch">
+                                <FormControl isInvalid={Boolean(errors.login)}>
+                                    <FormLabel color={'#4C4C4C'}>Username</FormLabel>
 
-                                <Controller
-                                    control={control}
-                                    name="login"
-                                    rules={{
-                                        required: "Login is required",
-                                        minLength: {
-                                            value: 3,
-                                            message: 'Minimum length 3 characters'
-                                        }, maxLength: {
-                                            value: 20,
-                                            message: 'Maximum length 20 characters'
-                                        }
+                                    <Controller
+                                        control={control}
+                                        name="login"
+                                        rules={{
+                                            required: "Login is required",
+                                            minLength: {
+                                                value: 3,
+                                                message: 'Minimum length 3 characters'
+                                            }, maxLength: {
+                                                value: 20,
+                                                message: 'Maximum length 20 characters'
+                                            }
 
-                                    }}
-                                    render={({field: {onChange, value,}}) => (<>
-                                        <Input type={'text'}
-                                            color={'white'}
-                                            value={value}
-                                            onChange={onChange}
-                                        />
-                                    </>)}
-                                />
-                                {errors.login ? <FormErrorMessage>
-                                    <span>{errors.login.message}</span>
-                                </FormErrorMessage> : <><br/></>}
-                            </FormControl>
+                                        }}
+                                        render={({field: {onChange, value,}}) => (<>
+                                            <Input type={'text'}
+                                                   color={'white'}
+                                                   value={value}
+                                                   onChange={onChange}
+                                            />
+                                        </>)}
+                                    />
+                                    {errors.login ? <FormErrorMessage>
+                                        <span>{errors.login.message}</span>
+                                    </FormErrorMessage> : <><br/></>}
+                                </FormControl>
 
-                            <FormControl isInvalid={Boolean(errors.email)}>
-                                <FormLabel color={'#4C4C4C'}>Email</FormLabel>
+                                <FormControl isInvalid={Boolean(errors.email)}>
+                                    <FormLabel color={'#4C4C4C'}>Email</FormLabel>
 
-                                <Controller
-                                    control={control}
-                                    name="email"
-                                    rules={{
-                                        required: "Email is required",
-                                        pattern: {
-                                            value: /^((([0-9A-Za-z]{1}[-0-9A-z\.]{1,}[0-9A-Za-z]{1})|([0-9А-Яа-я]{1}[-0-9А-я\.]{1,}[0-9А-Яа-я]{1}))@([-A-Za-z]{1,}\.){1,2}[-A-Za-z]{2,})$/u,
-                                            message: 'Please enter valid email...'
-                                        }
-                                    }}
-                                    render={({field: {onChange, value,}}) => (<>
-                                        <Input
-                                            color={'white'}
-                                            value={value}
-                                            onChange={onChange}
-                                        />
-                                    </>)}
-                                />
-                                <FormErrorMessage>
-                                    {errors.email && <span>{errors.email.message}</span>}
-                                </FormErrorMessage>
-                            </FormControl>
-
-                            <FormControl isInvalid={Boolean(errors.password)}>
-                                <FormLabel color={'#4C4C4C'}>Password</FormLabel>
-                                <Controller
-                                    control={control}
-                                    name="password"
-                                    rules={{
-                                        required: "Field is required",
-                                        minLength: {
-                                            value: 6,
-                                            message: 'Minimum length 6 characters'
-                                        }, maxLength: {
-                                            value: 20,
-                                            message: 'Maximum length 20 characters'
-                                        }
-
-                                    }}
-                                    render={({field: {onChange, value}}) => (<>
-                                        <InputGroup>
+                                    <Controller
+                                        control={control}
+                                        name="email"
+                                        rules={{
+                                            required: "Email is required",
+                                            pattern: {
+                                                value: /^((([0-9A-Za-z]{1}[-0-9A-z\.]{1,}[0-9A-Za-z]{1})|([0-9А-Яа-я]{1}[-0-9А-я\.]{1,}[0-9А-Яа-я]{1}))@([-A-Za-z]{1,}\.){1,2}[-A-Za-z]{2,})$/u,
+                                                message: 'Please enter valid email...'
+                                            }
+                                        }}
+                                        render={({field: {onChange, value,}}) => (<>
                                             <Input
+                                                color={'white'}
                                                 value={value}
                                                 onChange={onChange}
-                                                color={'white'}
-                                                pr="4.5rem"
-                                                type={showPassword ? "text" : "password"}
                                             />
-                                            <InputRightElement width="4.5rem">
-                                                <IconButton
-                                                    h="1.75rem"
-                                                    size="sm"
-                                                    bg={'transparent'}
-                                                    border={'none'}
-                                                    _hover={{border: 'none', background: 'transparent'}}
-                                                    aria-label={showPassword ? "Скрыть пароль" : "Показать пароль"}
-                                                    onClick={handleClick}
-                                                    icon={showPassword ? <AiOutlineEye size={'20px'} color={'white'}/> :
-                                                        <AiOutlineEyeInvisible size={'20px'} color={'white'}/>}
+                                        </>)}
+                                    />
+                                    <FormErrorMessage>
+                                        {errors.email && <span>{errors.email.message}</span>}
+                                    </FormErrorMessage>
+                                </FormControl>
+
+                                <FormControl isInvalid={Boolean(errors.password)}>
+                                    <FormLabel color={'#4C4C4C'}>Password</FormLabel>
+                                    <Controller
+                                        control={control}
+                                        name="password"
+                                        rules={{
+                                            required: "Field is required",
+                                            minLength: {
+                                                value: 6,
+                                                message: 'Minimum length 6 characters'
+                                            }, maxLength: {
+                                                value: 20,
+                                                message: 'Maximum length 20 characters'
+                                            }
+
+                                        }}
+                                        render={({field: {onChange, value}}) => (<>
+                                            <InputGroup>
+                                                <Input
+                                                    value={value}
+                                                    onChange={onChange}
+                                                    color={'white'}
+                                                    pr="4.5rem"
+                                                    type={showPassword ? "text" : "password"}
                                                 />
-                                            </InputRightElement>
-                                        </InputGroup>
-                                    </>)}
-                                />
+                                                <InputRightElement width="4.5rem">
+                                                    <IconButton
+                                                        h="1.75rem"
+                                                        size="sm"
+                                                        bg={'transparent'}
+                                                        border={'none'}
+                                                        _hover={{border: 'none', background: 'transparent'}}
+                                                        aria-label={showPassword ? "Скрыть пароль" : "Показать пароль"}
+                                                        onClick={handleClick}
+                                                        icon={showPassword ?
+                                                            <AiOutlineEye size={'20px'} color={'white'}/> :
+                                                            <AiOutlineEyeInvisible size={'20px'} color={'white'}/>}
+                                                    />
+                                                </InputRightElement>
+                                            </InputGroup>
+                                        </>)}
+                                    />
 
-                                <FormErrorMessage>
-                                    {errors.password && <span>{errors.password.message}</span>}
-                                </FormErrorMessage>
-                            </FormControl>
+                                    <FormErrorMessage>
+                                        {errors.password && <span>{errors.password.message}</span>}
+                                    </FormErrorMessage>
+                                </FormControl>
 
-                            <FormControl isInvalid={Boolean(errors.confirmPassword)} pb={'20px'}>
-                                <FormLabel color={'#4C4C4C'}>Password confirmation</FormLabel>
-                                <Controller
-                                    control={control}
-                                    name="confirmPassword"
-                                    rules={{
-                                        required: "Field is required",
-                                        validate: value => value === watch("password")
-                                    }}
-                                    render={({field: {onChange, value}}) => (<>
-                                        <InputGroup>
-                                            <Input
-                                                value={value}
-                                                onChange={onChange}
-                                                color={'white'}
-                                                pr="4.5rem"
-                                                type={showPassword ? "text" : "password"}
-                                            />
-                                            <InputRightElement width="4.5rem">
-                                                <IconButton
-                                                    h="1.75rem"
-                                                    size="sm"
-                                                    bg={'transparent'}
-                                                    border={'none'}
-                                                    _hover={{border: 'none', background: 'transparent'}}
-                                                    aria-label={showPassword ? "Скрыть пароль" : "Показать пароль"}
-                                                    onClick={handleClick}
-                                                    icon={showPassword ? <AiOutlineEye size={'20px'} color={'white'}/> :
-                                                        <AiOutlineEyeInvisible size={'20px'} color={'white'}/>}
+                                <FormControl isInvalid={Boolean(errors.confirmPassword)} pb={'20px'}>
+                                    <FormLabel color={'#4C4C4C'}>Password confirmation</FormLabel>
+                                    <Controller
+                                        control={control}
+                                        name="confirmPassword"
+                                        rules={{
+                                            required: "Field is required",
+                                            validate: value => value === watch("password")
+                                        }}
+                                        render={({field: {onChange, value}}) => (<>
+                                            <InputGroup>
+                                                <Input
+                                                    value={value}
+                                                    onChange={onChange}
+                                                    color={'white'}
+                                                    pr="4.5rem"
+                                                    type={showPassword ? "text" : "password"}
                                                 />
-                                            </InputRightElement>
-                                        </InputGroup>
-                                    </>)}
-                                />
+                                                <InputRightElement width="4.5rem">
+                                                    <IconButton
+                                                        h="1.75rem"
+                                                        size="sm"
+                                                        bg={'transparent'}
+                                                        border={'none'}
+                                                        _hover={{border: 'none', background: 'transparent'}}
+                                                        aria-label={showPassword ? "Скрыть пароль" : "Показать пароль"}
+                                                        onClick={handleClick}
+                                                        icon={showPassword ?
+                                                            <AiOutlineEye size={'20px'} color={'white'}/> :
+                                                            <AiOutlineEyeInvisible size={'20px'} color={'white'}/>}
+                                                    />
+                                                </InputRightElement>
+                                            </InputGroup>
+                                        </>)}
+                                    />
 
-                                <FormErrorMessage>
-                                    {errors.confirmPassword && <span>{errors.confirmPassword.message}</span>}
-                                    {errors.confirmPassword?.type === 'validate' &&
-                                        <span>Passwords do not match</span>}
-                                </FormErrorMessage>
-                            </FormControl>
+                                    <FormErrorMessage>
+                                        {errors.confirmPassword && <span>{errors.confirmPassword.message}</span>}
+                                        {errors.confirmPassword?.type === 'validate' &&
+                                            <span>Passwords do not match</span>}
+                                    </FormErrorMessage>
+                                </FormControl>
 
 
-                            <Button
-                                type="submit"
-                                isLoading={isSubmitting}
-                                loadingText="Отправка..."
-                                colorScheme="twitter"
-                                isDisabled={!isValid || isSubmitting}
-                                border="none"
-                                cursor={'pointer'}
-                            >
-                                Зарегистрироваться
-                            </Button>
-                        </VStack>
-                    </form>
-                </Box>
-                <Text>Do you have an account?</Text>
-                <Link href={'/'}>Sign In</Link>
-            </VStack>
-        </Box>
+                                <Button
+                                    type="submit"
+                                    isLoading={isSubmitting}
+                                    loadingText="Отправка..."
+                                    colorScheme="twitter"
+                                    isDisabled={!isValid || isSubmitting}
+                                    border="none"
+                                    cursor={'pointer'}
+                                >
+                                    Зарегистрироваться
+                                </Button>
+                            </VStack>
+                        </form>
+                    </Box>
+                    <Text>Do you have an account?</Text>
+                    <Link href={'/'}>Sign In</Link>
+                </VStack>
+            </Box>
         </>
     );
 }
