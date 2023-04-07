@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import s from './Header.module.scss'
 import logout from '../../assets/logout/logout.svg'
 import Image from 'next/image';
-// import ModalLogout from '@/components/Modal/ModalLogOut/ModalLogout';
+import ModalLogout from '@/components/Modal/ModalLogOut/ModalLogout';
 
 const Header = () => {
     const [show, setShow] = useState(false);
@@ -18,7 +18,7 @@ const Header = () => {
               <Image src={logout} width={24} height={24} alt=""/>
               <p>Log Out</p>
             </div>
-            {/*{show && <ModalLogout modalOnClick={()=> setShow(false)} />}*/}
+            {show && <ModalLogout modalOnClick={()=> setShow(false)} />}
           </div>
         </header>
     );

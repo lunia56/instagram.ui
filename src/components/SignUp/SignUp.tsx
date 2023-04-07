@@ -27,6 +27,7 @@ import {
 } from "@chakra-ui/react";
 import {AiOutlineEye, AiOutlineEyeInvisible} from 'react-icons/ai';
 import {useRegisterMutation} from '@/services/hooks';
+import ModalSendEmail from '@/components/Modal/ModalSendEmail/ModalSendEmail';
 
 
 type  FormValues = {
@@ -39,7 +40,7 @@ const SignUp = () => {
 
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [showPassword, setShowPassword] = useState(false);
-    const [isOpen, setIsOpen] = useState(false);
+    const [isOpen, setIsOpen] = useState(true);
     const toast = useToast();
 
     const {
@@ -244,19 +245,7 @@ const SignUp = () => {
                     <Link href={'/'}>Sign In</Link>
                 </VStack>
             </Box>
-            <Modal isOpen={isOpen} onClose={onCloseModal} isCentered={true} motionPreset="slideInBottom" blockScrollOnMount trapFocus >
-                <ModalOverlay borderRadius={'0%'}/>
-                <ModalContent bg={'#333333'} color={'white'} borderRadius={'0%'}>
-                    <ModalHeader> Email sent <ModalCloseButton/></ModalHeader>
-                    <ModalBody>
-                        <p>We have sent a link to confirm your email to {variables?.email}</p>
-                    </ModalBody>
-                    <ModalFooter>
-
-                        <Button colorScheme="blue" borderRadius={'0%'} onClick={onCloseModal}>OK</Button>
-                    </ModalFooter>
-                </ModalContent>
-            </Modal>
+            {isOpen && <ModalSendEmail modalOnClick={()=>setIsOpen(false)} email={variables?.email}/>}
             {isError  && toast({
                 title: 'Ошибка!',
                 description: error.message,
