@@ -4,6 +4,8 @@ import {type} from 'os';
 
 export const InstagramApi = {
     signUp:({login,email,password}: { login:string, email: string; password: string })=>{
+        console.log('data',{login,email,password})
+
         return instagramInstance.post('auth/registration',{
             login,
             email,

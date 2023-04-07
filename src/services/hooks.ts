@@ -2,6 +2,7 @@
 import {InstagramApi} from '@/services/index';
 import {useMutation, useQuery} from '@tanstack/react-query';
 import {useRouter} from 'next/router';
+import {useToast} from '@chakra-ui/react';
 
 // export const useSignUpQuery = () => {
 //     return useQuery({ queryKey: ['signUp'],queryFn: InstagramApi.signUp})
@@ -25,18 +26,29 @@ export const useEmailResendingMutation = () => {
         },
     });
 };
-export const useLoginMutation = () => {
+export const useRegisterMutation = (setError,onSuccessHandler) => {
     const { push } = useRouter();
     return useMutation({
         mutationFn: InstagramApi.signUp,
         onSuccess: (res) => {
-            // push("/");
             // открывается модалка
+            onSuccessHandler()
         },
+        onError: (error)=>{
+            console.log('error',error)
+           error.status === 400 &&
+           setError('login', { type: 'manual', message: `${error.message} /User with this username is already registered` })
+
+    }
     });
 };
 
-export const useSignInMutation = () => {
+// const errorHandler=(error,setError)=>{
+//     error.status === 400 &&
+//     setError('login', { type: 'manual', message: `${error.message} /User with this username is already registered` })
+// }
+
+    export const useSignInMutation = () => {
     const { push } = useRouter();
     return useMutation({
         mutationFn: InstagramApi.signIn,

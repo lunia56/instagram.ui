@@ -14,11 +14,19 @@ import {
     InputGroup,
     InputRightElement,
     Link,
+    Modal,
+    ModalBody,
+    ModalCloseButton,
+    ModalContent,
+    ModalFooter,
+    ModalHeader,
+    ModalOverlay,
     Text,
+    useToast,
     VStack,
 } from "@chakra-ui/react";
 import {AiOutlineEye, AiOutlineEyeInvisible} from 'react-icons/ai';
-import {useLoginMutation} from '@/services/hooks';
+import {useRegisterMutation} from '@/services/hooks';
 
 
 type  FormValues = {
@@ -32,23 +40,59 @@ const SignUp = () => {
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [showPassword, setShowPassword] = useState(false);
 
-    const {mutate: signUp, error} = useLoginMutation()
+    const [isOpen, setIsOpen] = useState(false);
 
     const {
         control,
         handleSubmit,
-        watch,
+        watch, setError,
         formState: {errors, isValid}
     } = useForm<FormValues>({mode: 'onChange'});
+    const {mutate: signUp, isError, error} = useRegisterMutation(setError,
+        ()=>setIsOpen(true)
+    )
+    const toast = useToast();
 
+    const onClose = () => setIsOpen(false);
+    const onOpen = () => setIsOpen(true);
     const onSubmit = (data: FormValues) => {
         setIsSubmitting(true);
+        toast({
+            title: 'Успешно!',
+            description: 'Форма успешно отправлена',
+            status: 'success',
+            duration: 5000,
+            isClosable: true,
+        });
         signUp(data)
         setIsSubmitting(false);
+
     };
     const handleClick = () => setShowPassword(!showPassword);
 
     return (
+        <>
+            <button onClick={onOpen}>Hello</button>
+            <Modal isOpen={isOpen} onClose={onClose}  isCentered={true} >
+                <ModalOverlay borderRadius={'0%'}/>
+                <ModalContent bg={'#333333'} color={'white'} borderRadius={'0%'} >
+                    <ModalHeader> Email sent <ModalCloseButton /></ModalHeader>
+                    <ModalBody>
+                        <p>We have sent a link to confirm your email to /epam@epam.com/</p>
+                    </ModalBody>
+                    <ModalFooter>
+
+                        <Button colorScheme="blue" borderRadius={'0%'}onClick={onClose}>OK</Button>
+                    </ModalFooter>
+                </ModalContent>
+            </Modal>
+            {isError &&  toast({
+                title: 'Ошибка!',
+                description: error.message,
+                status: 'error',
+                duration: 5000,
+                isClosable: true,
+            })}
         <Box className={s.signUpContainer}>
             <VStack className={s.signUpBlock} spacing={0}>
                 <Heading size="lg">Sign Up</Heading>
@@ -57,7 +101,7 @@ const SignUp = () => {
                     <form onSubmit={handleSubmit(onSubmit)}>
                         <VStack spacing={0} align="stretch">
                             <FormControl isInvalid={Boolean(errors.login)}>
-                                <FormLabel color={'#4C4C4C'}>Login</FormLabel>
+                                <FormLabel color={'#4C4C4C'}>Username</FormLabel>
 
                                 <Controller
                                     control={control}
@@ -74,7 +118,7 @@ const SignUp = () => {
 
                                     }}
                                     render={({field: {onChange, value,}}) => (<>
-                                        <Input
+                                        <Input type={'text'}
                                             color={'white'}
                                             value={value}
                                             onChange={onChange}
@@ -98,7 +142,6 @@ const SignUp = () => {
                                             value: /^((([0-9A-Za-z]{1}[-0-9A-z\.]{1,}[0-9A-Za-z]{1})|([0-9А-Яа-я]{1}[-0-9А-я\.]{1,}[0-9А-Яа-я]{1}))@([-A-Za-z]{1,}\.){1,2}[-A-Za-z]{2,})$/u,
                                             message: 'Please enter valid email...'
                                         }
-
                                     }}
                                     render={({field: {onChange, value,}}) => (<>
                                         <Input
@@ -210,6 +253,7 @@ const SignUp = () => {
                                 colorScheme="twitter"
                                 isDisabled={!isValid || isSubmitting}
                                 border="none"
+                                cursor={'pointer'}
                             >
                                 Зарегистрироваться
                             </Button>
@@ -220,6 +264,7 @@ const SignUp = () => {
                 <Link href={'/'}>Sign In</Link>
             </VStack>
         </Box>
+        </>
     );
 }
 

@@ -3,7 +3,7 @@ import type {AppProps} from 'next/app'
 import {QueryClient} from '@tanstack/query-core';
 import {QueryClientProvider} from '@tanstack/react-query';
 import {ReactQueryDevtools} from '@tanstack/react-query-devtools';
-import {ChakraProvider, ColorModeScript, extendTheme, ThemeProvider} from '@chakra-ui/react';
+import {ChakraProvider, ColorModeScript, extendTheme, ThemeProvider, ToastProvider} from '@chakra-ui/react';
 import {mode} from '@chakra-ui/theme-tools';
 import {AuthRedirect} from '@/components/auth-redirect';
 
@@ -11,7 +11,7 @@ const queryClient = new QueryClient()
 
 
 const config = {
-    initialColorMode: "light",
+    initialColorMode: 'dark',
     useSystemColorMode: false,
 };
 
@@ -22,10 +22,9 @@ const theme = extendTheme({
         body: 'Inter',
     },
     styles: {
-        global: (props: Record<string, any>) => ({
+        global:  ({
             body: {
-                bg: mode("white", "gray.800")(props),
-                color: mode("gray.800", "whiteAlpha.900")(props),
+                bg:'dark',
                 fontFamily: 'body'
             },
         }),
@@ -35,12 +34,11 @@ const theme = extendTheme({
 export default function App({Component, pageProps}: AppProps) {
     return (
         <QueryClientProvider client={queryClient}>
-            <ThemeProvider theme={theme}>
-                <ColorModeScript initialColorMode={theme.config.initialColorMode}/>
+            <ChakraProvider theme={theme}>
                 {/*<AuthRedirect>*/}
                     <Component {...pageProps} />
                 {/*</AuthRedirect>*/}
-            </ThemeProvider>
+            </ChakraProvider>
             <ReactQueryDevtools initialIsOpen={false}/>
         </QueryClientProvider>
     )
