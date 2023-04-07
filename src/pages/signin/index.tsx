@@ -1,16 +1,16 @@
-import React from 'react';
 import {NextPage} from 'next';
 import SignUp from '@/components/SignUp/SignUp';
 import styles from '@/styles/Home.module.scss';
 import Layout from '@/components/Layout/Layout';
+import SignIn from "@/components/SignIn/SignIn";
 
-const SignUpPage = () => {
+const SignInPage = () => {
     return (
         <Layout>
-            <SignUp/>
+            <SignIn/>
         </Layout>
 
     );
 };
 
-export default SignUpPage;
+export default SignInPage;

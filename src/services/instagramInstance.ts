@@ -1,5 +1,6 @@
 import axios from "axios";
 
 export const instagramInstance = axios.create({
-    baseURL: "#",
+    baseURL: "https://instagram-api-jq7e.onrender.com/api/",
+
 });
