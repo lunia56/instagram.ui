@@ -3,9 +3,7 @@ import {AxiosResponse} from 'axios';
 import {type} from 'os';
 
 export const InstagramApi = {
-    signUp:({login,email,password}: { login:string, email: string; password: string })=>{
-        console.log('data',{login,email,password})
-
+    signUp:({login,email,password}:RegistrationData):Promise<AxiosResponse>=>{
         return instagramInstance.post('auth/registration',{
             login,
             email,
@@ -15,8 +13,8 @@ export const InstagramApi = {
     signUpSocial:()=>{
         return  instagramInstance.get<AxiosResponse<{accessToken:string}>>('auth/google')
     },
-    me:()=>{
-      return  instagramInstance.get<AxiosResponse<AxiosResponseMe>>('auth/me')
+    me:():Promise<AxiosResponse<AxiosResponseMe>> =>{
+      return  instagramInstance.get('auth/me')
     },
     emailResent:(email:string)=>{
         return instagramInstance.post('auth/registration-email-resending',{email:email})
@@ -34,4 +32,9 @@ type AxiosResponseMe = {
     email:string
     login:string
     userId:string
+}
+type RegistrationData = {
+    login:string
+    email: string
+    password: string
 }

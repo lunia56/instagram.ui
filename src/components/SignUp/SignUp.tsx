@@ -20,7 +20,8 @@ import {
     ModalContent,
     ModalFooter,
     ModalHeader,
-    ModalOverlay, Progress,
+    ModalOverlay,
+    Progress,
     Text,
     useToast,
     VStack,
@@ -37,7 +38,7 @@ type  FormValues = {
 }
 const SignUp = () => {
 
-    const [isSubmitting, setIsSubmitting] = useState(false);
+    // const [isSubmitting, setIsSubmitting] = useState(false);
     const [showPassword, setShowPassword] = useState(false);
     const [isOpen, setIsOpen] = useState(false);
     const toast = useToast();
@@ -51,7 +52,7 @@ const SignUp = () => {
     } = useForm<FormValues>({mode: 'onChange'});
 
 
-    const {mutate:signUp, isError, error,variables,isLoading} = useRegisterMutation(setError,
+    const {mutate: signUp, isError, error, variables, isLoading} = useRegisterMutation(setError,
         () => setIsOpen(true),
         reset
     )
@@ -59,10 +60,10 @@ const SignUp = () => {
     const onCloseModal = () => setIsOpen(false);
 
     const onSubmit = (data: FormValues) => {
-        setIsSubmitting(true);
+        // setIsSubmitting(true);
         // setEmail(data.email)
         signUp(data)
-        setIsSubmitting(false);
+        // setIsSubmitting(false);
 
     };
     const handleClickShowPassword = () => setShowPassword(!showPassword);
@@ -78,7 +79,7 @@ const SignUp = () => {
                     <Box className={s.formBlock}>
                         <form onSubmit={handleSubmit(onSubmit)}>
                             <VStack spacing={0} align="stretch">
-                                <FormControl isInvalid={Boolean(errors.login)}>
+                                <FormControl isInvalid={Boolean(errors.login)} isRequired>
                                     <FormLabel color={'#4C4C4C'}>Username</FormLabel>
 
                                     <Controller
@@ -103,12 +104,12 @@ const SignUp = () => {
                                             />
                                         </>)}
                                     />
-                                    {errors.login ? <FormErrorMessage>
+                                    {errors.login && <FormErrorMessage>
                                         <span>{errors.login.message}</span>
-                                    </FormErrorMessage> : <><br/></>}
+                                    </FormErrorMessage> }
                                 </FormControl>
 
-                                <FormControl isInvalid={Boolean(errors.email)}>
+                                <FormControl isInvalid={Boolean(errors.email)} isRequired>
                                     <FormLabel color={'#4C4C4C'}>Email</FormLabel>
 
                                     <Controller
@@ -129,12 +130,10 @@ const SignUp = () => {
                                             />
                                         </>)}
                                     />
-                                    <FormErrorMessage>
-                                        {errors.email && <span>{errors.email.message}</span>}
-                                    </FormErrorMessage>
+                                    {errors.email && <FormErrorMessage> <span>{errors.email.message}</span> </FormErrorMessage>}
                                 </FormControl>
 
-                                <FormControl isInvalid={Boolean(errors.password)}>
+                                <FormControl isInvalid={Boolean(errors.password)} isRequired>
                                     <FormLabel color={'#4C4C4C'}>Password</FormLabel>
                                     <Controller
                                         control={control}
@@ -148,7 +147,6 @@ const SignUp = () => {
                                                 value: 20,
                                                 message: 'Maximum length 20 characters'
                                             }
-
                                         }}
                                         render={({field: {onChange, value}}) => (<>
                                             <InputGroup>
@@ -177,12 +175,10 @@ const SignUp = () => {
                                         </>)}
                                     />
 
-                                    <FormErrorMessage>
-                                        {errors.password && <span>{errors.password.message}</span>}
-                                    </FormErrorMessage>
+                                    {errors.password && <FormErrorMessage><span>{errors.password.message}</span></FormErrorMessage>}
                                 </FormControl>
 
-                                <FormControl isInvalid={Boolean(errors.confirmPassword)} pb={'20px'}>
+                                <FormControl isInvalid={Boolean(errors.confirmPassword)} pb={'20px'} isRequired>
                                     <FormLabel color={'#4C4C4C'}>Password confirmation</FormLabel>
                                     <Controller
                                         control={control}
@@ -218,33 +214,32 @@ const SignUp = () => {
                                         </>)}
                                     />
 
-                                    <FormErrorMessage>
-                                        {errors.confirmPassword && <span>{errors.confirmPassword.message}</span>}
-                                        {errors.confirmPassword?.type === 'validate' &&
-                                            <span>Passwords do not match</span>}
-                                    </FormErrorMessage>
+                                    {errors.confirmPassword && <FormErrorMessage><span>{errors.confirmPassword.message}</span></FormErrorMessage>}
+                                    {errors.confirmPassword?.type === 'validate' &&
+                                        <span>Passwords do not match</span>}
                                 </FormControl>
 
 
                                 <Button
                                     type="submit"
-                                    isLoading={isSubmitting}
-                                    loadingText="Отправка..."
+                                    isLoading={isLoading}
+                                    loadingText="Loading..."
                                     colorScheme="twitter"
-                                    isDisabled={!isValid || isSubmitting}
+                                    isDisabled={!isValid}
                                     border="none"
-                                    cursor={'pointer'}
+                                    // cursor={'pointer'}
                                 >
-                                    Зарегистрироваться
+                                    Sign Up
                                 </Button>
                             </VStack>
                         </form>
                     </Box>
                     <Text>Do you have an account?</Text>
-                    <Link href={'/'}>Sign In</Link>
+                    <Button variant={'link'}><Link href={'/'}>Sign In</Link></Button>
                 </VStack>
             </Box>
-            <Modal isOpen={isOpen} onClose={onCloseModal} isCentered={true} motionPreset="slideInBottom" blockScrollOnMount trapFocus >
+            <Modal isOpen={isOpen} onClose={onCloseModal} isCentered={true} motionPreset="slideInBottom"
+                   blockScrollOnMount trapFocus>
                 <ModalOverlay borderRadius={'0%'}/>
                 <ModalContent bg={'#333333'} color={'white'} borderRadius={'0%'}>
                     <ModalHeader> Email sent <ModalCloseButton/></ModalHeader>
@@ -257,13 +252,13 @@ const SignUp = () => {
                     </ModalFooter>
                 </ModalContent>
             </Modal>
-            {isError  && toast({
+            {isError && toast({
                 title: 'Ошибка!',
                 description: error.message,
                 status: 'error',
                 duration: 3000,
                 isClosable: true,
-                position:'bottom-left'
+                position: 'bottom-left'
             })}
         </>
     );
