@@ -28,6 +28,9 @@ export const InstagramApi = {
             password
         })
     },
+    logout:()=>{
+        return instagramInstance.post('auth/logout', {})
+    }
 }
 
 type AxiosResponseMe = {

@@ -62,4 +62,20 @@ export const useSignInMutation = () => {
             // console.log(`ERROR:${e.}`)
         }
     });
+}
+export const useLogOutMutation = () => {
+    return useMutation({
+        mutationFn: InstagramApi.logout,
+        mutationKey:['logout'],
+        onSuccess: (res) => {
+            console.log('Logout Succes')
+            //reset()
+            //onSuccessHandler()
+        },
+        onError: (error:AxiosError) => {
+            console.log('Logout Error')
+            //error.response?.status === 400 &&
+            //setError('login', {type: 'manual', message: 'User with this username or email is already registered'})
+        }
+    });
 };
