@@ -227,7 +227,6 @@ const SignUp = () => {
                                     colorScheme="twitter"
                                     isDisabled={!isValid}
                                     border="none"
-                                    // cursor={'pointer'}
                                 >
                                     Sign Up
                                 </Button>

@@ -7,9 +7,9 @@ import {AxiosError} from 'axios'
 export const useMeQuery = () => {
     return useQuery({queryKey: ['me'], queryFn: InstagramApi.me})
 }
-export const useSignUpSocialQuery = () => {
-    return useQuery({queryKey: ['signUpSocial'], queryFn: InstagramApi.signUpSocial})
-}
+// export const useSignUpSocialQuery = () => {
+//     return useQuery({queryKey: ['signUpSocial'], queryFn: InstagramApi.signUpSocial})
+// }
 
 
 
