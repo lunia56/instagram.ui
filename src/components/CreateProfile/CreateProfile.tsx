@@ -4,7 +4,7 @@ import {Box} from '@chakra-ui/react'
 const CreateProfile = () => {
     return (
         <Box color='white'>
-            Hello World!
+            Hello World!!!
         </Box>
     )
 }
