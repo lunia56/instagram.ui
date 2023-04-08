@@ -1,13 +1,9 @@
-import {Box, HStack, Link} from '@chakra-ui/react';
-import React from 'react';
-import {useSignUpSocialQuery} from '@/services/hooks';
+import {HStack, Link} from '@chakra-ui/react'
+import React from 'react'
 
 const SocialRegistrationForm = () => {
-const {data:signUpSocial}=useSignUpSocialQuery()
+// const {data:signUpSocial}=useSignUpSocialQuery()
 
-    const fn=()=>{
-        // data
-    }
 
 
     return (

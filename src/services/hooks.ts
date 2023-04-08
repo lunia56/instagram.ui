@@ -1,13 +1,8 @@
-// import {QueryObserverResult, useQuery} from '@tanstack/react-query';
-import {InstagramApi} from '@/services/index';
-import {useMutation, useQuery} from '@tanstack/react-query';
-import {useRouter} from 'next/router';
-import {useToast} from '@chakra-ui/react';
-import {AxiosError} from 'axios';
+import {InstagramApi} from '@/services/index'
+import {useMutation, useQuery} from '@tanstack/react-query'
+import {useRouter} from 'next/router'
+import {AxiosError} from 'axios'
 
-// export const useSignUpQuery = () => {
-//     return useQuery({ queryKey: ['signUp'],queryFn: InstagramApi.signUp})
-// }
 
 export const useMeQuery = () => {
     return useQuery({queryKey: ['me'], queryFn: InstagramApi.me})
@@ -15,51 +10,46 @@ export const useMeQuery = () => {
 export const useSignUpSocialQuery = () => {
     return useQuery({queryKey: ['signUpSocial'], queryFn: InstagramApi.signUpSocial})
 }
-// export const useEmailResendingQuery = () => {
-//     return useQuery({queryKey: ['emailResend'], queryFn: InstagramApi.me})
-// }
+
 
 
 export const useEmailResendingMutation = () => {
-    const {push} = useRouter();
+    // const {push} = useRouter()
     return useMutation({
         mutationFn: InstagramApi.emailResent,
         onSuccess: (res) => {
-            // push("/");
-            // открывается модалка
+
         },
-    });
-};
-export const useRegisterMutation = (setError:any, onSuccessHandler:()=>void,reset:any) => {
+    })
+}
+export const useRegisterMutation = (setError: any, onSuccessHandler: () => void, reset: any) => {
     return useMutation({
         mutationFn: InstagramApi.signUp,
-        mutationKey:['registered'],
+        mutationKey: ['registered'],
         onSuccess: (res) => {
             reset()
             onSuccessHandler()
         },
-        onError: (error:AxiosError) => {
+        onError: (error: AxiosError) => {
             error.response?.status === 400 &&
             setError('login', {type: 'manual', message: 'User with this username or email is already registered'})
         }
-    });
-};
+    })
+}
 
-// const errorHandler=(error,setError)=>{
-//     error.status === 400 &&
-//     setError('login', { type: 'manual', message: `${error.message} /User with this username is already registered` })
-// }
+
 
 export const useSignInMutation = () => {
-    const {push} = useRouter();
+    const {push} = useRouter()
     return useMutation({
         mutationFn: InstagramApi.signIn,
         onSuccess: (res) => {
-            // push("/");
-            // открывается модалка
+            localStorage.setItem('token', res.data.accessToken)
+            push('/CreateProfile')
+            //добавить флаг в зустанд сторе isLoggedIn и установить true
         },
-        onError: (e) => {
-            // console.log(`ERROR:${e.}`)
+        onError: (e:AxiosError) => {
+             console.log(e.message)
         }
-    });
-};
+    })
+}

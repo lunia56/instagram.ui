@@ -1,6 +1,5 @@
-import {instagramInstance} from '@/services/instagramInstance';
-import {AxiosResponse} from 'axios';
-import {type} from 'os';
+import {instagramInstance} from '@/services/instagramInstance'
+import {AxiosResponse} from 'axios'
 
 export const InstagramApi = {
     signUp:({login,email,password}:RegistrationData):Promise<AxiosResponse>=>{
@@ -19,7 +18,7 @@ export const InstagramApi = {
     emailResent:(email:string)=>{
         return instagramInstance.post('auth/registration-email-resending',{email:email})
     },
-    signIn:({email,password}: { email: string; password: string })=>{
+    signIn:({email,password}: SignInData):Promise<AxiosResponse<{accessToken:string}>> =>{
         console.log(email, password)
         return instagramInstance.post('/auth/login',{
             email,
@@ -35,6 +34,10 @@ type AxiosResponseMe = {
 }
 type RegistrationData = {
     login:string
+    email: string
+    password: string
+}
+type SignInData = {
     email: string
     password: string
 }
