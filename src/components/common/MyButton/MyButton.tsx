@@ -8,6 +8,7 @@ type DefaultButtonPropsType = DetailedHTMLProps<ButtonHTMLAttributes<HTMLButtonE
 type MyButtonPropsType = DefaultButtonPropsType & {
   callback: () => void
   variant?: string
+    children: React.ReactNode;
 }
 
 const MyButton: React.FC<MyButtonPropsType> = (
@@ -16,6 +17,7 @@ const MyButton: React.FC<MyButtonPropsType> = (
     className,
     disabled,
     callback,
+      children,
     ...restProps // все остальные пропсы попадут в объект restProps, там же будет children
   }
 ) => {
