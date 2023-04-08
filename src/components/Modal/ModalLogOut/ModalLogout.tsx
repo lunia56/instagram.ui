@@ -8,18 +8,14 @@ interface IModalLogout {
 }
 
 const ModalLogout: React.FC<IModalLogout> =  ({modalOnClick}) =>{
-const [show, setShow] = useState(true);
 
 const setTrue = () => {
-  setShow(false);
   modalOnClick()
 };
 const setFalse = () => {
-  setShow(false);
   modalOnClick()
 };
 
-console.log('render ModalQuestionContainer');
 return (
   <>
     <Modal
@@ -27,15 +23,11 @@ return (
       modalOnClick={setFalse}
       title='Log Out'
     >
-    <div
-      style={{
-        width: '100%',
-      }}
-    >
+    <div>
         <p className={s.message}>Are you really want to log out of your account <b>“Epam@epam.com”</b>?</p>
       <div className={s.buttonGroup}>
-        <MyButton onClick={setTrue} style={{width: '96px', height: '36px'}} variant="empty">Yes</MyButton>
-        <MyButton onClick={setFalse} style={{width: '96px', height: '36px'}} variant="secondary">No</MyButton>
+        <MyButton callback={setTrue} style={{width: '96px', height: '36px'}} variant="empty">Yes</MyButton>
+        <MyButton callback={setFalse} style={{width: '96px', height: '36px'}} variant="secondary" >No</MyButton>
       </div>
     </div>
     </Modal>

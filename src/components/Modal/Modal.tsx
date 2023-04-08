@@ -1,11 +1,13 @@
 import close from '../../assets/modal/close.svg'
 import s from './Modal.module.scss'
 import Image from 'next/image';
+import React from 'react';
 
 interface IModal {
   backgroundOnClick?: () => void;
   modalOnClick?: () => void;
   title:string
+  children: React.ReactNode
 }
 
 const Modal: React.FC<IModal> = (
@@ -16,7 +18,6 @@ const Modal: React.FC<IModal> = (
     title
   }
 ) => {
-  console.log('render Modal');
   return (
     <>
        <div className={s.modalBackgraund} onClick={backgroundOnClick} />

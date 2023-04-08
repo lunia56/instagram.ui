@@ -1,5 +1,5 @@
-import React, {useState} from "react";
-import {Controller, useForm} from "react-hook-form";
+import React, {useState} from 'react';
+import {Controller, useForm} from 'react-hook-form';
 import s from './SignUp.module.scss'
 import SocialRegistrationForm from '@/components/SignUp/SocialRegistrationForm';
 import {
@@ -14,17 +14,11 @@ import {
     InputGroup,
     InputRightElement,
     Link,
-    Modal,
-    ModalBody,
-    ModalCloseButton,
-    ModalContent,
-    ModalFooter,
-    ModalHeader,
-    ModalOverlay, Progress,
+    Progress,
     Text,
     useToast,
     VStack,
-} from "@chakra-ui/react";
+} from '@chakra-ui/react';
 import {AiOutlineEye, AiOutlineEyeInvisible} from 'react-icons/ai';
 import {useRegisterMutation} from '@/services/hooks';
 import ModalSendEmail from '@/components/Modal/ModalSendEmail/ModalSendEmail';
@@ -40,7 +34,7 @@ const SignUp = () => {
 
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [showPassword, setShowPassword] = useState(false);
-    const [isOpen, setIsOpen] = useState(true);
+    const [isOpen, setIsOpen] = useState(false);
     const toast = useToast();
 
     const {
@@ -56,8 +50,6 @@ const SignUp = () => {
         () => setIsOpen(true),
         reset
     )
-
-    const onCloseModal = () => setIsOpen(false);
 
     const onSubmit = (data: FormValues) => {
         setIsSubmitting(true);
@@ -245,7 +237,7 @@ const SignUp = () => {
                     <Link href={'/'}>Sign In</Link>
                 </VStack>
             </Box>
-            {isOpen && <ModalSendEmail modalOnClick={()=>setIsOpen(false)} email={variables?.email}/>}
+              {isOpen && <ModalSendEmail modalOnClick={()=>setIsOpen(false)} email={variables?.email}/>}
             {isError  && toast({
                 title: 'Ошибка!',
                 description: error.message,

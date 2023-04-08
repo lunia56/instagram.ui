@@ -6,7 +6,6 @@ import ModalLogout from '@/components/Modal/ModalLogOut/ModalLogout';
 
 const Header = () => {
     const [show, setShow] = useState(false);
-    console.log(show)
     const openModalLogout = () => {
         setShow(true)
     }
