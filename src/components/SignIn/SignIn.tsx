@@ -19,7 +19,6 @@ import {
 } from '@chakra-ui/react'
 import {AiOutlineEye, AiOutlineEyeInvisible} from 'react-icons/ai'
 import {useSignInMutation} from '@/services/hooks'
-import {redirect} from 'next/navigation'
 
 
 type  FormValues = {
@@ -29,7 +28,7 @@ type  FormValues = {
 const SignIn = () => {
 
     const [showPassword, setShowPassword] = useState(false)
-    const [queryError, setQueryError] = useState<string>('')
+    // const [queryError, setQueryError] = useState<string>('')
 
 
     const {mutate: signIn, error, isLoading} = useSignInMutation()
@@ -52,14 +51,14 @@ const SignIn = () => {
         <>
             {isLoading && <Progress size="xs" isIndeterminate color="gray.800" bg="gray.800"/>}
             <Box className={s.signUpContainer}>
-                <VStack className={s.signUpBlock} spacing={0}>
+                <VStack className={s.signUpBlock} spacing={1}>
                     <Heading mb="15px" size="lg">Sign In</Heading>
                     <SocialRegistrationForm/>
                     <Box className={s.formBlock}>
                         <form onSubmit={handleSubmit(onSubmit)}>
-                            <VStack spacing={0} align="stretch">
+                            <VStack spacing={2} align="stretch" >
 
-                                <FormControl isInvalid={Boolean(errors.email)}>
+                                <FormControl isInvalid={Boolean(errors.email)} isRequired>
                                     <FormLabel color={'#4C4C4C'}>Email</FormLabel>
 
                                     <Controller
@@ -86,7 +85,7 @@ const SignIn = () => {
                                     </FormErrorMessage>
                                 </FormControl>
 
-                                <FormControl isInvalid={Boolean(errors.password)}>
+                                <FormControl isInvalid={Boolean(errors.password)} isRequired  display={'flex'} flexDirection={'column'} justifyContent={'center'}>
                                     <FormLabel color={'#4C4C4C'}>Password</FormLabel>
                                     <Controller
                                         control={control}
@@ -104,8 +103,7 @@ const SignIn = () => {
                                         }}
                                         render={({field: {onChange, value}}) => (<>
 
-                                            <InputGroup mb="60px">
-
+                                            <InputGroup >
                                                 <Input
                                                     value={value}
                                                     onChange={onChange}
@@ -113,7 +111,6 @@ const SignIn = () => {
                                                     pr="4.5rem"
                                                     type={showPassword ? 'text' : 'password'}
                                                 />
-
                                                 <InputRightElement width="4.5rem">
                                                     <IconButton
                                                         h="1.75rem"
@@ -127,23 +124,15 @@ const SignIn = () => {
                                                             <AiOutlineEye size={'20px'} color={'white'}/> :
                                                             <AiOutlineEyeInvisible size={'20px'} color={'white'}/>}
                                                     />
-
                                                 </InputRightElement>
                                             </InputGroup>
                                         </>)}
-
                                     />
-                                    <Link className={s.forgot} href={'/'}>Forgot Password</Link>
-
-
                                     <FormErrorMessage>
                                         {errors.password && <span>{errors.password.message}</span>}
                                     </FormErrorMessage>
-                                    {/*<FormErrorMessage>*/}
-                                    {/*    {queryError && <span>Ошибка</span>}*/}
-                                    {/*</FormErrorMessage>*/}
                                 </FormControl>
-
+                                <Button variant={'link'} className={s.forgot} > <Link  href={'/'}>Forgot Password</Link></Button>
 
                                 <Button
                                     type="submit"
@@ -159,7 +148,7 @@ const SignIn = () => {
                         </form>
                     </Box>
                     <Text>Don’t have an account?</Text>
-                    <Link href={'/signup'}>Sign Up</Link>
+                    <Button variant={'link'}><Link href={'/'}>Sign Up</Link></Button>
                 </VStack>
             </Box>
         </>
