@@ -1,14 +1,12 @@
 import React, {ButtonHTMLAttributes, DetailedHTMLProps} from 'react'
 import s from './MyButton.module.scss'
 
-// тип пропсов обычной кнопки, children в котором храниться название кнопки там уже описан
 type DefaultButtonPropsType = DetailedHTMLProps<ButtonHTMLAttributes<HTMLButtonElement>,
   HTMLButtonElement>
 
 type MyButtonPropsType = DefaultButtonPropsType & {
   callback: () => void
   variant?: string
-    children: React.ReactNode;
 }
 
 const MyButton: React.FC<MyButtonPropsType> = (
@@ -17,8 +15,7 @@ const MyButton: React.FC<MyButtonPropsType> = (
     className,
     disabled,
     callback,
-      children,
-    ...restProps // все остальные пропсы попадут в объект restProps, там же будет children
+    ...restProps
   }
 ) => {
   const finalClassName = s.button
@@ -31,7 +28,7 @@ const MyButton: React.FC<MyButtonPropsType> = (
     <button
       disabled={disabled}
       className={finalClassName}
-      onClick={() => callback}
+      onClick={() => callback()}
       {...restProps}
     />
   )

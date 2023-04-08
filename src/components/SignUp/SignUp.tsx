@@ -1,5 +1,5 @@
-import React, {useState} from "react";
-import {Controller, useForm} from "react-hook-form";
+import React, {useState} from 'react';
+import {Controller, useForm} from 'react-hook-form';
 import s from './SignUp.module.scss'
 import SocialRegistrationForm from '@/components/SignUp/SocialRegistrationForm';
 import {
@@ -14,20 +14,14 @@ import {
     InputGroup,
     InputRightElement,
     Link,
-    Modal,
-    ModalBody,
-    ModalCloseButton,
-    ModalContent,
-    ModalFooter,
-    ModalHeader,
-    ModalOverlay,
     Progress,
     Text,
     useToast,
     VStack,
-} from "@chakra-ui/react";
+} from '@chakra-ui/react';
 import {AiOutlineEye, AiOutlineEyeInvisible} from 'react-icons/ai';
 import {useRegisterMutation} from '@/services/hooks';
+import ModalSendEmail from '@/components/Modal/ModalSendEmail/ModalSendEmail';
 
 
 type  FormValues = {
@@ -56,8 +50,6 @@ const SignUp = () => {
         () => setIsOpen(true),
         reset
     )
-
-    const onCloseModal = () => setIsOpen(false);
 
     const onSubmit = (data: FormValues) => {
         // setIsSubmitting(true);
@@ -237,21 +229,8 @@ const SignUp = () => {
                     <Button variant={'link'}><Link href={'/'}>Sign In</Link></Button>
                 </VStack>
             </Box>
-            <Modal isOpen={isOpen} onClose={onCloseModal} isCentered={true} motionPreset="slideInBottom"
-                   blockScrollOnMount trapFocus>
-                <ModalOverlay borderRadius={'0%'}/>
-                <ModalContent bg={'#333333'} color={'white'} borderRadius={'0%'}>
-                    <ModalHeader> Email sent <ModalCloseButton/></ModalHeader>
-                    <ModalBody>
-                        <p>We have sent a link to confirm your email to {variables?.email}</p>
-                    </ModalBody>
-                    <ModalFooter>
-
-                        <Button colorScheme="blue" borderRadius={'0%'} onClick={onCloseModal}>OK</Button>
-                    </ModalFooter>
-                </ModalContent>
-            </Modal>
-            {isError && toast({
+              {isOpen && <ModalSendEmail modalOnClick={()=>setIsOpen(false)} email={variables?.email}/>}
+            {isError  && toast({
                 title: 'Ошибка!',
                 description: error.message,
                 status: 'error',
@@ -264,36 +243,3 @@ const SignUp = () => {
 }
 
 export default SignUp;
-//
-// import { useForm, useWatch, Control } from "react-hook-form";
-//
-// type FormValues = {
-//     firstName: string;
-//     lastName: string;
-// };
-//
-// function IsolateReRender({ control }: { control: Control<FormValues> }) {
-//     const firstName = useWatch({
-//         control,
-//         name: "firstName",
-//         defaultValue: "default"
-//     });
-//
-//     return <div>{firstName}</div>;
-// }
-//
-// export default function App() {
-//     const { register, control, handleSubmit } = useForm<FormValues>();
-//     const onSubmit = handleSubmit((data) => console.log(data));
-//
-//     return (
-//         <form onSubmit={onSubmit}>
-//             <input {...register("firstName")} />
-//             <input {...register("lastName")} />
-//             <IsolateReRender control={control} />
-//
-//             <input type="submit" />
-//         </form>
-//     );
-// }
-
