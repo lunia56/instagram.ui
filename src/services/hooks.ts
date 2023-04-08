@@ -44,7 +44,6 @@ export const useRegisterMutation = (setError:any, onSuccessHandler:()=>void,rese
         }
     });
 };
-
 // const errorHandler=(error,setError)=>{
 //     error.status === 400 &&
 //     setError('login', { type: 'manual', message: `${error.message} /User with this username is already registered` })
@@ -64,18 +63,16 @@ export const useSignInMutation = () => {
     });
 }
 export const useLogOutMutation = () => {
+    const { push } = useRouter();
     return useMutation({
         mutationFn: InstagramApi.logout,
         mutationKey:['logout'],
         onSuccess: (res) => {
+            push("/");
             console.log('Logout Succes')
-            //reset()
-            //onSuccessHandler()
         },
         onError: (error:AxiosError) => {
             console.log('Logout Error')
-            //error.response?.status === 400 &&
-            //setError('login', {type: 'manual', message: 'User with this username or email is already registered'})
         }
     });
 };

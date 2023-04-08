@@ -10,7 +10,7 @@ interface IModalLogout {
 
 const ModalLogout: React.FC<IModalLogout> =  ({modalOnClick}) =>{
 
-  const {mutate:logout, isError, error,variables,isLoading} = useLogOutMutation()
+  const {mutate:logout} = useLogOutMutation()
 
 const setTrue = () => {
   modalOnClick()
