@@ -1,0 +1,30 @@
+@import "src/assets/styles/variables.module";
+@import "src/assets/styles/mixins.module";
+
+.createProfile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 500px;
+  margin: 245px auto 0 auto;
+  text-align: center;
+  & h1{
+    font-family: 'Inter', serif;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 36px;
+    margin-bottom: 20px;
+    color:$textColor;
+  }
+  & p{
+    width: 409px;
+    font-family: 'Inter', serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 24px;
+    color:$textColor;
+    margin-bottom: 48px;
+  }
+}
