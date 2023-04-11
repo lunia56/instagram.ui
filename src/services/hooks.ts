@@ -22,12 +22,11 @@ export const useEmailResendingMutation = () => {
         },
     })
 }
-export const useRegisterMutation = (setError: any, onSuccessHandler: () => void, reset: any) => {
+export const useRegisterMutation = (setError: any, onSuccessHandler: () => void) => {
     return useMutation({
         mutationFn: InstagramApi.signUp,
         mutationKey: ['registered'],
         onSuccess: (res) => {
-            reset()
             onSuccessHandler()
         },
         onError: (error: AxiosError) => {
