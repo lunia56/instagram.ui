@@ -27,6 +27,7 @@ type  FormValues = {
     password: string
     confirmPassword: string
 }
+
 const PasswordRecovery = () => {
 
     const [isSubmitting, setIsSubmitting] = useState(false);

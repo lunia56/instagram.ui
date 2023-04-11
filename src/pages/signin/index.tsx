@@ -9,7 +9,6 @@ const SignInPage = () => {
         <Layout>
             <SignIn/>
         </Layout>
-
     );
 };
 
