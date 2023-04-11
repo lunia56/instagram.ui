@@ -16,10 +16,10 @@ const Header = () => {
       <div className={s.container}>
         <p className={s.title}>Instagram</p>
         {
-          login && <div className={s.logout} onClick={openModalLogout}>
+          login ? <div className={s.logout} onClick={openModalLogout}>
                 <Image src={logout} width={24} height={24} alt=""/>
                 <p>Log Out</p>
-            </div>
+            </div> : <div></div>
         }
         {show && <ModalLogout modalOnClick={() => setShow(false)}/>}
       </div>

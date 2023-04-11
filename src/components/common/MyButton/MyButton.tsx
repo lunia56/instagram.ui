@@ -5,7 +5,7 @@ type DefaultButtonPropsType = DetailedHTMLProps<ButtonHTMLAttributes<HTMLButtonE
   HTMLButtonElement>
 
 type MyButtonPropsType = DefaultButtonPropsType & {
-  callback: () => void
+  callback?: () => void
   variant?: string
 }
 
@@ -28,7 +28,7 @@ const MyButton: React.FC<MyButtonPropsType> = (
     <button
       disabled={disabled}
       className={finalClassName}
-      onClick={() => callback()}
+      onClick={() => callback ? callback() : null}
       {...restProps}
     />
   )

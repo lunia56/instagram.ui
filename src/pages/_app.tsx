@@ -3,9 +3,7 @@ import type {AppProps} from 'next/app'
 import {QueryClient} from '@tanstack/query-core';
 import {QueryClientProvider} from '@tanstack/react-query';
 import {ReactQueryDevtools} from '@tanstack/react-query-devtools';
-import {ChakraProvider, ColorModeScript, extendTheme, ThemeProvider, ToastProvider} from '@chakra-ui/react';
-import {mode} from '@chakra-ui/theme-tools';
-import {AuthRedirect} from '@/components/auth-redirect';
+import {ChakraProvider, extendTheme} from '@chakra-ui/react';
 
 const queryClient = new QueryClient()
 
