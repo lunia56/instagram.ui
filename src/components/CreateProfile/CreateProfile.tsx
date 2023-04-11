@@ -7,6 +7,7 @@ import img from '@/assets/Profile/not_foto.png';
 import Image from 'next/image';
 import {SingleDatepicker} from '@/components/common/DatePicker/SingleDatepicker';
 import {RangeCalendarPanel, RangeDatepicker} from '@/components/common/DatePicker/RangeCalendarPanel';
+import ModalSendEmail from "@/components/Modal/ModalSendEmail/ModalSendEmail";
 
 type FormData = {
   username: string;
@@ -18,6 +19,7 @@ type FormData = {
 const CreateProfile = () => {
   const [isEdite, setIsEdite] = useState<boolean>(false)
   const [date, setDate] = useState(new Date())
+  const [addPhotoOpen, setAddPhotoOpen ] = useState(false)
   const {
     handleSubmit,
     register,
@@ -56,7 +58,7 @@ console.log('add avatar');
                   <div className={s.image}>
                     <Image src={img} alt=""/>
                   </div>
-                  <MyButton variant="empty" callback={addAvatar} style={{width: '179px', height: '36px'}}>Add a Profile Photo</MyButton>
+                  <MyButton onClick={()=>{setAddPhotoOpen(!addPhotoOpen)}} variant="empty" callback={addAvatar} style={{width: '179px', height: '36px'}}>Add a Profile Photo</MyButton>
                 </div>
                 <div className={s.right}>
                   <FormControl isInvalid={errors.username}>
@@ -140,6 +142,7 @@ console.log('add avatar');
 
         </div>
       }
+      {addPhotoOpen && <ModalSendEmail modalOnClick={()=>setAddPhotoOpen(false)} email={'variables?.email'}/>}
       </>
   )
 }
