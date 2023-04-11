@@ -1,30 +1,93 @@
 @import "src/assets/styles/variables.module";
 @import "src/assets/styles/mixins.module";
 
-.createProfile {
+.oops {
   display: flex;
   flex-direction: column;
   align-items: center;
   width: 500px;
   margin: 245px auto 0 auto;
   text-align: center;
-  & h1{
+
+  & h1 {
     font-family: 'Inter', serif;
     font-style: normal;
     font-weight: 700;
     font-size: 20px;
     line-height: 36px;
     margin-bottom: 20px;
-    color:$textColor;
+    color: $textColor;
   }
-  & p{
+
+  & p {
     width: 409px;
     font-family: 'Inter', serif;
     font-style: normal;
     font-weight: 400;
     font-size: 16px;
     line-height: 24px;
-    color:$textColor;
+    color: $textColor;
     margin-bottom: 48px;
+  }
+}
+
+.createProfile {
+  display: flex;
+  flex-direction: column;
+  width: 726px;
+  margin: 0 auto;
+  color: $textColor;
+
+  & .title {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 36px;
+    text-align: left;
+  }
+
+  & hr {
+    border: #333333 solid 2px;
+    margin-top: 24px;
+  }
+
+  & .form {
+    width: 719px;
+    display: flex;
+    flex-direction: column;
+    & .block {
+      display: flex;
+      justify-content: space-between;
+
+      & .left {
+        margin-top: 48px;
+        & .image {
+          width: 192px;
+          height: 192px;
+          margin-bottom: 28px;
+          border-radius: 50%;
+          background-color: #171717;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        }
+      }
+
+      & .right {
+        width: 493px;
+        & input{
+          height: 25px;
+        }
+        & label {
+          margin-top: 22px;
+          font-weight: 400;
+font-size: 14px;
+line-height: 24px;
+        }
+      }
+
+    }
+
   }
 }
