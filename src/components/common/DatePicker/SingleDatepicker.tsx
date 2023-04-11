@@ -1,23 +1,10 @@
-import React, { useState } from 'react';
-import {
-  Input,
-  Popover,
-  PopoverBody,
-  PopoverContent,
-  PopoverTrigger,
-  Portal,
-  useDisclosure,
-} from '@chakra-ui/react';
-import { format } from 'date-fns';
+import React, {useState} from 'react';
+import {Input, Popover, PopoverBody, PopoverContent, PopoverTrigger, Portal, useDisclosure,} from '@chakra-ui/react';
+import {format} from 'date-fns';
 import FocusLock from 'react-focus-lock';
-import {Month_Names_Full, Month_Names_Short, Weekday_Names_Short} from './utils/calanderUtils';
-import { CalendarPanel } from './components/calendarPanel';
-import {
-  CalendarConfigs,
-  DatepickerConfigs,
-  DatepickerProps,
-  OnDateSelected,
-} from './utils/commonTypes';
+import {Month_Names_Full, Weekday_Names_Short} from './utils/calanderUtils';
+import {CalendarPanel} from './components/calendarPanel';
+import {CalendarConfigs, DatepickerConfigs, DatepickerProps, OnDateSelected,} from './utils/commonTypes';
 
 export interface SingleDatepickerProps extends DatepickerProps {
   date?: Date;
@@ -39,13 +26,13 @@ const DefaultConfigs: CalendarConfigs = {
 };
 
 export const SingleDatepicker: React.FC<SingleDatepickerProps> = ({
-  configs,
-  propsConfigs,
-  usePortal,
-  defaultIsOpen = false,
-  closeOnSelect = true,
-  ...props
-}) => {
+                                                                    configs,
+                                                                    propsConfigs,
+                                                                    usePortal,
+                                                                    defaultIsOpen = false,
+                                                                    closeOnSelect = true,
+                                                                    ...props
+                                                                  }) => {
   const {
     date: selectedDate,
     name,
@@ -57,10 +44,10 @@ export const SingleDatepicker: React.FC<SingleDatepickerProps> = ({
   } = props;
 
   const [dateInView, setDateInView] = useState(selectedDate);
-  
+
   const [offset, setOffset] = useState(0);
 
-  const { onOpen, onClose, isOpen } = useDisclosure({ defaultIsOpen });
+  const {onOpen, onClose, isOpen} = useDisclosure({defaultIsOpen});
 
   const calendarConfigs: CalendarConfigs = {
     ...DefaultConfigs,
@@ -73,9 +60,9 @@ export const SingleDatepicker: React.FC<SingleDatepickerProps> = ({
     setOffset(0);
   };
 
-  const handleOnDateSelected: OnDateSelected = ({ selectable, date }) => {
-    console.log(selectable, date );
-    
+  const handleOnDateSelected: OnDateSelected = ({selectable, date}) => {
+    console.log(selectable, date);
+
     if (!selectable) return;
     if (date instanceof Date && !isNaN(date.getTime())) {
       onDateChange(date);
@@ -110,8 +97,9 @@ export const SingleDatepicker: React.FC<SingleDatepickerProps> = ({
           value={
             selectedDate ? format(selectedDate, calendarConfigs.dateFormat) : ''
           }
-          onChange={(e) => {e.target.value
-          console.log(e.target.value);
+          onChange={(e) => {
+            e.target.value
+            console.log(e.target.value);
           }}
           {...propsConfigs?.inputProps}
         />
