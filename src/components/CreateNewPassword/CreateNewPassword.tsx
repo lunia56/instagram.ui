@@ -30,17 +30,7 @@ const CreateNewPassword = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
 
-  // const router = useRouter();
-  //
-  // const {code} = router.query
-  // const recoveryCode = code
-  //
-  // const {mutate, isLoading,} = useCreateNewPasswordMutation()
 
-  // const onSubmitHandler = async (newPassword: string, recoveryCode: string) => {
-  //   await mutate({newPassword, recoveryCode})
-  //   // router.push('/auth/login')
-  // }
   const [isOpen, setIsOpen] = useState(false);
 
   const {
@@ -52,10 +42,7 @@ const CreateNewPassword = () => {
   } = useForm<FormValues>({mode: 'onChange'});
 
   const {mutate: signUp, isLoading,} = useRegisterMutation(setError, () => setIsOpen(true), reset)
-  //
-  // const onSubmit = (data: FormValues) => {
-  //   await mutate({newPassword, recoveryCode})
-  // };
+
   const onSubmit = (data: FormValues) => {
     setIsSubmitting(true);
     signUp(data)

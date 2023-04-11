@@ -48,7 +48,7 @@ export const useRegisterMutation = (setError: any, onSuccessHandler: () => void,
 
 export const useCreateNewPasswordMutation = () => {
   return useMutation({
-    mutationFn: InstagramApi.createNewPassword,
+    // mutationFn: InstagramApi.createNewPassword,
   })
 }
 
