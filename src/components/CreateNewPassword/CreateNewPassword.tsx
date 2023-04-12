@@ -30,24 +30,23 @@ const CreateNewPassword = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
 
+  const router = useRouter();
 
-  const [isOpen, setIsOpen] = useState(false);
+  const {token} = router.query
+  const recoveryToken = token
 
   const {
     control,
-    reset,
     handleSubmit,
     watch, setError,
     formState: {errors, isValid}
   } = useForm<FormValues>({mode: 'onChange'});
 
-  const {mutate: signUp, isLoading,} = useRegisterMutation(setError, () => setIsOpen(true), reset)
+  const {mutate: newPassword, isLoading,} = useCreateNewPasswordMutation(recoveryToken)
 
-  const onSubmit = (data: FormValues) => {
+  const onSubmit = () => {
     setIsSubmitting(true);
-    signUp(data)
     setIsSubmitting(false);
-
   };
 
   const handleClickShowPassword = () => setShowPassword(!showPassword);
@@ -152,7 +151,7 @@ const CreateNewPassword = () => {
                   <FormErrorMessage>
                     {errors.confirmPassword && <span>{errors.confirmPassword.message}</span>}
                     {errors.confirmPassword?.type === 'validate' &&
-                      <span>Passwords do not match</span>}
+                      <span>The password must match the new password</span>}
                   </FormErrorMessage>
 
                   <span className={style.spanDescr}>

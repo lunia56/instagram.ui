@@ -7,12 +7,6 @@ type AxiosResponseMe = {
   userId: string
 }
 
-type ReqNewPassword = {
-  newPassword: string
-  recoveryCode: string
-}
-
-
 export const test = {}
 export const InstagramApi = {
   signUp: ({login, email, password}: { login: string, email: string; password: string }) => {
@@ -40,9 +34,11 @@ export const InstagramApi = {
       password
     })
   },
-  createNewPassword(data: ReqNewPassword): Promise<AxiosResponse> {
-    const {newPassword, recoveryCode} = data
-    return instagramInstance.post('auth/new-password', {newPassword, recoveryCode})
+  createNewPassword: ({newPassword, resetPasswordToken}: {
+    newPassword: string,
+    resetPasswordToken: string
+  }): Promise<AxiosResponse> => {
+    return instagramInstance.post('auth/create-new-password', {newPassword, resetPasswordToken})
   },
 
 }

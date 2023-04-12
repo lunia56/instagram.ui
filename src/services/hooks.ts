@@ -1,8 +1,7 @@
 // import {QueryObserverResult, useQuery} from '@tanstack/react-query';
-import { InstagramApi, test } from '@/services/index';
+import { InstagramApi } from '@/services/index';
 import { useMutation, useQuery } from '@tanstack/react-query';
 import { useRouter } from 'next/router';
-import { useToast } from '@chakra-ui/react';
 import { AxiosError } from 'axios';
 
 // export const useSignUpQuery = () => {
@@ -46,9 +45,18 @@ export const useRegisterMutation = (setError: any, onSuccessHandler: () => void,
   });
 };
 
-export const useCreateNewPasswordMutation = () => {
+export const useCreateNewPasswordMutation = (resetPasswordToken: any,reset:any) => {
+  const {push} = useRouter()
   return useMutation({
-    // mutationFn: InstagramApi.createNewPassword,
+    mutationFn: InstagramApi.createNewPassword,
+    mutationKey: ['create-new-password'],
+    onSuccess: () => {
+      reset(),
+        push('/signin')
+    },
+    onError: (e: AxiosError) => {
+      console.log(e.message)
+    }
   })
 }
 
