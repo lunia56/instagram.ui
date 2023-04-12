@@ -6,8 +6,7 @@ import {FormControl, FormErrorMessage, FormLabel, Input, Textarea} from '@chakra
 import img from '@/assets/Profile/not_foto.png';
 import Image from 'next/image';
 import {SingleDatepicker} from '@/components/common/DatePicker/SingleDatepicker';
-import {RangeCalendarPanel, RangeDatepicker} from '@/components/common/DatePicker/RangeCalendarPanel';
-import ModalSendEmail from "@/components/Modal/ModalSendEmail/ModalSendEmail";
+import ModalAddProfilePhoto from "@/components/Modal/ModalAddProfilePhoto/ModalAddProfilePhoto";
 
 type FormData = {
   username: string;
@@ -142,7 +141,7 @@ console.log('add avatar');
 
         </div>
       }
-      {addPhotoOpen && <ModalSendEmail modalOnClick={()=>setAddPhotoOpen(false)} email={'variables?.email'}/>}
+      {addPhotoOpen && <ModalAddProfilePhoto modalOnClick={()=>setAddPhotoOpen(false)} email={'variables?.email'}/>}
       </>
   )
 }

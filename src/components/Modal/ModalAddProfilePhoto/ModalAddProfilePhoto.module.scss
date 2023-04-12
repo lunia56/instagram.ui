@@ -9,5 +9,7 @@
 
 .buttonGroup{
   display: flex;
-  justify-content: right;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }

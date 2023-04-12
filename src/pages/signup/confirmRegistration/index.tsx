@@ -9,6 +9,7 @@ const ConfirmRegistration = () => {
     const onClickHandler=()=>{
         push('/login')
     }
+
     return (
         <Layout>
             <ConfirmationMessage title={'Congratulations!'} description={'Your email has been confirmed'} buttonTitle={'SignIn'} onClickHandler={onClickHandler} image={img}/>

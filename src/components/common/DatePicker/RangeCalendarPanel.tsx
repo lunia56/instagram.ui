@@ -28,7 +28,7 @@ interface RangeCalendarPanelProps {
   propsConfigs?: PropsConfigs;
   selected?: Date | Date[];
 }
-const RangeCalendarPanel: React.FC<RangeCalendarPanelProps> = ({
+export const RangeCalendarPanel: React.FC<RangeCalendarPanelProps> = ({
   dayzedHookProps,
   configs,
   propsConfigs,

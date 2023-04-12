@@ -21,7 +21,7 @@ const Modal: React.FC<IModal> = (
   return (
     <>
        <div className={s.modalBackgraund} onClick={backgroundOnClick} />
-        <div className={s.modal} >
+        <div className={title === 'Add a Profile Photo' ? s.modalAddPhoto : s.modal} >
           <div className={s.title}>
             <p>{title}</p>
             <Image src={close} alt='' onClick={modalOnClick}/>
