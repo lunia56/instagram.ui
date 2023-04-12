@@ -2,6 +2,7 @@ import {InstagramApi} from '@/services/index'
 import {useMutation, useQuery} from '@tanstack/react-query'
 import {useRouter} from 'next/router'
 import {AxiosError} from 'axios'
+import {log} from 'util'
 
 
 export const useMeQuery = () => {
@@ -29,8 +30,10 @@ export const useRegisterMutation = (setError: any, onSuccessHandler: () => void)
         onSuccess: (res) => {
             onSuccessHandler()
         },
-        onError: (error: AxiosError) => {
+        onError: (error: AxiosError<{errorMessage:[{message:string,field:string}]}>) => {
+            console.log('errorsMessages', error.response?.data.errorMessage[0].message)
             error.response?.status === 400 &&
+
             setError('login', {type: 'manual', message: 'User with this username or email is already registered'})
         }
     })

@@ -1,6 +1,6 @@
 import axios, {AxiosError, AxiosResponse} from 'axios'
 
-const baseURL = 'https://instagram-api-jq7e.onrender.com/api/'
+const baseURL = 'https://instagram-api-psi.vercel.app/api'
 export const instagramInstance = axios.create({
     baseURL: baseURL,
     withCredentials: true
@@ -14,21 +14,24 @@ instagramInstance.interceptors.request.use((config) => {
 })
 
 // когда любой вопрос возвращается с ошибкой 401 (токен умер) мы освежаем токен соответствующим запросом
-instagramInstance.interceptors.response.use((config) => {
-        return config
-    },
-    async (error) => {
-        const originalRequest = error.config
-        if (error.response.status == 401) {
-            try {
-                const response = await axios.post<AxiosResponse<{
-                    accessToken: string
-                }>>(`${baseURL}/auth/refresh-token`, {withCredentials: true})
-                localStorage.setItem('token', response.data.data.accessToken)
-                return instagramInstance.request(originalRequest)
-            } catch (e) {
-                console.log('НЕ АВТОРИЗОВАН')
-            }
-        }
-    }
-)
+
+// instagramInstance.interceptors.response.use((config) => {
+//         return config
+//     },
+//     async (error) => {
+//     debugger
+//         const originalRequest = error.config
+//         console.log('error ', error)
+//         if (error.response && error.response.status == 401) {
+//             try {
+//                 const response = await axios.post<AxiosResponse<{
+//                     accessToken: string
+//                 }>>(`${baseURL}/auth/refresh-token`, {withCredentials: true})
+//                 localStorage.setItem('token', response.data.data.accessToken)
+//                 return instagramInstance.request(originalRequest)
+//             } catch (e) {
+//                 console.log('НЕ АВТОРИЗОВАН')
+//             }
+//             }
+//         }
+//     )

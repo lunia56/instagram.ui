@@ -59,6 +59,14 @@ const SignUp = () => {
     if (status === 'success') {
         reset()
     }
+    if (isError) { toast({
+        title: 'Ошибка!',
+        description: error.message,
+        status: 'error',
+        duration: 3000,
+        isClosable: true,
+        position: 'bottom-left'
+    })}
     return (
         <>
             {isLoading && <Progress size="xs" isIndeterminate color="gray.800" bg="gray.800"/>}
@@ -210,7 +218,7 @@ const SignUp = () => {
                                     {errors.confirmPassword &&
                                         <FormErrorMessage><span>{errors.confirmPassword.message}</span></FormErrorMessage>}
                                     {errors.confirmPassword?.type === 'validate' &&
-                                        <span>Passwords do not match</span>}
+                                        <FormErrorMessage> <span>Passwords do not match</span></FormErrorMessage>}
                                 </FormControl>
 
 
@@ -232,14 +240,7 @@ const SignUp = () => {
                 </VStack>
             </Box>
             {isOpen && <ModalSendEmail modalOnClick={() => setIsOpen(false)} email={variables?.email}/>}
-            {isError && toast({
-                title: 'Ошибка!',
-                description: error.message,
-                status: 'error',
-                duration: 3000,
-                isClosable: true,
-                position: 'bottom-left'
-            })}
+
         </>
     )
 }
