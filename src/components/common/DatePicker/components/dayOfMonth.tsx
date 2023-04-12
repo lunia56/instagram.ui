@@ -1,7 +1,7 @@
-import { Button } from '@chakra-ui/react';
-import { DateObj, RenderProps } from 'dayzed';
-import React, { useMemo } from 'react';
-import { DatepickerProps, DayOfMonthBtnStyleProps } from '../utils/commonTypes';
+import {Button} from '@chakra-ui/react';
+import {DateObj, RenderProps} from 'dayzed';
+import React, {useMemo} from 'react';
+import {DatepickerProps, DayOfMonthBtnStyleProps} from '../utils/commonTypes';
 
 interface DayOfMonthProps extends DatepickerProps {
   renderProps: RenderProps;
@@ -10,17 +10,17 @@ interface DayOfMonthProps extends DatepickerProps {
   onMouseEnter?: React.MouseEventHandler<HTMLButtonElement> | undefined;
 }
 
-const halfGap = 0.125; 
+const halfGap = 0.125;
 
 export const DayOfMonth: React.FC<DayOfMonthProps> = ({
-  dateObj,
-  propsConfigs,
-  isInRange,
-  renderProps,
-  onMouseEnter,
-}) => {
-  const { date, selected, selectable, today } = dateObj;
-  const { getDateProps } = renderProps;
+                                                        dateObj,
+                                                        propsConfigs,
+                                                        isInRange,
+                                                        renderProps,
+                                                        onMouseEnter,
+                                                      }) => {
+  const {date, selected, selectable, today} = dateObj;
+  const {getDateProps} = renderProps;
   const {
     defaultBtnProps,
     isInRangeBtnProps,
@@ -32,26 +32,20 @@ export const DayOfMonth: React.FC<DayOfMonthProps> = ({
     () => ({
       defaultBtnProps: {
         size: 'sm',
-        variant: 'outline',
-        background: 'red',
-        borderColor: 'yellow',
-        
-        _after: {
-          content: "''",
-          position: 'absolute',
-          top: `-${halfGap}rem`,
-          left: `-${halfGap}rem`,
-          bottom: `-${halfGap}rem`,
-          right: `-${halfGap}rem`,
-          borderWidth: `${halfGap}rem`,
-          borderColor: 'transparent',
-        },
+        variant: 'link',
+        width: '36px',
+        height: '36px',
+        color: '#BDC1C7',
+
         ...defaultBtnProps,
         _hover: selectable
           ? {
-              bg: 'purple.400',
-              ...defaultBtnProps?._hover,
-            }
+            bg: '#397DF6',
+            borderWidth: '4px',
+            borderColor: '#234E99',
+            borderRadius: '50%',
+            ...defaultBtnProps?._hover,
+          }
           : undefined,
       },
       isInRangeBtnProps: {
@@ -59,11 +53,11 @@ export const DayOfMonth: React.FC<DayOfMonthProps> = ({
         ...isInRangeBtnProps,
       },
       selectedBtnProps: {
-        background: 'blue.200',
+        color: '#397DF6',
         ...selectedBtnProps,
       },
       todayBtnProps: {
-        borderColor: 'blue.400',
+        color: 'red',
         ...todayBtnProps,
       },
     }),
@@ -75,7 +69,6 @@ export const DayOfMonth: React.FC<DayOfMonthProps> = ({
       selectable,
     ]
   );
-
   return (
     <Button
       {...getDateProps({

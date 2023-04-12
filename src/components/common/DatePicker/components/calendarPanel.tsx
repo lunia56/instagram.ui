@@ -67,7 +67,6 @@ export const CalendarPanel: React.FC<CalendarPanelProps> = ({
   if (calendars.length <= 0) {
     return null;
   }
-
   return (
     <Stack
       className="datepicker-calendar"
@@ -97,9 +96,9 @@ export const CalendarPanel: React.FC<CalendarPanelProps> = ({
                 />
               </Box>
             </Box>
-            <SimpleGrid columns={7} spacing={1} textAlign="center">
+            <SimpleGrid columns={7} spacing={1} color="#4C4C4C" textAlign="center">
               {weekdayNames.map((day, dayIdx) => (
-                <Box fontSize="sm" fontWeight="semibold" key={dayIdx}>
+                <Box key={dayIdx}>
                   {day}
                 </Box>
               ))}

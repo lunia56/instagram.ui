@@ -1,10 +1,23 @@
 import React, {useState} from 'react';
-import {Input, Popover, PopoverBody, PopoverContent, PopoverTrigger, Portal, useDisclosure,} from '@chakra-ui/react';
+import {
+  Input,
+  InputGroup,
+  InputProps,
+  InputRightElement,
+  Popover,
+  PopoverBody,
+  PopoverBodyProps,
+  PopoverContent,
+  PopoverTrigger,
+  Portal,
+  useDisclosure,
+} from '@chakra-ui/react';
 import {format} from 'date-fns';
 import FocusLock from 'react-focus-lock';
 import {Month_Names_Full, Weekday_Names_Short} from './utils/calanderUtils';
 import {CalendarPanel} from './components/calendarPanel';
 import {CalendarConfigs, DatepickerConfigs, DatepickerProps, OnDateSelected,} from './utils/commonTypes';
+import {CalendarIcon} from '@chakra-ui/icons';
 
 export interface SingleDatepickerProps extends DatepickerProps {
   date?: Date;
@@ -19,11 +32,21 @@ export interface SingleDatepickerProps extends DatepickerProps {
 }
 
 const DefaultConfigs: CalendarConfigs = {
-  dateFormat: 'yyyy-MM-dd',
+  dateFormat: 'dd.MM.yyyy',
   monthNames: Month_Names_Full,
   dayNames: Weekday_Names_Short,
   firstDayOfWeek: 0,
 };
+const styleInputProps: InputProps = {
+  width: '158px',
+  height: '58px',
+  backgroundColor: '#171717',
+  focusBorderColor: '#333333',
+}
+const popoverBodyProps: PopoverBodyProps = {
+  padding: 0,
+}
+
 
 export const SingleDatepicker: React.FC<SingleDatepickerProps> = ({
                                                                     configs,
@@ -61,7 +84,6 @@ export const SingleDatepicker: React.FC<SingleDatepickerProps> = ({
   };
 
   const handleOnDateSelected: OnDateSelected = ({selectable, date}) => {
-    console.log(selectable, date);
 
     if (!selectable) return;
     if (date instanceof Date && !isNaN(date.getTime())) {
@@ -72,7 +94,6 @@ export const SingleDatepicker: React.FC<SingleDatepickerProps> = ({
   };
 
   const PopoverContentWrapper = usePortal ? Portal : React.Fragment;
-
   return (
     <Popover
       placement="bottom-start"
@@ -83,33 +104,33 @@ export const SingleDatepicker: React.FC<SingleDatepickerProps> = ({
       isLazy
     >
       <PopoverTrigger>
-        <Input
-          onKeyPress={(e) => {
-            if (e.key === ' ' && !isOpen) {
-              e.preventDefault();
-              onOpen();
+        <InputGroup position="relative">
+          <Input
+            onKeyPress={(e) => {
+              if (e.key === ' ' && !isOpen) {
+                e.preventDefault();
+                onOpen();
+              }
+            }}
+            id={id}
+            autoComplete="off"
+            isDisabled={disabled}
+            name={name}
+            value={
+              selectedDate ? format(selectedDate, calendarConfigs.dateFormat) : (new Date).toLocaleDateString('ru')
             }
-          }}
-          id={id}
-          autoComplete="off"
-          isDisabled={disabled}
-          name={name}
-          value={
-            selectedDate ? format(selectedDate, calendarConfigs.dateFormat) : ''
-          }
-          onChange={(e) => {
-            e.target.value
-            console.log(e.target.value);
-          }}
-          {...propsConfigs?.inputProps}
-        />
+            onChange={(e) => e.target.value}
+            {...styleInputProps}
+          />
+          <InputRightElement right={'335px'} top="-7px" children={<CalendarIcon/>}/>
+        </InputGroup>
       </PopoverTrigger>
       <PopoverContentWrapper>
         <PopoverContent
           width="100%"
           {...propsConfigs?.popoverCompProps?.popoverContentProps}
         >
-          <PopoverBody {...propsConfigs?.popoverCompProps?.popoverBodyProps}>
+          <PopoverBody {...popoverBodyProps}>
             <FocusLock>
               <CalendarPanel
                 dayzedHookProps={{

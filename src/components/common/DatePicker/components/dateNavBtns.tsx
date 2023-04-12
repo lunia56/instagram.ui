@@ -9,15 +9,17 @@ export interface DatepickerBackBtnsProps extends DatepickerProps {
 }
 
 const DefaultBtnStyle: ButtonProps = {
-  variant: 'ghost',
-  size: 'sm',
+  width: '36px',
+  height: '36px',
+  bgColor: '#4C4C4C',
+  borderRadius: '50%',
 };
 
 export const DatepickerBackBtns: React.FC<DatepickerBackBtnsProps> = (props) => {
   const {calendars, getBackProps} = props;
   const customBtnProps = props.propsConfigs?.dateNavBtnProps;
   return (
-    <Box width={'36px'} height={'36px'} bgColor="#4C4C4C" borderRadius={'50%'}>
+    <Box>
       <Button
         {...getBackProps({calendars})}
         {...DefaultBtnStyle}
@@ -40,7 +42,7 @@ export const DatepickerForwardBtns: React.FC<DatepickerForwardBtnsProps> = (
   const {calendars, getForwardProps} = props;
   const customBtnProps = props.propsConfigs?.dateNavBtnProps;
   return (
-    <Box width={'36px'} height={'36px'} bgColor="#4C4C4C" borderRadius={'50%'}>
+    <Box>
       <Button
         {...getForwardProps({calendars})}
         {...DefaultBtnStyle}

@@ -56,12 +56,14 @@
     width: 719px;
     display: flex;
     flex-direction: column;
+
     & .block {
       display: flex;
       justify-content: space-between;
 
       & .left {
         margin-top: 48px;
+
         & .image {
           width: 192px;
           height: 192px;
@@ -76,14 +78,20 @@
 
       & .right {
         width: 493px;
-        & input{
+
+        & input {
           height: 25px;
+
+          & :focus {
+            background-color: #171717;
+          }
         }
+
         & label {
           margin-top: 22px;
           font-weight: 400;
-font-size: 14px;
-line-height: 24px;
+          font-size: 14px;
+          line-height: 24px;
         }
       }
 
