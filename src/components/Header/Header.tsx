@@ -7,7 +7,9 @@ import {useSignInMutation} from '@/services/hooks';
 
 const Header = () => {
   const [show, setShow] = useState(false);
-  const {login} = useSignInMutation()
+  const [isLoggedIn, setIsLoggedIn] = useState(true);//временно пока нет стейта зустанд
+
+  const {variables} = useSignInMutation()
   const openModalLogout = () => {
     setShow(true)
   }
@@ -16,7 +18,7 @@ const Header = () => {
       <div className={s.container}>
         <p className={s.title}>Instagram</p>
         {
-          login ? <div className={s.logout} onClick={openModalLogout}>
+          isLoggedIn ? <div className={s.logout} onClick={openModalLogout}>
                 <Image src={logout} width={24} height={24} alt=""/>
                 <p>Log Out</p>
             </div> : <div></div>

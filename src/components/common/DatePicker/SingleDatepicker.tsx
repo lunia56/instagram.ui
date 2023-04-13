@@ -122,7 +122,7 @@ export const SingleDatepicker: React.FC<SingleDatepickerProps> = ({
             onChange={(e) => e.target.value}
             {...styleInputProps}
           />
-          <InputRightElement right={'335px'} top="-7px" children={<CalendarIcon/>}/>
+          <InputRightElement right={'335px'} top="-7px" ><CalendarIcon/></InputRightElement>
         </InputGroup>
       </PopoverTrigger>
       <PopoverContentWrapper>

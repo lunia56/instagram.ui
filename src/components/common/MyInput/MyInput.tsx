@@ -16,7 +16,7 @@ const MyInput: React.FC<MyInputPropsType> = ({value, callback}) => {
       <Text mb="8px">Value: {value}</Text>
       <Input
         value={value}
-        onChange={handleChange}
+        onChange={callback}
         variant="flushed"
         placeholder="Here is a sample placeholder"
         size="sm"
