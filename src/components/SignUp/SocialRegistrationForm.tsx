@@ -1,18 +1,14 @@
-import {Box, Link} from '@chakra-ui/react';
-import React from 'react';
-import {useSignUpSocialQuery} from '@/services/hooks';
+import {HStack, Link} from '@chakra-ui/react'
+import React from 'react'
 
 const SocialRegistrationForm = () => {
-const {data:signUpSocial}=useSignUpSocialQuery()
+// const {data:signUpSocial}=useSignUpSocialQuery()
 
-    const fn=()=>{
-        // data
-    }
 
 
     return (
 
-        <Box  display={'flex'} >
+        <HStack >
             <Link href={'#'} mr={6} >
                 <svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <g clipPath="url(#clip0_314_5860)">
@@ -45,7 +41,7 @@ const {data:signUpSocial}=useSignUpSocialQuery()
                 </svg>
             </Link>
 
-        </Box>
+        </HStack>
     );
 };
 

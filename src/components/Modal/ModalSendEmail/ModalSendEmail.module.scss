@@ -1,0 +1,13 @@
+@import "src/assets/styles/variables.module";
+.message{
+  padding-top: 30px;
+  margin-bottom: 30px;
+  line-height: 24px;
+  font-size: 20px;
+  color: $textColor;
+}
+
+.buttonGroup{
+  display: flex;
+  justify-content: right;
+}
