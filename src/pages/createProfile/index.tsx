@@ -1,11 +1,12 @@
 import React from 'react'
 import CreateProfile from '@/components/CreateProfile/CreateProfile'
+import Layout from '@/components/Layout/Layout'
 
 const CreateProfilePage = () => {
     return (
-        <div>
+        <Layout>
             <CreateProfile/>
-        </div>
+        </Layout>
     )
 }
 
