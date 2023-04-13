@@ -1,6 +1,6 @@
 import axios, {AxiosError, AxiosResponse} from 'axios'
 
-const baseURL = 'https://instagram-api-psi.vercel.app/api'
+const baseURL = 'https://instagram-api-psi.vercel.app'
 export const instagramInstance = axios.create({
     baseURL: baseURL,
     withCredentials: true

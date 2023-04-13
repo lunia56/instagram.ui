@@ -3,9 +3,7 @@ import CreateProfile from '@/components/CreateProfile/CreateProfile';
 
 const CreateProfilePage = () => {
     return (
-        <Layout>
             <CreateProfile/>
-        </Layout>
     )
 }
 
