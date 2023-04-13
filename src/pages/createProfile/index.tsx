@@ -1,12 +1,13 @@
-import React from 'react'
-import CreateProfile from '@/components/CreateProfile/CreateProfile'
+import Layout from '@/components/Layout/Layout';
+import CreateProfile from '@/components/CreateProfile/CreateProfile';
 
-const CreateProfilePage = () => {
+const SignInPage = () => {
     return (
-        <div>
+        <Layout>
             <CreateProfile/>
-        </div>
-    )
-}
+        </Layout>
 
-export default CreateProfilePage
+    );
+};
+
+export default SignInPage;
