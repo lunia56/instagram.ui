@@ -1,6 +1,5 @@
-import React from 'react'
-import CreateProfile from '@/components/CreateProfile/CreateProfile'
-import Layout from '@/components/Layout/Layout'
+import Layout from '@/components/Layout/Layout';
+import CreateProfile from '@/components/CreateProfile/CreateProfile';
 
 const CreateProfilePage = () => {
     return (

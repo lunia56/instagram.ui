@@ -53,5 +53,19 @@ export const useSignInMutation = () => {
         onError: (e:AxiosError) => {
              console.log(e.message)
         }
-    })
+    });
 }
+export const useLogOutMutation = () => {
+    const { push } = useRouter();
+    return useMutation({
+        mutationFn: InstagramApi.logout,
+        mutationKey:['logout'],
+        onSuccess: (res) => {
+            push("/");
+            console.log('Logout Succes')
+        },
+        onError: (error:AxiosError) => {
+            console.log('Logout Error')
+        }
+    });
+};
