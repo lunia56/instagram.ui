@@ -1,15 +1,15 @@
-import React from 'react';
-import ConfirmationMessage from '@/components/confirmationMessage/confirmationMessage';
-import {useRouter} from 'next/router';
+import React from 'react'
+import ConfirmationMessage from '@/components/ConfirmationMessage/confirmationMessage'
 import img from '../../../../public/rafiki.png'
-import Layout from '@/components/Layout/Layout';
-import {useEmailResendingMutation, useMeQuery} from '@/services/hooks';
+import {useEmailResendingMutation, useMeQuery} from '@/services/API-hooks'
+import {NextPage} from 'next'
+import LayoutWithHeader from '@/components/Layout/LayoutWithHeader'
 
-const ConfirmRegistration = () => {
+const LinkExpired: NextPage = () => {
 
     const {mutate: resentEmail} = useEmailResendingMutation()
     const {data} = useMeQuery()
-    console.log('me where email' ,data)
+    console.log('me where email', data)
     // const email
     const onClickHandler = () => {
         // делаем запрос на отправку сообщения
@@ -17,12 +17,12 @@ const ConfirmRegistration = () => {
         // resentEmail(email)
     }
     return (
-        <Layout>
+        <LayoutWithHeader>
             <ConfirmationMessage title={'Email verification link expired'}
                                  description={'Looks like the verification link has expired. Not to worry, we can send the link again'}
                                  buttonTitle={'Resent verification link'} onClickHandler={onClickHandler} image={img}/>
-        </Layout>
-    );
-};
+        </LayoutWithHeader>
+    )
+}
 
-export default ConfirmRegistration;
+export default LinkExpired

@@ -1,6 +1,6 @@
 import {useRouter} from 'next/router';
 import {FC, PropsWithChildren} from 'react';
-import {useMeQuery} from '@/services/hooks';
+import {useMeQuery} from '@/services/API-hooks';
 
 export const AuthRedirect: FC<PropsWithChildren> = ({ children }) => {
     const { isLoading, isError } = useMeQuery();

@@ -1,8 +1,8 @@
-import React, { useState} from 'react';
+import React from 'react'
 import s from './ModalLogout.module.scss'
-import MyButton from '@/components/common/MyButton/MyButton';
-import Modal from '@/components/Modal/Modal';
-import {useLogOutMutation, useRegisterMutation} from '@/services/hooks';
+import MyButton from '@/components/common/MyButton/MyButton'
+import Modal from '@/components/Modal/Modal'
+import {useLogOutMutation} from '@/services/API-hooks'
 
 interface IModalLogout {
   modalOnClick: () => void;

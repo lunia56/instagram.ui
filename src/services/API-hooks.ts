@@ -46,7 +46,7 @@ export const useSignInMutation = () => {
         mutationFn: InstagramApi.signIn,
         onSuccess: (res) => {
             localStorage.setItem('token', res.data.accessToken)
-            push('/CreateProfile')
+            push('/EditProfile')
             //добавить флаг в зустанд сторе isLoggedIn и установить true
         },
         onError: (e:AxiosError) => {

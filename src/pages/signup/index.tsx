@@ -1,15 +1,12 @@
-import {NextPage} from 'next';
-import SignUp from '@/components/SignUp/SignUp';
-import styles from '@/styles/Home.module.scss';
-import Layout from '@/components/Layout/Layout';
+import {NextPage} from 'next'
+import SignUp from '@/components/SignUp/SignUp'
+import LayoutWithHeader from '@/components/Layout/LayoutWithHeader'
 
-const SignUpPage = () => {
+const SignUpPage: NextPage = () => {
     return (
-        <Layout>
+        <LayoutWithHeader>
             <SignUp/>
-        </Layout>
-
-    );
-};
-
-export default SignUpPage;
+        </LayoutWithHeader>
+    )
+}
+export default SignUpPage

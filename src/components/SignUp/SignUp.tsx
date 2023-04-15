@@ -1,7 +1,6 @@
 import React, {useState} from 'react'
 import {Controller, useForm} from 'react-hook-form'
 import s from './SignUp.module.scss'
-import SocialRegistrationForm from '@/components/SignUp/SocialRegistrationForm'
 import {
     Box,
     Button,
@@ -20,7 +19,7 @@ import {
     VStack,
 } from '@chakra-ui/react'
 import {AiOutlineEye, AiOutlineEyeInvisible} from 'react-icons/ai'
-import {useRegisterMutation} from '@/services/hooks'
+import {useRegisterMutation} from '@/services/API-hooks'
 import ModalSendEmail from '@/components/Modal/ModalSendEmail/ModalSendEmail'
 
 
@@ -31,7 +30,6 @@ type  FormValues = {
     confirmPassword: string
 }
 const SignUp = () => {
-
     // const [isSubmitting, setIsSubmitting] = useState(false);
     const [showPassword, setShowPassword] = useState(false)
     const [isOpen, setIsOpen] = useState(false)
@@ -237,7 +235,7 @@ const SignUp = () => {
                         </form>
                     </Box>
                     <Text>Do you have an account?</Text>
-                    <Button variant={'link'}><Link href={'/'}>Sign In</Link></Button>
+                    <Button variant={'link'}><Link href={'/signin'}>Sign In</Link></Button>
                 </VStack>
             </Box>
             {isOpen && <ModalSendEmail modalOnClick={() => setIsOpen(false)} email={variables?.email}/>}

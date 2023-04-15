@@ -1,7 +1,6 @@
 import React, {useState} from 'react'
 import {Controller, useForm} from 'react-hook-form'
 import s from './SignIn.module.scss'
-import SocialRegistrationForm from '@/components/SignUp/SocialRegistrationForm'
 import {
     Box,
     Button,
@@ -13,12 +12,13 @@ import {
     Input,
     InputGroup,
     InputRightElement,
-    Link, Progress,
+    Link,
+    Progress,
     Text,
     VStack,
 } from '@chakra-ui/react'
 import {AiOutlineEye, AiOutlineEyeInvisible} from 'react-icons/ai'
-import {useSignInMutation} from '@/services/hooks'
+import {useSignInMutation} from '@/services/API-hooks'
 
 
 type  FormValues = {
@@ -53,7 +53,7 @@ const SignIn = () => {
             <Box className={s.signUpContainer}>
                 <VStack className={s.signUpBlock} spacing={1}>
                     <Heading mb="15px" size="lg">Sign In</Heading>
-                    <SocialRegistrationForm/>
+                    {/*<SocialRegistrationForm/>*/}
                     <Box className={s.formBlock}>
                         <form onSubmit={handleSubmit(onSubmit)}>
                             <VStack spacing={2} align="stretch" >
@@ -148,7 +148,7 @@ const SignIn = () => {
                         </form>
                     </Box>
                     <Text>Don’t have an account?</Text>
-                    <Button variant={'link'}><Link href={'/'}>Sign Up</Link></Button>
+                    <Button variant={'link'}><Link href={'/signup'}>Sign Up</Link></Button>
                 </VStack>
             </Box>
         </>

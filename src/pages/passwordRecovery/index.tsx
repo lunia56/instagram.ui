@@ -1,11 +1,11 @@
-import Layout from '@/components/Layout/Layout';
-import PasswordRecovery from "@/components/PasswordRecovery/PasswordRecovery";
+import PasswordRecovery from '@/components/PasswordRecovery/PasswordRecovery'
+import LayoutWithHeader from '@/components/Layout/LayoutWithHeader'
 
 const passwordRecoveryPage = () => {
     return (
-        <Layout>
+        <LayoutWithHeader>
             <PasswordRecovery/>
-        </Layout>
+        </LayoutWithHeader>
 
     );
 };

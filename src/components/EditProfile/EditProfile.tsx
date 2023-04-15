@@ -1,30 +1,28 @@
 import React, {ChangeEvent, useRef, useState} from 'react';
-import s from './CreateProfile.module.scss'
+import s from './EditProfile.module.scss'
 import MyButton from '@/components/common/MyButton/MyButton';
 import {Controller, useForm} from 'react-hook-form';
 import {FormControl, FormErrorMessage, FormLabel, Input, Textarea} from '@chakra-ui/react';
-import img from '@/assets/Profile/not_foto.png';
+import img from '@/assets/Image/Profile/not_foto.png';
 import Image from 'next/image';
 import {SingleDatepicker} from '@/components/common/DatePicker/SingleDatepicker';
-import {convertFileToBase64} from '@/services/converter64Base';
+import {convertFileToBase64} from '@/assets/hooks/converter64Base';
 
 type FormData = {
   username: string;
   name: string;
   surname: string;
   city: string;
-  aboutme: string;
+  aboutMe: string;
   date: Date;
 };
-const CreateProfile = () => {
-  const [isEdite, setIsEdite] = useState<boolean>(false)
+const EditProfile = () => {
+  // const [isEdite, setIsEdite] = useState<boolean>(false)
   //const [date, setDate] = useState<Date>(new Date())
   const {
     control,
-    reset,
     handleSubmit,
-    watch, setError,
-    formState: {errors, isValid}
+    formState: {errors}
   } = useForm<FormData>({mode: 'onChange'});
   const [avatar, setAvatar] = useState('')
 
@@ -35,7 +33,6 @@ const CreateProfile = () => {
   const inputRef = useRef<HTMLInputElement>(null)
 
   const selectFileHandler = () => {
-    //как остоновить submit
     inputRef && inputRef.current?.click();
   };
   const uploadHandler = (e: ChangeEvent<HTMLInputElement>) => {
@@ -54,16 +51,16 @@ const CreateProfile = () => {
 
   return (
     <>
-      {!isEdite ?
-        <div className={s.oops}>
-          <h1>Oops! This place looks empty</h1>
-          <p>You do not have an account to create one, click below and then fill in all the fields</p>
-          <MyButton variant="secondary" callback={() => setIsEdite(true)} style={{width: '179px', height: '36px'}}>
-            Create Button</MyButton>
-        </div>
-        :
+      {/*{!isEdite ?*/}
+      {/*  <div className={s.oops}>*/}
+      {/*    <h1>Oops! This place looks empty</h1>*/}
+      {/*    <p>You do not have an account to create one, click below and then fill in all the fields</p>*/}
+      {/*    <MyButton variant="secondary" callback={() => setIsEdite(true)} style={{width: '179px', height: '36px'}}>*/}
+      {/*      Create Button</MyButton>*/}
+      {/*  </div>*/}
+      {/*  :*/}
         <div className={s.createProfile}>
-          <div className={s.title}>Create Profile
+          <div className={s.title}>Edit Profile
           </div>
           <form className={s.form} onSubmit={handleSubmit(onSubmit)}>
             <hr/>
@@ -211,18 +208,18 @@ const CreateProfile = () => {
                     {errors.city && errors.city.message}
                   </FormErrorMessage>
                 </FormControl>
-                <FormControl isInvalid={Boolean(errors.aboutme)}>
+                <FormControl isInvalid={Boolean(errors.aboutMe)}>
                   <FormLabel color={'#BDC1C7'}>About Me</FormLabel>
                   <Controller
                     control={control}
-                    name="aboutme"
+                    name="aboutMe"
                     rules={{
                       required: 'About me is required',
                       maxLength: {value: 200, message: 'Minimum length should be 200'},
                     }}
                     render={({field: {onChange, value,}}) => (<>
                       <Textarea
-                        id="aboutme"
+                        id="aboutMe"
                         focusBorderColor="#2F68CC"
                         value={value}
                         onChange={onChange}
@@ -232,22 +229,21 @@ const CreateProfile = () => {
 
                   />
                   <FormErrorMessage>
-                    {errors.aboutme && errors.aboutme.message}
+                    {errors.aboutMe && errors.aboutMe.message}
                   </FormErrorMessage>
                 </FormControl>
               </div>
             </div>
             <hr/>
             <MyButton type="submit" variant="secondary"
-                      style={{marginTop: '25px', alignSelf: 'flex-end', width: '179px', height: '36px'}}>Create
-              Account</MyButton>
+                      style={{marginTop: '25px', alignSelf: 'flex-end', width: '179px', height: '36px'}}>Save Changes</MyButton>
           </form>
         </div>
-      }
+      {/*}*/}
     </>
   )
 }
 
-export default CreateProfile;
+export default EditProfile;
 
 

@@ -1,16 +1,15 @@
-import styles from '@/styles/Home.module.scss'
-import Layout from '@/components/Layout/Layout'
 import React from 'react'
-import CreateProfilePage from '@/pages/createProfile'
+import {NextPageWithLayout} from '@/pages/_app'
+import {getLayout} from '@/components/Layout/BaseLayout'
+import Profile from '@/pages/profile'
 
 
-export default function Home() {
-  return (
-      <Layout>
-        <main className={styles.main}>
-          {/*  потом будет проверка на то что существет ли профиль или нет, такая же обертка как auth redirect наверное*/}
-          <CreateProfilePage/>
-        </main>
-      </Layout>
-  )
+const Home: NextPageWithLayout = () => {
+    return (
+        <>
+            <Profile/>
+        </>
+    )
 }
+Home.getLayout = getLayout
+export default Home

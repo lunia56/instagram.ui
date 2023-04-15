@@ -1,19 +1,20 @@
-import React from 'react';
-import ConfirmationMessage from '@/components/confirmationMessage/confirmationMessage';
-import {useRouter} from 'next/router';
+import React from 'react'
+import ConfirmationMessage from '@/components/ConfirmationMessage/confirmationMessage'
+import {useRouter} from 'next/router'
 import img from '../../../../public/bro.png'
-import Layout from '@/components/Layout/Layout';
+import {NextPage} from 'next'
+import LayoutWithHeader from '@/components/Layout/LayoutWithHeader'
 
-const ConfirmRegistration = () => {
-    const {push}=useRouter()
-    const onClickHandler=()=>{
+const ConfirmRegistration: NextPage = () => {
+    const {push} = useRouter()
+    const onClickHandler = () => {
         push('/login')
     }
     return (
-        <Layout>
-            <ConfirmationMessage title={'Congratulations!'} description={'Your email has been confirmed'} buttonTitle={'SignIn'} onClickHandler={onClickHandler} image={img}/>
-        </Layout>
-    );
-};
-
-export default ConfirmRegistration;
+        <LayoutWithHeader>
+            <ConfirmationMessage title={'Congratulations!'} description={'Your email has been confirmed'}
+                                 buttonTitle={'SignIn'} onClickHandler={onClickHandler} image={img}/>
+        </LayoutWithHeader>
+    )
+}
+export default ConfirmRegistration

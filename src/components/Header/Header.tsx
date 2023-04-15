@@ -1,15 +1,14 @@
-import React, {useState} from 'react';
+import React, {useState} from 'react'
 import s from './Header.module.scss'
-import logout from '../../assets/logout/logout.svg'
-import Image from 'next/image';
-import ModalLogout from '@/components/Modal/ModalLogOut/ModalLogout';
-import {useSignInMutation} from '@/services/hooks';
+import logout from '@/assets/Image/logout/logout.svg'
+import Image from 'next/image'
+import ModalLogout from '@/components/Modal/ModalLogOut/ModalLogout'
 
 const Header = () => {
   const [show, setShow] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(true);//временно пока нет стейта зустанд
 
-  const {variables} = useSignInMutation()
+  // const {variables} = useSignInMutation()
   const openModalLogout = () => {
     setShow(true)
   }

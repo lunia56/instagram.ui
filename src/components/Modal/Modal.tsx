@@ -1,4 +1,4 @@
-import close from '../../assets/modal/close.svg'
+import close from '@/assets/Image/modal/close.svg'
 import s from './Modal.module.scss'
 import Image from 'next/image';
 import React from 'react';
