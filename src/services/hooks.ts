@@ -30,7 +30,7 @@ export const useRegisterMutation = (setError: any, onSuccessHandler: () => void,
   });
 };
 
-export const useCreateNewPasswordMutation = (resetPasswordToken: any, reset: any) => {
+export const useCreateNewPasswordMutation = (recoveryCode: any, reset: any) => {
   const {push} = useRouter()
   return useMutation({
     mutationFn: InstagramApi.createNewPassword,

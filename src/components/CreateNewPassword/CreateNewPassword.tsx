@@ -42,7 +42,7 @@ const CreateNewPassword = () => {
     formState: {errors, isValid}
   } = useForm<FormValues>({mode: 'onChange'});
 
-  const {mutate: newPassword, isLoading,} = useCreateNewPasswordMutation(recoveryToken)
+  const {mutate: createNewPassword, isLoading,} = useCreateNewPasswordMutation(token,recoveryToken)
 
   const onSubmit = () => {
     setIsSubmitting(true);
