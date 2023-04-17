@@ -1,0 +1,26 @@
+.calendar {
+  background-color: #171717;
+  padding: 24px;
+  height: 100%;
+  width: 300px;
+}
+
+.buttons {
+  display: flex;
+}
+
+.heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+
+  & .month {
+    font-family: 'Inter', serif;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 24px;
+  }
+
+}

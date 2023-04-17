@@ -1,7 +1,8 @@
-import { InstagramApi } from '@/services/index'
-import { useMutation, useQuery } from '@tanstack/react-query'
-import { useRouter } from 'next/router'
-import { AxiosError } from 'axios'
+import {InstagramApi} from '@/services/index'
+import {useMutation, useQuery} from '@tanstack/react-query'
+import {useRouter} from 'next/router'
+import {AxiosError} from 'axios'
+import {log} from 'util'
 
 
 export const useMeQuery = () => {
@@ -66,7 +67,6 @@ export const useEmailResendingMutation = () => {
   })
 }
 
-
 export const useSignInMutation = () => {
   const {push} = useRouter()
   return useMutation({
@@ -81,3 +81,19 @@ export const useSignInMutation = () => {
     }
   })
 }
+
+
+export const useLogOutMutation = () => {
+    const { push } = useRouter();
+    return useMutation({
+        mutationFn: InstagramApi.logout,
+        mutationKey:['logout'],
+        onSuccess: (res) => {
+            push("/");
+            console.log('Logout Succes')
+        },
+        onError: (error:AxiosError) => {
+            console.log('Logout Error')
+        }
+    });
+};

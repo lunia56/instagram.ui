@@ -2,6 +2,7 @@ import React, { useState} from 'react';
 import s from './ModalLogout.module.scss'
 import MyButton from '@/components/common/MyButton/MyButton';
 import Modal from '@/components/Modal/Modal';
+import {useLogOutMutation, useRegisterMutation} from '@/services/hooks';
 
 interface IModalLogout {
   modalOnClick: () => void;
@@ -9,8 +10,11 @@ interface IModalLogout {
 
 const ModalLogout: React.FC<IModalLogout> =  ({modalOnClick}) =>{
 
+  const {mutate:logout} = useLogOutMutation()
+
 const setTrue = () => {
   modalOnClick()
+  logout()
 };
 const setFalse = () => {
   modalOnClick()

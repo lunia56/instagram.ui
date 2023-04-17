@@ -6,7 +6,6 @@ const passwordRecoveryPage = () => {
         <Layout>
             <PasswordRecovery/>
         </Layout>
-
     );
 };
 

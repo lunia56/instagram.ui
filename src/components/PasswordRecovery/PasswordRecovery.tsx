@@ -18,7 +18,7 @@ import {
     VStack,
 } from "@chakra-ui/react";
 import {AiOutlineEye, AiOutlineEyeInvisible} from 'react-icons/ai';
-import {useLoginMutation} from '@/services/hooks';
+// import {useLoginMutation} from '@/services/hooks';
 
 
 type  FormValues = {
@@ -33,7 +33,7 @@ const PasswordRecovery = () => {
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [showPassword, setShowPassword] = useState(false);
 
-    const {mutate: signUp, error} = useLoginMutation()
+    // const {mutate: signUp, error} = useLoginMutation()
 
     const {
         control,
@@ -44,9 +44,10 @@ const PasswordRecovery = () => {
 
     const onSubmit = (data: FormValues) => {
         setIsSubmitting(true);
-        signUp(data)
+        // signUp(data)
         setIsSubmitting(false);
     };
+
     const handleClick = () => setShowPassword(!showPassword);
 
     return (
