@@ -5,13 +5,11 @@ import {getLayout} from '@/components/Layout/BaseLayout'
 import {NextPageWithLayout} from '@/pages/_app'
 
 const ProfilePage:NextPageWithLayout = () => {
-    const [editProfile, setEditProfile] = useState(false)
     const {push} = useRouter()
 
 
-    const profileSettingsHandler = () => {
-        setEditProfile(true)
-    }
+
+
     return (
         <>
             <Button colorScheme={'whiteAlpha'} onClick={()=>push('/editProfile')}>Profile Settings</Button>

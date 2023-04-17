@@ -2,15 +2,12 @@ import {InstagramApi} from '@/services/index'
 import {useMutation, useQuery} from '@tanstack/react-query'
 import {useRouter} from 'next/router'
 import {AxiosError} from 'axios'
-import {log} from 'util'
 
 
 export const useMeQuery = () => {
     return useQuery({queryKey: ['me'], queryFn: InstagramApi.me})
 }
-// export const useSignUpSocialQuery = () => {
-//     return useQuery({queryKey: ['signUpSocial'], queryFn: InstagramApi.signUpSocial})
-// }
+
 
 
 
