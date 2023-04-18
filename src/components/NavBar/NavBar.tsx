@@ -23,9 +23,10 @@ const NavBar: NextPage<PropsWithChildren> = ({children}) => {
                 gap="1"
                 color="blackAlpha.700"
                 fontWeight="bold"
+                position={'relative'}
             >
 
-                <GridItem marginLeft={'40px'} bg="pink.300" area={'nav'} h="95vh" borderRight={'2px #171717 solid'}>
+                <GridItem marginLeft={'40px'} bg="pink.300" area={'nav'} h="95vh" borderRight={'2px #171717 solid'} position={'fixed'} w={'220px'}>
                     <Flex direction={'column'} gap={'15px'}  alignItems={'flex-start'} h={'100%'}
                           justifyContent={'space-around'} color={'white'}>
                         <VStack mt={'72px'} spacing={50} alignItems={'flex-start'}>

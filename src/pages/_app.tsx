@@ -24,6 +24,7 @@ const theme = extendTheme({
         global: ({
             body: {
                 bg: 'dark',
+                color: 'white',
                 fontFamily: 'body'
             },
         }),
