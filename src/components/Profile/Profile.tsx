@@ -9,7 +9,7 @@ const ProfilePage: NextPageWithLayout = () => {
 
 
     return (
-        <Container centerContent maxW="90%"  mt={'40px'}>
+        <Container centerContent maxW="90%"  >
             <HStack spacing={'15px'} mt={'20px'}>
                 <Avatar src={''} size={'lg'} h={'192px'} w={'192px'}/>
                 <VStack alignItems={'flex-start'} spacing={25}>

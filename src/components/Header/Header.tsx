@@ -3,7 +3,7 @@ import s from './Header.module.scss'
 import logout from '@/assets/Image/logout/logout.svg'
 import Image from 'next/image'
 import ModalLogout from '@/components/Modal/ModalLogOut/ModalLogout'
-import {Button, Link} from '@chakra-ui/react'
+import {Box, Button, Link} from '@chakra-ui/react'
 import {useRouter} from 'next/router'
 
 const Header = () => {
@@ -20,7 +20,7 @@ const Header = () => {
             // style={{position:'relative'}}
     >
       <div className={s.container}>
-        <Button onClick={()=>push('/')} className={s.title}>Instagram</Button>
+        <Box onClick={()=>push('/')} cursor={'pointer'} className={s.title}>Instagram</Box>
         {/*{*/}
         {/*  isLoggedIn ? <div className={s.logout} onClick={openModalLogout}>*/}
         {/*        <Image src={logout} width={24} height={24} alt=""/>*/}
