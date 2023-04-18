@@ -3,6 +3,10 @@ import ConfirmationMessage from '@/components/confirmationMessage/confirmationMe
 import {useRouter} from 'next/router';
 import img from '../../../../public/bro.png'
 import Layout from '@/components/Layout/Layout';
+import { Navigate, useParams } from 'react-router-dom'
+
+const { token } = useParams<{ token: string }>()
+
 
 const ConfirmRegistration = () => {
     const {push}=useRouter()

@@ -30,6 +30,9 @@ export const InstagramApi = {
     },
     logout:()=>{
         return instagramInstance.post('auth/logout', {})
+    },
+    registConfirm:(code: string) => {
+        return instagramInstance.post('auth/registration-confirmation', {code})
     }
 }
 

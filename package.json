@@ -33,6 +33,7 @@
     "react-icons": "^4.8.0",
     "sass": "^1.60.0",
     "scss": "^0.2.4",
+    "styled-components": "^5.3.9",
     "typescript": "5.0.3"
   }
 }
