@@ -24,7 +24,7 @@ return (
       title='Log Out'
     >
     <div>
-        <p className={s.message}>We have sent a link to confirm your email to <b>{email}</b>?</p>
+        <p className={s.message}>We have sent a link to confirm your email to <b>{email}</b></p>
       <div className={s.buttonGroup}>
         <MyButton callback={setTrue} style={{width: '96px', height: '36px'}} variant="secondary">OK</MyButton>
       </div>

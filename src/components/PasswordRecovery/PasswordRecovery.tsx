@@ -18,35 +18,31 @@ import {
     VStack,
 } from "@chakra-ui/react";
 import {AiOutlineEye, AiOutlineEyeInvisible} from 'react-icons/ai';
-// import {useLoginMutation} from '@/services/hooks';
-
-
-type  FormValues = {
-    login: string
-    email: string
-    password: string
-    confirmPassword: string
-}
+import {usePasswordRecoveryMutation} from "@/services/API-hooks";
+import ModalSendEmail from "@/components/Modal/ModalSendEmail/ModalSendEmail";
 const PasswordRecovery = () => {
 
     const [isSubmitting, setIsSubmitting] = useState(false);
-    const [showPassword, setShowPassword] = useState(false);
-
-    // const {mutate: signUp, error} = useLoginMutation()
+    const [isOpen, setIsOpen] = useState(false);
+    const [email, setEmail] = useState('');
 
     const {
         control,
         handleSubmit,
-        watch,
         formState: {errors, isValid}
     } = useForm<FormValues>({mode: 'onChange'});
 
+    const {mutate: recovery, error} = usePasswordRecoveryMutation(() => setIsOpen(true))
+
     const onSubmit = (data: FormValues) => {
         setIsSubmitting(true);
-        // signUp(data)
+        console.log('omSubmit:', data)
+        recovery(data?.email)
+        setEmail(data?.email)
+        localStorage.setItem('email', data.email)
         setIsSubmitting(false);
+
     };
-    const handleClick = () => setShowPassword(!showPassword);
 
     return (
         <Box className={s.signUpContainer}>
@@ -100,42 +96,19 @@ const PasswordRecovery = () => {
                 </Box>
                 <Link href={'/'} className={s.passwordRecovery__backLink}>Back to Sign In</Link>
             </VStack>
+            {isOpen && <ModalSendEmail modalOnClick={() => setIsOpen(false)} email={email}/>}
+
         </Box>
 
-    );
+
+);
+}
+
+
+type  FormValues = {
+    email: string
 }
 
 export default PasswordRecovery;
-//
-// import { useForm, useWatch, Control } from "react-hook-form";
-//
-// type FormValues = {
-//     firstName: string;
-//     lastName: string;
-// };
-//
-// function IsolateReRender({ control }: { control: Control<FormValues> }) {
-//     const firstName = useWatch({
-//         control,
-//         name: "firstName",
-//         defaultValue: "default"
-//     });
-//
-//     return <div>{firstName}</div>;
-// }
-//
-// export default function App() {
-//     const { register, control, handleSubmit } = useForm<FormValues>();
-//     const onSubmit = handleSubmit((data) => console.log(data));
-//
-//     return (
-//         <form onSubmit={onSubmit}>
-//             <input {...register("firstName")} />
-//             <input {...register("lastName")} />
-//             <IsolateReRender control={control} />
-//
-//             <input type="submit" />
-//         </form>
-//     );
-// }
+
 
