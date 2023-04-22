@@ -1,0 +1,10 @@
+.mainBtn {
+    font-weight: 600;
+    line-height: 1.5;
+    padding: 6px 24px;
+    border-radius: 0.125rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all 300ms ease;
+}
