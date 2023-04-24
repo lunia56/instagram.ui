@@ -30,7 +30,6 @@ type  FormValues = {
     confirmPassword: string
 }
 const SignUp = () => {
-    // const [isSubmitting, setIsSubmitting] = useState(false);
     const [showPassword, setShowPassword] = useState(false)
     const [isOpen, setIsOpen] = useState(false)
     const toast = useToast()
@@ -73,7 +72,6 @@ const SignUp = () => {
                 <VStack className={s.signUpBlock} spacing={1}>
                     {error&& <p>{error?.message}</p>}
                     <Heading size="lg">Sign Up</Heading>
-                    {/*<SocialRegistrationForm/>*/}
                     <Box className={s.formBlock}>
                         <form onSubmit={handleSubmit(onSubmit)}>
                             <VStack spacing={0} align="stretch">

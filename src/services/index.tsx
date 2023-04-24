@@ -20,7 +20,7 @@ export const InstagramApi = {
     },
     signIn:({email,password}: SignInData):Promise<AxiosResponse<{accessToken:string}>> =>{
         console.log(email, password)
-        return instagramInstance.post('/auth/login',{
+        return instagramInstance.post('auth/login',{
             email,
             password
         })
