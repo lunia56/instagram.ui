@@ -21,6 +21,7 @@ import {
 import {AiOutlineEye, AiOutlineEyeInvisible} from 'react-icons/ai'
 import {useRegisterMutation} from '@/services/API-hooks'
 import ModalSendEmail from '@/components/Modal/ModalSendEmail/ModalSendEmail'
+import {useRouter} from 'next/router'
 
 
 type  FormValues = {
@@ -33,6 +34,7 @@ const SignUp = () => {
     const [showPassword, setShowPassword] = useState(false)
     const [isOpen, setIsOpen] = useState(false)
     const toast = useToast()
+    const {push} = useRouter()
 
     const {
         control,
@@ -43,7 +45,14 @@ const SignUp = () => {
     } = useForm<FormValues>({mode: 'onChange'})
 
 
-    const {mutate: signUp, isError, error, variables, isLoading, status} = useRegisterMutation(setError, () => setIsOpen(true))
+    const {
+        mutate: signUp,
+        isError,
+        error,
+        variables,
+        isLoading,
+        status
+    } = useRegisterMutation(setError, () => setIsOpen(true))
 
     const onSubmit = (data: FormValues) => {
         signUp(data)
@@ -53,13 +62,13 @@ const SignUp = () => {
     useEffect(() => {
         if (status === 'success') {
             reset({
-                email:'',
-                login:'',
-                password:'',
-                confirmPassword:''
-            });
+                email: '',
+                login: '',
+                password: '',
+                confirmPassword: ''
+            })
         }
-    }, [status, reset]);
+    }, [status, reset])
 
     // if (isError) { toast({
     //     title: 'Ошибка!',
@@ -75,7 +84,7 @@ const SignUp = () => {
 
             <Box className={s.signUpContainer}>
                 <VStack className={s.signUpBlock} spacing={1}>
-                    {error&& <p>{error?.message}</p>}
+                    {error && <p>{error?.message}</p>}
                     <Heading size="lg">Sign Up</Heading>
                     <Box className={s.formBlock}>
                         <form onSubmit={handleSubmit(onSubmit)}>
@@ -238,7 +247,7 @@ const SignUp = () => {
                         </form>
                     </Box>
                     <Text>Do you have an account?</Text>
-                    <Button variant={'link'}><Link href={'/signin'}>Sign In</Link></Button>
+                    <Button variant={'link'} onClick={() => push('/auth/signin')}>Sign In</Button>
                 </VStack>
             </Box>
             {isOpen && <ModalSendEmail modalOnClick={() => setIsOpen(false)} email={variables?.email}/>}

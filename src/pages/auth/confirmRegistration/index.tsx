@@ -6,9 +6,9 @@ import {NextPage} from 'next'
 import LayoutWithHeader from '@/components/Layout/LayoutWithHeader'
 
 const ConfirmRegistration: NextPage = () => {
-    const {push} = useRouter()
+    const {push,replace} = useRouter()
     const onClickHandler = () => {
-        push('/login')
+        push('/auth/signin')
     }
     return (
         <LayoutWithHeader>

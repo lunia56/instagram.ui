@@ -19,6 +19,7 @@ import {
 } from '@chakra-ui/react'
 import {AiOutlineEye, AiOutlineEyeInvisible} from 'react-icons/ai'
 import {useSignInMutation} from '@/services/API-hooks'
+import {useRouter} from 'next/router'
 
 
 type  FormValues = {
@@ -29,7 +30,7 @@ const SignIn = () => {
 
     const [showPassword, setShowPassword] = useState(false)
     // const [queryError, setQueryError] = useState<string>('')
-
+const {push} = useRouter()
 
     const {mutate: signIn, error, isLoading} = useSignInMutation()
 
@@ -147,7 +148,7 @@ const SignIn = () => {
                         </form>
                     </Box>
                     <Text>Don’t have an account?</Text>
-                    <Button variant={'link'}><Link href={'/signup'}>Sign Up</Link></Button>
+                    <Button variant={'link'} onClick={() => push('/auth/signup')}>Sign Up</Button>
                 </VStack>
             </Box>
         </>
