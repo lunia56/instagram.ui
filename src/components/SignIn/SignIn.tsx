@@ -53,7 +53,6 @@ const SignIn = () => {
             <Box className={s.signUpContainer}>
                 <VStack className={s.signUpBlock} spacing={1}>
                     <Heading mb="15px" size="lg">Sign In</Heading>
-                    {/*<SocialRegistrationForm/>*/}
                     <Box className={s.formBlock}>
                         <form onSubmit={handleSubmit(onSubmit)}>
                             <VStack spacing={2} align="stretch" >

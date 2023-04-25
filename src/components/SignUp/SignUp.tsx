@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useEffect, useState} from 'react'
 import {Controller, useForm} from 'react-hook-form'
 import s from './SignUp.module.scss'
 import {
@@ -30,7 +30,6 @@ type  FormValues = {
     confirmPassword: string
 }
 const SignUp = () => {
-    // const [isSubmitting, setIsSubmitting] = useState(false);
     const [showPassword, setShowPassword] = useState(false)
     const [isOpen, setIsOpen] = useState(false)
     const toast = useToast()
@@ -47,16 +46,21 @@ const SignUp = () => {
     const {mutate: signUp, isError, error, variables, isLoading, status} = useRegisterMutation(setError, () => setIsOpen(true))
 
     const onSubmit = (data: FormValues) => {
-        // setIsSubmitting(true);
-        // setEmail(data.email)
         signUp(data)
-        // setIsSubmitting(false);
     }
     const handleClickShowPassword = () => setShowPassword(!showPassword)
 
-    if (status === 'success') {
-        reset()
-    }
+    useEffect(() => {
+        if (status === 'success') {
+            reset({
+                email:'',
+                login:'',
+                password:'',
+                confirmPassword:''
+            });
+        }
+    }, [status, reset]);
+
     // if (isError) { toast({
     //     title: 'Ошибка!',
     //     description: error.message,
@@ -73,7 +77,6 @@ const SignUp = () => {
                 <VStack className={s.signUpBlock} spacing={1}>
                     {error&& <p>{error?.message}</p>}
                     <Heading size="lg">Sign Up</Heading>
-                    {/*<SocialRegistrationForm/>*/}
                     <Box className={s.formBlock}>
                         <form onSubmit={handleSubmit(onSubmit)}>
                             <VStack spacing={0} align="stretch">

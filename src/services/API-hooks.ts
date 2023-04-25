@@ -28,7 +28,7 @@ export const useRegisterMutation = (setError: any, onSuccessHandler: () => void)
             onSuccessHandler()
         },
         onError: (error: AxiosError<{errorMessage:[{message:string,field:string}]}>) => {
-            // console.log('errorsMessages', error.response?.data.errorMessage[0].message)
+            console.log('errorsMessages', error.response?.data.errorMessage[0].message)
             error.response && error.response?.status === 400 &&
             setError('login', {type: 'manual', message: 'User with this username or email is already registered'})
         }
@@ -47,7 +47,7 @@ export const useSignInMutation = () => {
             //добавить флаг в зустанд сторе isLoggedIn и установить true
         },
         onError: (e:AxiosError) => {
-             console.log(e.message)
+             console.log('ошибка ',e.message)
         }
     });
 }
