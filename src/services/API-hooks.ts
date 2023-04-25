@@ -1,11 +1,11 @@
-import {InstagramApi} from '@/services/index'
+import {InstagramAuthApi, InstagramUserApi} from '@/services/index'
 import {useMutation, useQuery} from '@tanstack/react-query'
 import {useRouter} from 'next/router'
 import {AxiosError} from 'axios'
 
 
 export const useMeQuery = () => {
-    return useQuery({queryKey: ['me'], queryFn: InstagramApi.me})
+    return useQuery({queryKey: ['me'], queryFn: InstagramAuthApi.me})
 }
 
 
@@ -14,7 +14,7 @@ export const useMeQuery = () => {
 export const useEmailResendingMutation = (callback:()=>void) => {
     // const {push} = useRouter()
     return useMutation({
-        mutationFn: InstagramApi.emailResent,
+        mutationFn: InstagramAuthApi.emailResent,
         onSuccess: () => {
             callback()
 
@@ -26,7 +26,7 @@ export const useEmailResendingMutation = (callback:()=>void) => {
 }
 export const useRegisterMutation = (setError: any, onSuccessHandler: () => void) => {
     return useMutation({
-        mutationFn: InstagramApi.signUp,
+        mutationFn: InstagramAuthApi.signUp,
         mutationKey: ['registered'],
         onSuccess: (res) => {
             onSuccessHandler()
@@ -44,7 +44,7 @@ export const useRegisterMutation = (setError: any, onSuccessHandler: () => void)
 export const useSignInMutation = () => {
     const {push} = useRouter()
     return useMutation({
-        mutationFn: InstagramApi.signIn,
+        mutationFn: InstagramAuthApi.signIn,
         onSuccess: (res) => {
             localStorage.setItem('token', res.data.accessToken)
             push('/EditProfile')
@@ -58,7 +58,7 @@ export const useSignInMutation = () => {
 export const useLogOutMutation = () => {
     const { push } = useRouter();
     return useMutation({
-        mutationFn: InstagramApi.logout,
+        mutationFn: InstagramAuthApi.logout,
         mutationKey:['logout'],
         onSuccess: (res) => {
             push("/");
@@ -69,3 +69,18 @@ export const useLogOutMutation = () => {
         }
     });
 };
+
+export const useUpdateProfileMutations = ()=>{
+    return useMutation(
+        {
+            mutationFn:InstagramUserApi.updateProfile,
+            mutationKey:['updateUser'],
+            onSuccess: (res) => {
+                console.log('updateUser Succes',res)
+            },
+            onError: (error:AxiosError<{errorMessage:[{message:string,field:string}]}>) => {
+                console.log('error ',error.response?.data.errorMessage[0].message)
+            }
+        }
+    )
+}

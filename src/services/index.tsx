@@ -1,16 +1,13 @@
 import {instagramInstance} from '@/services/instagramInstance'
 import {AxiosResponse} from 'axios'
 
-export const InstagramApi = {
+export const InstagramAuthApi = {
     signUp:({login,email,password}:RegistrationData):Promise<AxiosResponse>=>{
         return instagramInstance.post('auth/registration',{
             login,
             email,
             password
         })
-    },
-    signUpSocial:()=>{
-        return  instagramInstance.get<AxiosResponse<{accessToken:string}>>('auth/google')
     },
     me:():Promise<AxiosResponse<AxiosResponseMe>> =>{
       return  instagramInstance.get('auth/me')
@@ -32,6 +29,15 @@ export const InstagramApi = {
         return instagramInstance.post('auth/logout', {})
     }
 }
+export const InstagramUserApi={
+    updateProfile:(profileData:profileData)=>{
+        return instagramInstance.put<AxiosResponse<profileData>>('users/profile',profileData)
+    },
+    getProfile:()=>{
+        return instagramInstance.get<AxiosResponse<profileData>>('users/profile')
+    }
+
+}
 
 type AxiosResponseMe = {
     email:string
@@ -46,4 +52,11 @@ type RegistrationData = {
 type SignInData = {
     email: string
     password: string
+}
+type profileData = {
+    name: string,
+    surname: string,
+    aboutMe: string,
+    city: string,
+    dateOfBirthday: string
 }
