@@ -2,6 +2,7 @@ import {InstagramAuthApi, InstagramUserApi} from '@/services/index'
 import {useMutation, useQuery} from '@tanstack/react-query'
 import {useRouter} from 'next/router'
 import {AxiosError} from 'axios'
+import ModalSendEmail from "@/components/Modal/ModalSendEmail/ModalSendEmail";
 
 
 export const useMeQuery = () => {
@@ -84,3 +85,30 @@ export const useUpdateProfileMutations = ()=>{
         }
     )
 }
+
+export const usePasswordRecoveryMutation = (onSuccessHandler: () => void) => {
+    const { push } = useRouter();
+    return useMutation({
+        mutationFn: InstagramAuthApi.passwordRecovery,
+        mutationKey:['recovery'],
+        onSuccess: (res) => {
+            onSuccessHandler()
+        },
+        onError: (error:AxiosError) => {
+            console.log('recovery error')
+        }
+    });
+};
+
+export const useNewPasswordMutation = () => {
+    return useMutation({
+        mutationFn: InstagramAuthApi.newPassword,
+        mutationKey:['newPassword'],
+        onSuccess: (res) => {
+
+        },
+        onError: (error:AxiosError) => {
+            console.log('recovery error')
+        }
+    });
+};

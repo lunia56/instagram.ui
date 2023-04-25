@@ -27,7 +27,20 @@ export const InstagramAuthApi = {
     },
     logout:()=>{
         return instagramInstance.post('auth/logout', {})
-    }
+    },
+    passwordRecovery:(email:string)=>{
+        console.log(email)
+        return instagramInstance.post('/auth/password-recovery', {email})
+    },
+    newPassword:({newPassword, recoveryCode}) => {
+    return instagramInstance.post('/auth/new-password', {newPassword, recoveryCode})
+}
+
+}
+
+type AxiosResponseNewPassword = {
+    newPassword:string
+    recoveryCode:string
 }
 export const InstagramUserApi={
     updateProfile:(profileData:profileData)=>{
