@@ -21,7 +21,7 @@ return (
     <Modal
       backgroundOnClick={setFalse}
       modalOnClick={setFalse}
-      title='Log Out'
+      title='Sign Up'
     >
     <div>
         <p className={s.message}>We have sent a link to confirm your email to <b>{email}</b>?</p>

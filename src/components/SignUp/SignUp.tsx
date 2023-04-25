@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useEffect, useState} from 'react'
 import {Controller, useForm} from 'react-hook-form'
 import s from './SignUp.module.scss'
 import {
@@ -46,16 +46,21 @@ const SignUp = () => {
     const {mutate: signUp, isError, error, variables, isLoading, status} = useRegisterMutation(setError, () => setIsOpen(true))
 
     const onSubmit = (data: FormValues) => {
-        // setIsSubmitting(true);
-        // setEmail(data.email)
         signUp(data)
-        // setIsSubmitting(false);
     }
     const handleClickShowPassword = () => setShowPassword(!showPassword)
 
-    if (status === 'success') {
-        reset()
-    }
+    useEffect(() => {
+        if (status === 'success') {
+            reset({
+                email:'',
+                login:'',
+                password:'',
+                confirmPassword:''
+            });
+        }
+    }, [status, reset]);
+
     // if (isError) { toast({
     //     title: 'Ошибка!',
     //     description: error.message,
