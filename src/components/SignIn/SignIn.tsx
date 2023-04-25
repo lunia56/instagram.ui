@@ -132,7 +132,7 @@ const {push} = useRouter()
                                         {errors.password && <span>{errors.password.message}</span>}
                                     </FormErrorMessage>
                                 </FormControl>
-                                <Button variant={'link'} className={s.forgot} > <Link  href={'/'}>Forgot Password</Link></Button>
+                                <Button variant={'link'} className={s.forgot} onClick={() => push('/passwordRecovery')} > Forgot Password</Button>
 
                                 <Button
                                     type="submit"
