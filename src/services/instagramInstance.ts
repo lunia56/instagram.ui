@@ -9,10 +9,10 @@ export const instagramInstance = axios.create({
 // interceptors- перехватывает наши запросы на сервер
 // при каждом запросе у нас в header запроса прикрепляется наш токен
 
-// instagramInstance.interceptors.request.use((config) => {
-//     config.headers.Authorization = `Bearer ${localStorage.getItem('token')}`
-//     return config
-// })
+instagramInstance.interceptors.request.use((config) => {
+    config.headers.Authorization = `Bearer ${localStorage.getItem('token')}`
+    return config
+})
 
 
 

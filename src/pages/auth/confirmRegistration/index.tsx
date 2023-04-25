@@ -1,7 +1,7 @@
 import React from 'react'
 import ConfirmationMessage from '@/components/ConfirmationMessage/confirmationMessage'
 import {useRouter} from 'next/router'
-import img from '../../../../public/bro.png'
+import img from '../../../../public/bro.svg'
 import {NextPage} from 'next'
 import LayoutWithHeader from '@/components/Layout/LayoutWithHeader'
 

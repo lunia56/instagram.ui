@@ -11,13 +11,17 @@ export const useMeQuery = () => {
 
 
 
-export const useEmailResendingMutation = () => {
+export const useEmailResendingMutation = (callback:()=>void) => {
     // const {push} = useRouter()
     return useMutation({
         mutationFn: InstagramApi.emailResent,
-        onSuccess: (res) => {
+        onSuccess: () => {
+            callback()
 
         },
+        onError:(error:AxiosError)=>{
+
+        }
     })
 }
 export const useRegisterMutation = (setError: any, onSuccessHandler: () => void) => {
