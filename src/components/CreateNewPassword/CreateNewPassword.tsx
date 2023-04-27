@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useEffect, useState} from 'react'
 import {Controller, useForm} from 'react-hook-form'
 import s from './CreateNewPassword.module.scss'
 import {
@@ -19,16 +19,21 @@ import {
     VStack,
 } from '@chakra-ui/react'
 import {AiOutlineEye, AiOutlineEyeInvisible} from 'react-icons/ai'
-import {useRegisterMutation} from '@/services/API-hooks'
+import {useNewPasswordMutation, useRegisterMutation} from '@/services/API-hooks'
 import ModalSendEmail from '@/components/Modal/ModalSendEmail/ModalSendEmail'
+import {useRouter} from "next/router";
 
 
 type  FormValues = {
     password: string
     confirmPassword: string
 }
-const SignUp = () => {
-    // const [isSubmitting, setIsSubmitting] = useState(false);
+const CreateNewPassword = () => {
+    const router = useRouter()
+    const code = router.query.code
+
+    console.log(router.query.code)
+    const {mutate: sentNewPassword,error,variables, isLoading, status} = useNewPasswordMutation()
     const [showPassword, setShowPassword] = useState(false)
     const [isOpen, setIsOpen] = useState(false)
 
@@ -41,17 +46,11 @@ const SignUp = () => {
     } = useForm<FormValues>({mode: 'onChange'})
 
 
-    const {
-        mutate: signUp,
-        isError,
-        error,
-        variables,
-        isLoading,
-        status
-    } = useRegisterMutation(setError, () => setIsOpen(true))
 
     const onSubmit = (data: FormValues) => {
-        signUp(data)
+
+        sentNewPassword({newPassword: data.password, recoveryCode: String(code)})
+
     }
     const handleClickShowPassword = () => setShowPassword(!showPassword)
 
@@ -180,4 +179,4 @@ const SignUp = () => {
     )
 }
 
-export default SignUp
+export default CreateNewPassword

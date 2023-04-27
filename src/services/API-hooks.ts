@@ -82,14 +82,16 @@ export const usePasswordRecoveryMutation = (onSuccessHandler: () => void) => {
 };
 
 export const useNewPasswordMutation = () => {
+    const { push } = useRouter();
     return useMutation({
         mutationFn: InstagramApi.newPassword,
         mutationKey:['newPassword'],
         onSuccess: (res) => {
-
+            push('/')
         },
         onError: (error:AxiosError) => {
-            console.log('recovery error')
+            push('/auth/linkExpired')
+
         }
     });
 };

@@ -37,8 +37,8 @@ const PasswordRecovery = () => {
     const onSubmit = (data: FormValues) => {
         setIsSubmitting(true);
         console.log('omSubmit:', data)
-        recovery(data?.email)
-        setEmail(data?.email)
+        data && recovery(data.email)
+        setEmail(data.email)
         localStorage.setItem('email', data.email)
         setIsSubmitting(false);
 
