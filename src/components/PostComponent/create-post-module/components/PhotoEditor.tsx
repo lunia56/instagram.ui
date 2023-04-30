@@ -3,7 +3,7 @@ import React, { useCallback, useEffect, useState } from 'react'
 import Cropper, { Area } from 'react-easy-crop'
 // eslint-disable-next-line import/no-unresolved
 import { Point } from 'react-easy-crop/types'
-import getCroppedImg from "@/components/post-component/create-post-module/components/utils/canvasUtils";
+import getCroppedImg from "@/components/PostComponent/create-post-module/components/utils/canvasUtils";
 
 
 type PropsType = {

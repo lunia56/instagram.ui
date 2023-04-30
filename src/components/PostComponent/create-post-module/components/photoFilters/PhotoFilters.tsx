@@ -1,7 +1,7 @@
 import React from 'react'
 import {
   PhotoFilter
-} from "@/components/post-component/create-post-module/components/photoFilters/photoFilter/PhotoFilter";
+} from "@/components/PostComponent/create-post-module/components/photoFilters/photoFilter/PhotoFilter";
 
 
 type FilterType = {

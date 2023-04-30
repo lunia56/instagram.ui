@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { PhotoFilters } from "@/components/post-component/create-post-module/components/photoFilters/PhotoFilters";
+import { PhotoFilters } from "@/components/PostComponent/create-post-module/components/photoFilters/PhotoFilters";
 
 
 type PropsType = {

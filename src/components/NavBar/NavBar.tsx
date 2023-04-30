@@ -11,10 +11,10 @@ import Trending from '@/assets/Image/NavBar/Trending'
 import Account from '@/assets/Image/NavBar/Account'
 import LogOut from '@/assets/Image/NavBar/LogOut'
 import { ModalWithContent } from "@/components/Modal/CreatePost/modalWithContent/ModalWithContent";
-import { PhotoSelector } from "@/components/post-component/create-post-module/components/photo-selector/PhotoSelector";
 import { ModalCreatePost } from "@/components/Modal/CreatePost/ModalCreatePost/ModalCreatePost";
-import { FiltersEditor } from "@/components/post-component/create-post-module/components/filtersEditor/FiltersEditor";
-import { PhotoEditor } from "@/components/post-component/create-post-module/components/PhotoEditor";
+import { PhotoEditor } from "@/components/PostComponent/create-post-module/components/PhotoEditor";
+import { FiltersEditor } from "@/components/PostComponent/create-post-module/components/filtersEditor/FiltersEditor";
+import { PhotoSelector } from "@/components/PostComponent/create-post-module/components/photoSelector/PhotoSelector";
 
 
 const NavBar: NextPage<PropsWithChildren> = ({children}) => {
