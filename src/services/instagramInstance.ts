@@ -1,6 +1,6 @@
 import axios, {AxiosError, AxiosResponse} from 'axios'
 
-const baseURL = 'https://instagram-api-psi.vercel.app'
+const baseURL = 'https://instagramapi-production.up.railway.app/'
 export const instagramInstance = axios.create({
     baseURL: baseURL,
     withCredentials: true
@@ -8,10 +8,14 @@ export const instagramInstance = axios.create({
 
 // interceptors- перехватывает наши запросы на сервер
 // при каждом запросе у нас в header запроса прикрепляется наш токен
+
 instagramInstance.interceptors.request.use((config) => {
     config.headers.Authorization = `Bearer ${localStorage.getItem('token')}`
     return config
 })
+
+
+
 
 // когда любой вопрос возвращается с ошибкой 401 (токен умер) мы освежаем токен соответствующим запросом
 

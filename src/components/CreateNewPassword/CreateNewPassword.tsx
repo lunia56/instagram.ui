@@ -1,6 +1,6 @@
-import React, {useEffect, useState} from 'react'
+import React, {useState} from 'react'
 import {Controller, useForm} from 'react-hook-form'
-import s from './SignUp.module.scss'
+import s from './CreateNewPassword.module.scss'
 import {
     Box,
     Button,
@@ -21,20 +21,16 @@ import {
 import {AiOutlineEye, AiOutlineEyeInvisible} from 'react-icons/ai'
 import {useRegisterMutation} from '@/services/API-hooks'
 import ModalSendEmail from '@/components/Modal/ModalSendEmail/ModalSendEmail'
-import {useRouter} from 'next/router'
 
 
 type  FormValues = {
-    login: string
-    email: string
     password: string
     confirmPassword: string
 }
 const SignUp = () => {
+    // const [isSubmitting, setIsSubmitting] = useState(false);
     const [showPassword, setShowPassword] = useState(false)
     const [isOpen, setIsOpen] = useState(false)
-    const toast = useToast()
-    const {push} = useRouter()
 
     const {
         control,
@@ -59,25 +55,9 @@ const SignUp = () => {
     }
     const handleClickShowPassword = () => setShowPassword(!showPassword)
 
-    useEffect(() => {
-        if (status === 'success') {
-            reset({
-                email: '',
-                login: '',
-                password: '',
-                confirmPassword: ''
-            })
-        }
-    }, [status, reset])
-
-    // if (isError) { toast({
-    //     title: 'Ошибка!',
-    //     description: error.message,
-    //     status: 'error',
-    //     duration: 3000,
-    //     isClosable: true,
-    //     position: 'bottom-left'
-    // })}
+    if (status === 'success') {
+        reset()
+    }
     return (
         <>
             {isLoading && <Progress size="xs" isIndeterminate color="gray.800" bg="gray.800"/>}
@@ -85,67 +65,14 @@ const SignUp = () => {
             <Box className={s.signUpContainer}>
                 <VStack className={s.signUpBlock} spacing={1}>
                     {error && <p>{error?.message}</p>}
-                    <Heading size="lg">Sign Up</Heading>
+                    <Heading size="lg">Create New Password</Heading>
+                    {/*<SocialRegistrationForm/>*/}
                     <Box className={s.formBlock}>
                         <form onSubmit={handleSubmit(onSubmit)}>
                             <VStack spacing={0} align="stretch">
-                                <FormControl isInvalid={Boolean(errors.login)} isRequired>
-                                    <FormLabel color={'#4C4C4C'}>Username</FormLabel>
-
-                                    <Controller
-                                        control={control}
-                                        name="login"
-                                        rules={{
-                                            required: 'Login is required',
-                                            minLength: {
-                                                value: 3,
-                                                message: 'Minimum length 3 characters'
-                                            }, maxLength: {
-                                                value: 20,
-                                                message: 'Maximum length 20 characters'
-                                            }
-
-                                        }}
-                                        render={({field: {onChange, value,}}) => (<>
-                                            <Input type={'text'}
-                                                   color={'white'}
-                                                   value={value}
-                                                   onChange={onChange}
-                                            />
-                                        </>)}
-                                    />
-                                    {errors.login && <FormErrorMessage>
-                                        <span>{errors.login.message}</span>
-                                    </FormErrorMessage>}
-                                </FormControl>
-
-                                <FormControl isInvalid={Boolean(errors.email)} isRequired>
-                                    <FormLabel color={'#4C4C4C'}>Email</FormLabel>
-
-                                    <Controller
-                                        control={control}
-                                        name="email"
-                                        rules={{
-                                            required: 'Email is required',
-                                            pattern: {
-                                                value: /^((([0-9A-Za-z]{1}[-0-9A-z\.]{1,}[0-9A-Za-z]{1})|([0-9А-Яа-я]{1}[-0-9А-я\.]{1,}[0-9А-Яа-я]{1}))@([-A-Za-z]{1,}\.){1,2}[-A-Za-z]{2,})$/u,
-                                                message: 'Please enter valid email...'
-                                            }
-                                        }}
-                                        render={({field: {onChange, value,}}) => (<>
-                                            <Input
-                                                color={'white'}
-                                                value={value}
-                                                onChange={onChange}
-                                            />
-                                        </>)}
-                                    />
-                                    {errors.email &&
-                                        <FormErrorMessage> <span>{errors.email.message}</span> </FormErrorMessage>}
-                                </FormControl>
 
                                 <FormControl isInvalid={Boolean(errors.password)} isRequired>
-                                    <FormLabel color={'#4C4C4C'}>Password</FormLabel>
+                                    <FormLabel color={'#4C4C4C'}>New Password</FormLabel>
                                     <Controller
                                         control={control}
                                         name="password"
@@ -241,13 +168,11 @@ const SignUp = () => {
                                     isDisabled={!isValid}
                                     border="none"
                                 >
-                                    Sign Up
+                                    Create new password
                                 </Button>
                             </VStack>
                         </form>
                     </Box>
-                    <Text>Do you have an account?</Text>
-                    <Button variant={'link'} onClick={() => push('/auth/signin')}>Sign In</Button>
                 </VStack>
             </Box>
             {isOpen && <ModalSendEmail modalOnClick={() => setIsOpen(false)} email={variables?.email}/>}

@@ -19,7 +19,7 @@ const Header = () => {
     <header className={s.header}
             // style={{position:'relative'}}
     >
-      <div className={s.container}>
+      <Box className={s.container}>
         <Box onClick={()=>push('/')} cursor={'pointer'} className={s.title}>Instagram</Box>
         {/*{*/}
         {/*  isLoggedIn ? <div className={s.logout} onClick={openModalLogout}>*/}
@@ -28,7 +28,7 @@ const Header = () => {
         {/*    </div> : <div></div>*/}
         {/*}*/}
         {show && <ModalLogout modalOnClick={() => setShow(false)}/>}
-      </div>
+      </Box>
     </header>
   );
 };

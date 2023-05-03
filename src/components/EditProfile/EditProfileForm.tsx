@@ -7,14 +7,16 @@ import img from '@/assets/Image/Profile/not_foto.png';
 import Image from 'next/image';
 import {SingleDatepicker} from '@/components/common/DatePicker/SingleDatepicker';
 import {convertFileToBase64} from '@/assets/hooks/converter64Base';
+import {useRegisterMutation, useUpdateProfileMutations} from '@/services/API-hooks'
+import {formatDate} from '@/assets/utils/ConvertDate'
 
 type FormData = {
     username: string;
     name: string;
-    surname: string;
     city: string;
+    surname: string;
     aboutMe: string;
-    date: Date;
+    dateOfBirthday: Date;
 };
 const EditProfileForm = () => {
     // const [isEdite, setIsEdite] = useState<boolean>(false)
@@ -26,8 +28,16 @@ const EditProfileForm = () => {
     } = useForm<FormData>({mode: 'onChange'});
     const [avatar, setAvatar] = useState('')
 
+
+    const {mutate: updateProfile, isError, error, variables, isLoading, status} = useUpdateProfileMutations()
     function onSubmit(values: FormData) {
 
+
+
+        const {name,surname,aboutMe,city,dateOfBirthday}=values
+        // @ts-ignore
+        console.log({name,surname,aboutMe,city,dateOfBirthday:formatDate(dateOfBirthday)})
+        updateProfile({name,surname,aboutMe,city,dateOfBirthday:formatDate(dateOfBirthday)})
     }
 
     const inputRef = useRef<HTMLInputElement>(null)
@@ -165,10 +175,10 @@ const EditProfileForm = () => {
                                     {errors.surname && errors.surname.message}
                                 </FormErrorMessage>
                             </FormControl>
-                            <FormControl isInvalid={Boolean(errors.date)}>
+                            <FormControl isInvalid={Boolean(errors.dateOfBirthday)}>
                                 <FormLabel color={'#BDC1C7'}>Date of birthday</FormLabel>
                                 <Controller
-                                    name="date"
+                                    name="dateOfBirthday"
                                     control={control}
                                     // rules={{required: true}}
                                     render={({field: {onChange, value}}) => (<>
@@ -181,7 +191,7 @@ const EditProfileForm = () => {
                                     </>)}
                                 />
                                 <FormErrorMessage>
-                                    {errors.date && errors.date.message}
+                                    {errors.dateOfBirthday && errors.dateOfBirthday.message}
                                 </FormErrorMessage>
                             </FormControl>
                             <FormControl isInvalid={Boolean(errors.city)}>

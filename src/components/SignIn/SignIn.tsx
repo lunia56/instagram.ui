@@ -19,6 +19,7 @@ import {
 } from '@chakra-ui/react'
 import {AiOutlineEye, AiOutlineEyeInvisible} from 'react-icons/ai'
 import {useSignInMutation} from '@/services/API-hooks'
+import {useRouter} from 'next/router'
 
 
 type  FormValues = {
@@ -29,7 +30,7 @@ const SignIn = () => {
 
     const [showPassword, setShowPassword] = useState(false)
     // const [queryError, setQueryError] = useState<string>('')
-
+const {push} = useRouter()
 
     const {mutate: signIn, error, isLoading} = useSignInMutation()
 
@@ -40,7 +41,7 @@ const SignIn = () => {
     } = useForm<FormValues>({mode: 'onChange'})
 
     const onSubmit = (data: FormValues) => {
-        console.log(`inOnSubmit:${error}`)
+        // console.log(`inOnSubmit:${error}`)
         // setQueryError(error.response.data)
         signIn(data)
         // console.log(error.response.config.data);
@@ -53,7 +54,6 @@ const SignIn = () => {
             <Box className={s.signUpContainer}>
                 <VStack className={s.signUpBlock} spacing={1}>
                     <Heading mb="15px" size="lg">Sign In</Heading>
-                    {/*<SocialRegistrationForm/>*/}
                     <Box className={s.formBlock}>
                         <form onSubmit={handleSubmit(onSubmit)}>
                             <VStack spacing={2} align="stretch" >
@@ -132,7 +132,7 @@ const SignIn = () => {
                                         {errors.password && <span>{errors.password.message}</span>}
                                     </FormErrorMessage>
                                 </FormControl>
-                                <Button variant={'link'} className={s.forgot} > <Link  href={'/'}>Forgot Password</Link></Button>
+                                <Button variant={'link'} className={s.forgot} onClick={() => push('/passwordRecovery')} > Forgot Password</Button>
 
                                 <Button
                                     type="submit"
@@ -148,7 +148,7 @@ const SignIn = () => {
                         </form>
                     </Box>
                     <Text>Don’t have an account?</Text>
-                    <Button variant={'link'}><Link href={'/signup'}>Sign Up</Link></Button>
+                    <Button variant={'link'} onClick={() => push('/auth/signup')}>Sign Up</Button>
                 </VStack>
             </Box>
         </>
