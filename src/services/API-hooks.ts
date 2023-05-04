@@ -1,7 +1,7 @@
 import {InstagramApi} from '@/services/index'
 import {useMutation, useQuery} from '@tanstack/react-query'
 import {useRouter} from 'next/router'
-import {AxiosError} from 'axios'
+import {AxiosError, AxiosResponse} from 'axios'
 import ModalSendEmail from "@/components/Modal/ModalSendEmail/ModalSendEmail";
 
 
@@ -42,7 +42,7 @@ export const useSignInMutation = () => {
     const {push} = useRouter()
     return useMutation({
         mutationFn: InstagramApi.signIn,
-        onSuccess: (res) => {
+        onSuccess: (res:AxiosResponse) => {
             localStorage.setItem('token', res.data.accessToken)
             push('/EditProfile')
             //добавить флаг в зустанд сторе isLoggedIn и установить true
