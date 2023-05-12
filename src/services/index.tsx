@@ -3,7 +3,7 @@ import {AxiosResponse} from 'axios'
 
 export const InstagramApi = {
     signUp:({login,email,password}:RegistrationData):Promise<AxiosResponse>=>{
-        return instagramInstance.post('auth/registration',{
+        return instagramInstance.post('/auth/registration',{
             login,
             email,
             password
