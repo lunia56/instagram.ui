@@ -1,4 +1,4 @@
-import React, {PropsWithChildren} from 'react'
+import React, {PropsWithChildren, useState} from 'react'
 import {Flex, Grid, GridItem, Icon, Link, VStack} from '@chakra-ui/react'
 import {NextPage} from 'next'
 import {useRouter} from 'next/router'
@@ -7,7 +7,21 @@ import Home from '@/assets/Image/NavBar/Home'
 import Bookmark from '@/assets/Image/NavBar/Bookmark'
 import Trending from '@/assets/Image/NavBar/Trending'
 import Account from '@/assets/Image/NavBar/Account'
-import LogOut from '@/assets/Image/NavBar/LogOut'
+import LogOutImage from '@/assets/Image/NavBar/LogOut'
+import {useLogOutMutation} from '@/services/API-hooks'
+
+
+const LogOut = () => {
+
+    const {mutate: logOut} = useLogOutMutation()
+    const onClickHandler = () => {
+        logOut()
+    }
+    return  <Link display={'flex'} alignItems={'center'} cursor={'pointer'} onClick={onClickHandler}>
+            <Icon as={LogOutImage} w={'25px'} h={'25px'} mr={15}/>Logout
+        </Link>
+
+}
 
 const NavBar: NextPage<PropsWithChildren> = ({children}) => {
     const {push} = useRouter()
@@ -26,31 +40,32 @@ const NavBar: NextPage<PropsWithChildren> = ({children}) => {
                 position={'relative'}
             >
 
-                <GridItem marginLeft={'40px'} bg="pink.300" area={'nav'} h="95vh" borderRight={'2px #171717 solid'} position={'fixed'} w={'220px'}>
-                    <Flex direction={'column'} gap={'15px'}  alignItems={'flex-start'} h={'100%'}
+                <GridItem marginLeft={'40px'} bg="pink.300" area={'nav'} h="95vh" borderRight={'2px #171717 solid'}
+                          position={'fixed'} w={'220px'}>
+                    <Flex direction={'column'} gap={'15px'} alignItems={'flex-start'} h={'100%'}
                           justifyContent={'space-around'} color={'white'}>
                         <VStack mt={'72px'} spacing={50} alignItems={'flex-start'}>
-                            <Link display={'flex'} alignItems={'center'}  cursor={'pointer'}>
+                            <Link display={'flex'} alignItems={'center'} cursor={'pointer'}>
                                 <Icon as={Home} w={'25px'} h={'25px'} mr={15}/>Home
                             </Link>
-                            <Link display={'flex'} alignItems={'center'}  cursor={'pointer'}>
+                            <Link display={'flex'} alignItems={'center'} cursor={'pointer'}>
                                 <Icon as={CreateIcon} w={'25px'} h={'25px'} mr={15}/>Create
                             </Link>
-                            <Link display={'flex'} alignItems={'center'}   cursor={'pointer'} onClick={() => push('/')}>
+                            <Link display={'flex'} alignItems={'center'} cursor={'pointer'} onClick={() => push('/')}>
                                 <Icon as={Account} w={'25px'} h={'25px'} mr={15}/>My Profile
                             </Link>
                         </VStack>
                         <VStack spacing={50} alignItems={'flex-start'}>
-                            <Link display={'flex'} alignItems={'center'}  cursor={'pointer'}>
+                            <Link display={'flex'} alignItems={'center'} cursor={'pointer'}>
                                 <Icon as={Trending} w={'25px'} h={'25px'} mr={15}/>Statistics
                             </Link>
-                            <Link display={'flex'} alignItems={'center'}  cursor={'pointer'}>
+                            <Link display={'flex'} alignItems={'center'} cursor={'pointer'}>
                                 <Icon as={Bookmark} w={'25px'} h={'25px'} mr={15}/>Favorites
                             </Link>
                         </VStack>
-                        <Link display={'flex'} alignItems={'center'}  cursor={'pointer'}>
-                            <Icon as={LogOut} w={'25px'} h={'25px'} mr={15}/>Logout
-                        </Link>
+                        <LogOut/>
+
+
                     </Flex>
                 </GridItem>
                 <GridItem pl="2" bg="green.300" area={'main'}>

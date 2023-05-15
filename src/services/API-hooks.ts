@@ -5,7 +5,7 @@ import {AxiosError} from 'axios'
 
 
 export const useMeQuery = () => {
-    return useQuery({queryKey: ['me'], queryFn: InstagramAuthApi.me})
+    return useQuery({queryKey: ['me'], queryFn: InstagramAuthApi.me,retry:false})
 }
 
 
@@ -41,13 +41,13 @@ export const useRegisterMutation = (setError: any, onSuccessHandler: () => void)
 
 
 
-export const useSignInMutation = () => {
+export const useLoginMutation = () => {
     const {push} = useRouter()
     return useMutation({
-        mutationFn: InstagramAuthApi.signIn,
+        mutationFn: InstagramAuthApi.login,
         onSuccess: (res) => {
             localStorage.setItem('token', res.data.accessToken)
-            push('/EditProfile')
+            push('/')
             //добавить флаг в зустанд сторе isLoggedIn и установить true
         },
         onError: (e:AxiosError) => {
@@ -61,7 +61,7 @@ export const useLogOutMutation = () => {
         mutationFn: InstagramAuthApi.logout,
         mutationKey:['logout'],
         onSuccess: (res) => {
-            push("/");
+            push("/auth/login");
             console.log('Logout Succes')
         },
         onError: (error:AxiosError) => {

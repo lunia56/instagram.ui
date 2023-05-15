@@ -1,6 +1,6 @@
 import React, {useState} from 'react'
 import {Controller, useForm} from 'react-hook-form'
-import s from './SignIn.module.scss'
+import s from './Login.module.scss'
 import {
     Box,
     Button,
@@ -18,7 +18,7 @@ import {
     VStack,
 } from '@chakra-ui/react'
 import {AiOutlineEye, AiOutlineEyeInvisible} from 'react-icons/ai'
-import {useSignInMutation} from '@/services/API-hooks'
+import {useLoginMutation} from '@/services/API-hooks'
 import {useRouter} from 'next/router'
 
 
@@ -26,13 +26,13 @@ type  FormValues = {
     email: string
     password: string
 }
-const SignIn = () => {
+const Login = () => {
 
     const [showPassword, setShowPassword] = useState(false)
     // const [queryError, setQueryError] = useState<string>('')
 const {push} = useRouter()
 
-    const {mutate: signIn, error, isLoading} = useSignInMutation()
+    const {mutate: login, error, isLoading} = useLoginMutation()
 
     const {
         control,
@@ -43,7 +43,7 @@ const {push} = useRouter()
     const onSubmit = (data: FormValues) => {
         // console.log(`inOnSubmit:${error}`)
         // setQueryError(error.response.data)
-        signIn(data)
+        login(data)
         // console.log(error.response.config.data);
     }
     const handleClick = () => setShowPassword(!showPassword)
@@ -155,6 +155,6 @@ const {push} = useRouter()
     )
 }
 
-export default SignIn
+export default Login
 
 

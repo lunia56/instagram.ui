@@ -247,7 +247,7 @@ const SignUp = () => {
                         </form>
                     </Box>
                     <Text>Do you have an account?</Text>
-                    <Button variant={'link'} onClick={() => push('/auth/signin')}>Sign In</Button>
+                    <Button variant={'link'} onClick={() => push('/auth/login')}>Sign In</Button>
                 </VStack>
             </Box>
             {isOpen && <ModalSendEmail modalOnClick={() => setIsOpen(false)} email={variables?.email}/>}

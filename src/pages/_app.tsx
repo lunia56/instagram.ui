@@ -8,6 +8,7 @@ import useLoader from '@/assets/hooks/useLoader'
 import {ReactElement, ReactNode, useState} from 'react'
 import {NextPage} from 'next'
 import '../assets/styles/nprogress.css'
+import {AuthRedirect} from '@/components/Auth-redirect'
 
 const config = {
     initialColorMode: 'dark',
@@ -48,9 +49,9 @@ export default function App({Component, pageProps}: AppPropsWithLayout) {
     return getLayout(
         <QueryClientProvider client={queryClient}>
             <ChakraProvider theme={theme}>
-                {/*<AuthRedirect>*/}
+                <AuthRedirect>
                 <Component {...pageProps} />
-                {/*</AuthRedirect>*/}
+                </AuthRedirect>
             </ChakraProvider>
             <ReactQueryDevtools initialIsOpen={false}/>
         </QueryClientProvider>)

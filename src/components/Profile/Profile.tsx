@@ -4,10 +4,10 @@ import {useRouter} from 'next/router'
 import {getLayout} from '@/components/Layout/BaseLayout'
 import {NextPageWithLayout} from '@/pages/_app'
 import ProfileContent from '@/components/Profile/ProfileContent'
+import {useLogOutMutation} from '@/services/API-hooks'
 
 const ProfilePage: NextPageWithLayout = () => {
     const {push} = useRouter()
-
 
     return (
         <Container centerContent maxW="90%">

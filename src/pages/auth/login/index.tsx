@@ -1,12 +1,12 @@
-import SignIn from '@/components/SignIn/SignIn'
+import Login from '@/components/Login/Login'
 import {NextPageWithLayout} from '@/pages/_app'
 import LayoutWithHeader from '@/components/Layout/LayoutWithHeader'
 
-const SignInPage: NextPageWithLayout = () => {
+const LoginPage: NextPageWithLayout = () => {
     return (
         <LayoutWithHeader>
-            <SignIn/>
+            <Login/>
         </LayoutWithHeader>
     )
 }
-export default SignInPage
+export default LoginPage
