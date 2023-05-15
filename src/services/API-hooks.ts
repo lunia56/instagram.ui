@@ -2,7 +2,7 @@ import {InstagramAuthApi, InstagramUserApi} from '@/services/index'
 import {useMutation, useQuery} from '@tanstack/react-query'
 import {useRouter} from 'next/router'
 import {AxiosError} from 'axios'
-import ModalSendEmail from "@/components/Modal/ModalSendEmail/ModalSendEmail";
+import ModalSendEmail from '@/components/Modal/ModalSendEmail/ModalSendEmail'
 
 
 export const useMeQuery = () => {
@@ -12,7 +12,7 @@ export const useMeQuery = () => {
 
 
 
-export const useEmailResendingMutation = (callback:()=>void) => {
+export const useEmailResendingMutation = (callback: () => void) => {
     // const {push} = useRouter()
     return useMutation({
         mutationFn: InstagramAuthApi.emailResent,
@@ -20,7 +20,7 @@ export const useEmailResendingMutation = (callback:()=>void) => {
             callback()
 
         },
-        onError:(error:AxiosError)=>{
+        onError: (error: AxiosError) => {
 
         }
     })
@@ -32,14 +32,13 @@ export const useRegisterMutation = (setError: any, onSuccessHandler: () => void)
         onSuccess: (res) => {
             onSuccessHandler()
         },
-        onError: (error: AxiosError<{errorMessage:[{message:string,field:string}]}>) => {
+        onError: (error: AxiosError<{ errorMessage: [{ message: string, field: string }] }>) => {
             console.log('errorsMessages', error.response?.data.errorMessage[0].message)
             error.response && error.response?.status === 400 &&
             setError('login', {type: 'manual', message: 'User with this username or email is already registered'})
         }
     })
 }
-
 
 
 export const useSignInMutation = () => {
@@ -51,64 +50,64 @@ export const useSignInMutation = () => {
             push('/EditProfile')
             //добавить флаг в зустанд сторе isLoggedIn и установить true
         },
-        onError: (e:AxiosError) => {
-             console.log('ошибка ',e.message)
+        onError: (e: AxiosError) => {
+            console.log('ошибка ', e.message)
         }
-    });
+    })
 }
 export const useLogOutMutation = () => {
-    const { push } = useRouter();
+    const {push} = useRouter()
     return useMutation({
         mutationFn: InstagramAuthApi.logout,
-        mutationKey:['logout'],
+        mutationKey: ['logout'],
         onSuccess: (res) => {
-            push("/");
+            push('/')
             console.log('Logout Succes')
         },
-        onError: (error:AxiosError) => {
+        onError: (error: AxiosError) => {
             console.log('Logout Error')
         }
-    });
-};
+    })
+}
 
-export const useUpdateProfileMutations = ()=>{
+export const useUpdateProfileMutations = () => {
     return useMutation(
         {
-            mutationFn:InstagramUserApi.updateProfile,
-            mutationKey:['updateUser'],
+            mutationFn: InstagramUserApi.updateProfile,
+            mutationKey: ['updateUser'],
             onSuccess: (res) => {
-                console.log('updateUser Succes',res)
+                console.log('updateUser Succes', res)
             },
-            onError: (error:AxiosError<{errorMessage:[{message:string,field:string}]}>) => {
-                console.log('error ',error.response?.data.errorMessage[0].message)
+            onError: (error: AxiosError<{ errorMessage: [{ message: string, field: string }] }>) => {
+                console.log('error ', error.response?.data.errorMessage[0].message)
             }
         }
     )
 }
 
 export const usePasswordRecoveryMutation = (onSuccessHandler: () => void) => {
-    const { push } = useRouter();
+    const {push} = useRouter()
     return useMutation({
         mutationFn: InstagramAuthApi.passwordRecovery,
-        mutationKey:['recovery'],
+        mutationKey: ['recovery'],
         onSuccess: (res) => {
             onSuccessHandler()
         },
-        onError: (error:AxiosError) => {
+        onError: (error: AxiosError) => {
             console.log('recovery error')
         }
-    });
-};
+    })
+}
 
 export const useNewPasswordMutation = () => {
     return useMutation({
         mutationFn: InstagramAuthApi.newPassword,
-        mutationKey:['newPassword'],
+        mutationKey: ['newPassword'],
         onSuccess: (res) => {
 
         },
-        onError: (error:AxiosError) => {
+        onError: (error: AxiosError) => {
             console.log('recovery error')
         }
-    });
-};
+    })
+}
