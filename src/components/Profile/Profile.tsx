@@ -1,12 +1,16 @@
-import React from 'react'
-import { Avatar, Button, Container, HStack, Text, VStack } from '@chakra-ui/react'
-import { useRouter } from 'next/router'
-import { NextPageWithLayout } from '@/pages/_app'
+import React, {useState} from 'react'
+import {Box, Button, HStack, Text, VStack, Image, Avatar, Container, Wrap, WrapItem} from '@chakra-ui/react'
+import {useRouter} from 'next/router'
+import {getLayout} from '@/components/Layout/BaseLayout'
+import {NextPageWithLayout} from '@/pages/_app'
 import ProfileContent from '@/components/Profile/ProfileContent'
-import { getBaseLayout } from "@/components/Layout/BaseLayout";
+import ModalLogout from "@/components/Modal/ModalLogOut/ModalLogout";
+import ModalListSubscribers from "@/components/Modal/ModalListSubscribers/ModalListSubscribers";
 
-const ProfilePage = () => {
+const ProfilePage: NextPageWithLayout = () => {
     const {push} = useRouter()
+    const [openSubscribers, setOpenSubscribers] = useState(false)
+
 
     return (
         <Container centerContent maxW="90%">
@@ -25,7 +29,7 @@ const ProfilePage = () => {
                         </VStack>
                         <VStack>
                             <Text>кол-во подписчиков</Text>
-                            <Text>Subscribers</Text>
+                            <Button onClick={()=>setOpenSubscribers(!openSubscribers)}>Subscribers</Button>
                         </VStack>
                         <VStack>
                             <Text>кол-во публикация</Text>
@@ -34,12 +38,13 @@ const ProfilePage = () => {
                     </HStack>
                     <Text> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Culpa cupiditate earum harum hic
                         magni molestiae omnis praesentium quas reiciendis tenetur.</Text>
-                </VStack>
+                    {openSubscribers && <ModalListSubscribers modalOnClick={() => setOpenSubscribers(false)} />}
 
+                </VStack>
             </HStack>
             <ProfileContent/>
         </Container>
     )
 }
-// ProfilePage.getLayout = getBaseLayout
+ProfilePage.getLayout = getLayout
 export default ProfilePage

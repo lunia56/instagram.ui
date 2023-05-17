@@ -1,0 +1,21 @@
+.element{
+  display: flex;
+  margin: 10px 5px 15px 0;
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  justify-content: space-between;
+  overflow-y: auto
+}
+
+.image{
+  width: 60px;
+  border-radius: 50%;
+}
+
+.profile{
+  display: flex;
+  align-items: center;
+}
