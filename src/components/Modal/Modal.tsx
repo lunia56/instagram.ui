@@ -4,7 +4,7 @@ import Image from 'next/image';
 import React from 'react';
 
 interface IModal {
-    size?: string,
+    size?: string, // в size можно передать другие размеры модалки, по дефолту будут как в modal
     backgroundOnClick?: () => void;
     modalOnClick?: () => void;
     title: string
