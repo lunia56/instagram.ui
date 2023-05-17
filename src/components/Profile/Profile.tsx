@@ -4,9 +4,12 @@ import {useRouter} from 'next/router'
 import {getLayout} from '@/components/Layout/BaseLayout'
 import {NextPageWithLayout} from '@/pages/_app'
 import ProfileContent from '@/components/Profile/ProfileContent'
+import ModalLogout from "@/components/Modal/ModalLogOut/ModalLogout";
+import ModalListSubscribers from "@/components/Modal/ModalListSubscribers/ModalListSubscribers";
 
 const ProfilePage: NextPageWithLayout = () => {
     const {push} = useRouter()
+    const [openSubscribers, setOpenSubscribers] = useState(false)
 
 
     return (
@@ -26,7 +29,7 @@ const ProfilePage: NextPageWithLayout = () => {
                         </VStack>
                         <VStack>
                             <Text>кол-во подписчиков</Text>
-                            <Text>Subscribers</Text>
+                            <Button onClick={()=>setOpenSubscribers(!openSubscribers)}>Subscribers</Button>
                         </VStack>
                         <VStack>
                             <Text>кол-во публикация</Text>
@@ -35,6 +38,8 @@ const ProfilePage: NextPageWithLayout = () => {
                     </HStack>
                     <Text> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Culpa cupiditate earum harum hic
                         magni molestiae omnis praesentium quas reiciendis tenetur.</Text>
+                    {openSubscribers && <ModalListSubscribers modalOnClick={() => setOpenSubscribers(false)} />}
+
                 </VStack>
             </HStack>
             <ProfileContent/>

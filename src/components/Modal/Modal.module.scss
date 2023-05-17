@@ -14,14 +14,16 @@
   z-index: 20;
 }
 .modal{
+  position: fixed;
   width: 438px;
   height: 240px;
-  left: calc(50vw - 219px);
-  top: calc(50vh - 120px);
-  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   z-index: 20;
   background-color: #333333;
   border-radius: 2px;
+  overflow-y: auto
 }
 .title{
   display: flex;
