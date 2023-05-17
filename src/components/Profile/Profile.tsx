@@ -1,13 +1,12 @@
-import React, {useState} from 'react'
-import {Box, Button, HStack, Text, VStack, Image, Avatar, Container, Wrap, WrapItem} from '@chakra-ui/react'
-import {useRouter} from 'next/router'
-import {getLayout} from '@/components/Layout/BaseLayout'
-import {NextPageWithLayout} from '@/pages/_app'
+import React from 'react'
+import { Avatar, Button, Container, HStack, Text, VStack } from '@chakra-ui/react'
+import { useRouter } from 'next/router'
+import { NextPageWithLayout } from '@/pages/_app'
 import ProfileContent from '@/components/Profile/ProfileContent'
+import { getBaseLayout } from "@/components/Layout/BaseLayout";
 
-const ProfilePage: NextPageWithLayout = () => {
+const ProfilePage = () => {
     const {push} = useRouter()
-
 
     return (
         <Container centerContent maxW="90%">
@@ -36,10 +35,11 @@ const ProfilePage: NextPageWithLayout = () => {
                     <Text> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Culpa cupiditate earum harum hic
                         magni molestiae omnis praesentium quas reiciendis tenetur.</Text>
                 </VStack>
+
             </HStack>
             <ProfileContent/>
         </Container>
     )
 }
-ProfilePage.getLayout = getLayout
+// ProfilePage.getLayout = getBaseLayout
 export default ProfilePage

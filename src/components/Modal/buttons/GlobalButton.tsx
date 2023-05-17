@@ -30,6 +30,7 @@ export const GlobalButton: FC<PropsType> = ({
                                             }) => {
   return (
     <button
+      style={{fontSize: "16px", marginTop: "60px", marginBottom: "60px", fontWeight: "600"}}
       onClick={callback}
       type={type}
       disabled={disabled}

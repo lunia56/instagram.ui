@@ -4,7 +4,6 @@ import { FaTimes } from 'react-icons/fa'
 import Modal from 'react-modal'
 
 import styles from './ModalWithContent.module.scss'
-
 interface Props {
   isOpen: boolean
   onConfirm?: () => void
@@ -17,15 +16,15 @@ interface Props {
 }
 
 export const ModalWithContent: FC<Props> = ({
-  isOpen,
-  onConfirm,
-  onDecline,
-  onClose,
-  title,
-  children,
-  confirmButtonText,
-  declineButtonText,
-}) => {
+                                              isOpen,
+                                              onConfirm,
+                                              onDecline,
+                                              onClose,
+                                              title,
+                                              children,
+                                              confirmButtonText,
+                                              declineButtonText,
+                                            }) => {
   return (
     <Modal
       isOpen={isOpen}

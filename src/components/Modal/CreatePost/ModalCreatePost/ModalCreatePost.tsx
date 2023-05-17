@@ -5,7 +5,7 @@ import Modal from 'react-modal'
 
 import styles from './ModalCreatePost.module.scss'
 
-import ArrowBackIcon from '@/assets/Image/modal/arrow-ios-back.svg'
+import ArrowBackIcon from '@/assets/Image/modal/createPost/arrow-ios-back.svg'
 
 interface Props {
   isOpen: boolean
