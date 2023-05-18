@@ -31,6 +31,9 @@ type  FormValues = {
 const CreateNewPassword = () => {
     const router = useRouter()
     const code = router.query.code
+    const email = localStorage.getItem('email')
+
+
 
     console.log(router.query.code)
     const {mutate: sentNewPassword,error,variables, isLoading, status} = useNewPasswordMutation()
@@ -48,7 +51,6 @@ const CreateNewPassword = () => {
 
 
     const onSubmit = (data: FormValues) => {
-
         sentNewPassword({newPassword: data.password, recoveryCode: String(code)})
 
     }
@@ -174,7 +176,7 @@ const CreateNewPassword = () => {
                     </Box>
                 </VStack>
             </Box>
-            {isOpen && <ModalSendEmail modalOnClick={() => setIsOpen(false)} email={variables?.email}/>}
+            {isOpen && <ModalSendEmail modalOnClick={() => setIsOpen(false)} email={email ? email : undefined}/>}
         </>
     )
 }

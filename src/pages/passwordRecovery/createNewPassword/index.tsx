@@ -1,6 +1,6 @@
 import PasswordRecovery from '@/components/PasswordRecovery/PasswordRecovery'
 import LayoutWithHeader from '@/components/Layout/LayoutWithHeader'
-import CreateNewPassword from "@/components/CreateNewPassword/CreateNewPassword";
+import CreateNewPassword from "@/components/PasswordRecovery/CreateNewPassword/CreateNewPassword";
 import {useRouter} from "next/router";
 import {useEmailResendingMutation, useNewPasswordMutation} from "@/services/API-hooks";
 import {useEffect} from "react";

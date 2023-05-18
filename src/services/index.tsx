@@ -18,10 +18,10 @@ export const InstagramAuthApi = {
     emailResent:(email: string)=>{
         return instagramInstance.post('auth/registration-email-resending',{"email":email})
     },
-    signIn:({email,password}: SignInData):Promise<AxiosResponse<{accessToken:string}>> =>{
-        console.log(email, password)
+    signIn:({loginOrEmail,password}: SignInData):Promise<AxiosResponse<{accessToken:string}>> =>{
+        console.log(loginOrEmail, password)
         return instagramInstance.post('auth/login',{
-            email,
+            loginOrEmail,
             password
         })
     },
@@ -64,7 +64,7 @@ type RegistrationData = {
     password: string
 }
 type SignInData = {
-    email: string
+    loginOrEmail: string
     password: string
 }
 type profileData = {
