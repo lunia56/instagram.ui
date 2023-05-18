@@ -5,7 +5,7 @@ import img from '../../../../public/bro.svg'
 import {NextPage} from 'next'
 import LayoutWithHeader from '@/components/Layout/LayoutWithHeader'
 
-const ConfirmRegistration: NextPage = () => {
+export const ConfirmRegistration: NextPage = () => {
     const {push,replace} = useRouter()
     const onClickHandler = () => {
         push('/auth/signin')
@@ -17,4 +17,3 @@ const ConfirmRegistration: NextPage = () => {
         </LayoutWithHeader>
     )
 }
-export default ConfirmRegistration

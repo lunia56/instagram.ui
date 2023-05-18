@@ -1,24 +1,26 @@
-import React, {PropsWithChildren, ReactElement} from 'react'
-import {NextPage} from 'next'
+import React, { PropsWithChildren, ReactElement } from 'react'
+import { NextPage } from 'next'
 import NavBar from '@/components/NavBar/NavBar'
-import LayoutWithHeader from '@/components/Layout/LayoutWithHeader'
-import {Box, Center} from '@chakra-ui/react'
+import { Box } from '@chakra-ui/react'
+import LayoutWithHeader from "@/components/Layout/LayoutWithHeader";
 
 
-const BaseLayout: NextPage<PropsWithChildren> = ({children}) => (
+export const BaseLayout: NextPage<PropsWithChildren> = ({children}) => {
+
+  return (
     <>
-        <LayoutWithHeader>
-            <NavBar>
-                <Box mt={'55px'} ml={'30px'} >
-                    {children}
-                </Box>
-            </NavBar>
-        </LayoutWithHeader>
+      <LayoutWithHeader>
+        <NavBar>
+          <Box mt={'55px'} ml={'30px'}>
+            {children}
+          </Box>
+        </NavBar>
+      </LayoutWithHeader>
     </>
-)
+  )
+}
 
-export default BaseLayout
 
-export const getLayout = (page: ReactElement) => {
-    return <BaseLayout>{page}</BaseLayout>
+export const getBaseLayout = (page: ReactElement) => {
+  return <BaseLayout>{page}</BaseLayout>
 }
