@@ -3,11 +3,10 @@ import {Box, Button, HStack, Text, VStack, Image, Avatar, Container, Wrap, WrapI
 import {useRouter} from 'next/router'
 import {getLayout} from '@/components/Layout/BaseLayout'
 import {NextPageWithLayout} from '@/pages/_app'
-import ProfileContent from "@/components/Profile/ProfileContent";
+import ProfileContent from '@/components/Profile/ProfileContent'
 
 const ProfilePage: NextPageWithLayout = () => {
     const {push} = useRouter()
-    const [openSubscribers, setOpenSubscribers] = useState<boolean>(false)
 
 
     return (

@@ -63,7 +63,7 @@ export const useLogOutMutation = () => {
         mutationKey:['logout'],
         onSuccess: (res) => {
             push("/");
-            console.log('Logout Succes')
+            console.log('Logout Success')
         },
         onError: (error:AxiosError) => {
             console.log('Logout Error')

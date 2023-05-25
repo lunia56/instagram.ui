@@ -32,8 +32,7 @@ export const InstagramAuthApi = {
         console.log(email)
         return instagramInstance.post('/auth/password-recovery', {email})
     },
-    newPassword:({newPassword, recoveryCode}:AxiosResponseNewPassword) => {
-        debugger
+    newPassword:({newPassword, recoveryCode}) => {
     return instagramInstance.post('/auth/new-password', {newPassword, recoveryCode})
 }
 

@@ -14,7 +14,7 @@ import {
     InputRightElement,
     Link,
     Progress,
-    Text,
+    Text, useToast,
     VStack,
 } from '@chakra-ui/react'
 import {AiOutlineEye, AiOutlineEyeInvisible} from 'react-icons/ai'
@@ -33,7 +33,7 @@ const SignIn = () => {
 const {push} = useRouter()
 
     const {mutate: signIn, error, isLoading} = useSignInMutation()
-
+    const toast = useToast()
     const {
         control,
         handleSubmit,
@@ -47,6 +47,7 @@ const {push} = useRouter()
         // console.log(error.response.config.data);
     }
     const handleClick = () => setShowPassword(!showPassword)
+    console.log('error',error)
 
     return (
         <>
