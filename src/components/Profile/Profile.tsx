@@ -26,7 +26,7 @@ const ProfilePage: NextPageWithLayout = () => {
                         </VStack>
                         <VStack>
                             <Text>кол-во подписчиков</Text>
-                            <Button onClick={()=>{setOpenSubscribers(true)}}>Subscribers</Button>
+                            <Button>Subscribers</Button>
                         </VStack>
                         <VStack>
                             <Text>кол-во публикация</Text>

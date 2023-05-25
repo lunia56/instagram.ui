@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react'
+import React, {useState} from 'react'
 import {Controller, useForm} from 'react-hook-form'
 import s from './CreateNewPassword.module.scss'
 import {
@@ -12,14 +12,11 @@ import {
     Input,
     InputGroup,
     InputRightElement,
-    Link,
     Progress,
-    Text,
-    useToast,
     VStack,
 } from '@chakra-ui/react'
 import {AiOutlineEye, AiOutlineEyeInvisible} from 'react-icons/ai'
-import {useNewPasswordMutation, useRegisterMutation} from '@/services/API-hooks'
+import {useNewPasswordMutation} from '@/services/API-hooks'
 import ModalSendEmail from '@/components/Modal/ModalSendEmail/ModalSendEmail'
 import {useRouter} from "next/router";
 
