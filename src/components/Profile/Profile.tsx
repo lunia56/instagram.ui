@@ -1,10 +1,9 @@
 import React, {useState} from 'react'
-import {Box, Button, HStack, Text, VStack, Image, Avatar, Container, Wrap, WrapItem} from '@chakra-ui/react'
+import {Avatar, Button, Container, HStack, Text, VStack} from '@chakra-ui/react'
 import {useRouter} from 'next/router'
 import {getLayout} from '@/components/Layout/BaseLayout'
 import {NextPageWithLayout} from '@/pages/_app'
 import ProfileContent from '@/components/Profile/ProfileContent'
-import ModalLogout from "@/components/Modal/ModalLogOut/ModalLogout";
 import ModalListSubscribers from "@/components/Modal/ModalListSubscribers/ModalListSubscribers";
 
 const ProfilePage: NextPageWithLayout = () => {
