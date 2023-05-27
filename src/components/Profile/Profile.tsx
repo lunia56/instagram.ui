@@ -4,12 +4,13 @@ import { useRouter } from 'next/router'
 import { NextPageWithLayout } from '@/pages/_app'
 import ProfileContent from '@/components/Profile/ProfileContent'
 import { getBaseLayout } from "@/components/Layout/BaseLayout";
+import { LatestPosts } from "@/module/latest-posts/components/LatestPosts";
 
 const ProfilePage = () => {
     const {push} = useRouter()
 
     return (
-        <Container centerContent maxW="90%">
+        <Container centerContent maxW="90%" textColor={"#ffff"}>
             <HStack spacing={'15px'} mt={'20px'}>
                 <Avatar src={''} size={'lg'} h={'192px'} w={'192px'}/>
                 <VStack alignItems={'flex-start'} spacing={25}>
@@ -37,7 +38,7 @@ const ProfilePage = () => {
                 </VStack>
 
             </HStack>
-            <ProfileContent/>
+            <LatestPosts />
         </Container>
     )
 }

@@ -1,0 +1,13 @@
+.editor {
+    height: 500px;
+}
+
+.edit {
+    height: 100%;
+}
+
+.imageEditor {
+    display: flex;
+    justify-content: center;
+}
+

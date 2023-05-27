@@ -3,11 +3,31 @@ import {useMutation, useQuery} from '@tanstack/react-query'
 import {useRouter} from 'next/router'
 import {AxiosError} from 'axios'
 import ModalSendEmail from "@/components/Modal/ModalSendEmail/ModalSendEmail";
+import { noRefetch } from "@/components/common/helpers/no-refetch";
+import { meSendRequest } from "@/services/instagramInstance";
 
 
-export const useMeQuery = () => {
-    return useQuery({queryKey: ['me'], queryFn: InstagramAuthApi.me})
+export const useMeQuery = (
+  saveUserId?: (userId: number) => void,
+  setHasBusinessAccount?: (hasBusinessAccount: boolean) => void
+) => {
+    return useQuery({
+        queryFn: meSendRequest,
+        onSuccess: data => {
+            if (saveUserId) {
+                saveUserId(data.data.userId)
+            }
+            if (setHasBusinessAccount) {
+                setHasBusinessAccount(data.data.hasBusinessAccount)
+            }
+        },
+        queryKey: ['me'],
+        retry: false,
+        staleTime: 300000,
+        ...noRefetch,
+    })
 }
+
 
 
 

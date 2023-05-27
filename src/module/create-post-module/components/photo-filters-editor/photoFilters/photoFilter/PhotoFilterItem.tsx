@@ -1,20 +1,16 @@
 import React from 'react'
 
 import Image from 'next/image'
+import { IPhoto } from "@/store/storeSelectorPhoto";
 
 type PropsType = {
-  imageSrc: string
+  imageSrc: IPhoto
   filter: string
   filterName: string
   onFilterClick: (filter: string) => void
 }
 
-export const PhotoFilterItem = ({
-                                  imageSrc = '',
-                                  filter = '',
-                                  filterName,
-                                  onFilterClick,
-                                }: PropsType) => {
+export const PhotoFilterItem = ({ imageSrc, filter, filterName, onFilterClick }: PropsType) => {
   const onFilterClickHandler = () => {
     onFilterClick(filter)
   }
@@ -29,12 +25,12 @@ export const PhotoFilterItem = ({
       paddingTop: "5px",
       paddingBlock: "5px"
     }} onClick={onFilterClickHandler}>
-      <Image
+      <img
         alt={`filter ${filter}`}
-        src={imageSrc}
-        style={{filter: filter}}
-        width={108}
-        height={108}
+        src={String(imageSrc.filteredUrl)}
+        style={{ filter: filter }}
+        width={95}
+        height={95}
       />
       <div style={{color: "#E5E7EB",
         fontSize: "16px",

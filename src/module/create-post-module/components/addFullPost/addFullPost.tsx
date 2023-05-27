@@ -1,24 +1,25 @@
-import React, { FC } from 'react'
+import React, { FC, useState } from 'react'
 
 import { useUploadPost } from "@/module/create-post-module/components/hooks/useAddPostImgMutation";
 import { CreatePostModal } from "@/module/create-post-module/components/create-post-modal/CreatePostModal";
 import { AddPublication } from "@/module/create-post-module/components/description-add/add-publication";
-import { clearDatabase } from "@/components/common/indexedDb/clearDatabase";
-import { IMAGES } from "@/module/create-post-module/constants/db-image-names";
 import { useUserStore } from "@/store/userStore";
-import { usePostStore } from "@/store/postStore";
-import { useQueryClient } from "@tanstack/react-query";
+import { useImageSelector } from "@/store/storeSelectorPhoto";
+import { RightDescription } from "@/module/create-post-module/components/description-add/rightDescription";
+
+import { Navigation, Pagination } from 'swiper'
+import { Swiper, SwiperSlide } from "swiper/react";
 
 
 interface IAddFullPost {
   isModalOpen: boolean
   storeAddFullPostModule: (isModalOpen: any) => void
-  callback?: () => void
   filterEditorModule: (isModalOpen: boolean) => void
   onClose: () => void
   setIsDraftModalOpen: (isModalOpen: boolean) => void
+  location: boolean
+  callback?: () => void
 }
-
 
 export const AddFullPost: FC<IAddFullPost> = ({
                                                 isModalOpen,
@@ -26,28 +27,22 @@ export const AddFullPost: FC<IAddFullPost> = ({
                                                 filterEditorModule,
                                                 onClose,
                                                 setIsDraftModalOpen,
+                                                location,
+                                                callback,
                                               }) => {
-
-  const {postPhotos, clearPostPhotos, postDescription, isLoadedFromDB} = usePostStore()
   const {userId} = useUserStore()
-  let imageUrl = postPhotos[0].filteredPhoto
+  const {imagesSelector, setDescription, description} = useImageSelector()
 
+  const [postDescription, setPostDescription] = useState(description)
   const onSuccessPostSent = () => {
-    if (isLoadedFromDB) {
-      clearDatabase({
-        dbName: IMAGES.DB_NAME,
-        storeName: IMAGES.STORE_NAME,
-        keyPath: IMAGES.KEY_PATH,
-      })
-    }
-    clearPostPhotos()
     onClose()
+    setDescription('')
     storeAddFullPostModule(false)
   }
 
   const {mutate: addPhotoToThePost, isLoading} = useUploadPost(onSuccessPostSent, userId!)
-
   const onCloseClick = () => {
+    setDescription(postDescription)
     setIsDraftModalOpen(true)
     onClose()
     storeAddFullPostModule(false)
@@ -61,33 +56,69 @@ export const AddFullPost: FC<IAddFullPost> = ({
   const addAllPost = async () => {
     const formData = new FormData()
 
-    const blobUrl = imageUrl as RequestInfo | URL
+    await Promise.all(
+      imagesSelector.map(async photo => {
+        // @ts-ignore
+        const response = await fetch(photo.finalUrl)
+        const blob = await response.blob()
 
-    fetch(blobUrl)
-      .then(response => response.blob())
-      .then((blob: Blob) => {
-        formData.append('files', blob) // add file to Form data
-
-        formData.append('description', postDescription) // add description to Form data
-        addPhotoToThePost(formData)
+        formData.append('files', blob)
       })
+    )
+
+    formData.append('description', postDescription)
+    addPhotoToThePost(formData)
   }
 
-  if (isLoading) return <div>Loading</div>
+  if (isLoading) return <div>load</div>
 
   return (
-    <>
-      <CreatePostModal
-        isOpen={isModalOpen}
-        onBackClick={onBackClick}
-        onClose={onCloseClick}
-        title={'Publication'}
-        onBtnClick={addAllPost}
-        showBackArrow={true}
-        variant={'Publish'}
-      >
-        <AddPublication location={true} imageUrl={imageUrl}/>
-      </CreatePostModal>
-    </>
+    <CreatePostModal
+      isOpen={isModalOpen}
+      onBackClick={onBackClick}
+      onClose={onCloseClick}
+      title={'Publication'}
+      onBtnClick={addAllPost}
+      showBackArrow={true}
+      variant={'Publish'}
+    >
+      <div style={{
+        display: "flex",
+        flexWrap: "wrap",
+        flexDirection: "row",
+      }}>
+        <div
+          style={{maxWidth: "438px"}}
+        >
+          <div>
+            <Swiper
+              style={{height: "100%"}}
+              modules={[Navigation, Pagination]}
+              navigation
+              pagination={{clickable: true}}
+            >
+              {imagesSelector.map((image, ind) => {
+                if (image) {
+                  return (
+                    <SwiperSlide key={ind}>
+                      <AddPublication key={ind} location={true} imageUrl={image}/>
+                    </SwiperSlide>
+                  )
+                } else {
+                  return null
+                }
+              })}
+            </Swiper>
+          </div>
+        </div>
+        <div style={{maxWidth: "480px"}}>
+          <RightDescription
+            text={postDescription}
+            callback={callback}
+            setText={setPostDescription}
+          />
+        </div>
+      </div>
+    </CreatePostModal>
   )
 }

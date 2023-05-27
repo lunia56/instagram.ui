@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react'
+import { useRouter } from 'next/router'
 
 import Image from 'next/image'
 import Link from 'next/link'
-import { useRouter } from 'next/router'
 
 import plusOutline from '@/assets/Image/modal/plus-square-outline.svg'
 import {
@@ -11,15 +11,15 @@ import {
   useStoreFilterEditorModal,
   useStoreWithContentModal
 } from "@/components/Modal/store/store";
+
 import { FiltersEditor } from "@/module/create-post-module/components/photo-filters-editor/FiltersEditor";
 import { AddFullPost } from "@/module/create-post-module/components/addFullPost/addFullPost";
 import { PhotoUploader } from "@/module/create-post-module/components/photo-uploader/PhotoUploader";
 import { CropEditor } from "@/module/create-post-module/components/photo-crop-editor/CropEditor";
-import { SaveDraftPost } from "@/module/create-post-module/components/save-draft-post/SaveDraftPost";
+import { useImageSelector } from "@/store/storeSelectorPhoto";
 
 
 export const CreatePost = ({client}:any) => {
-  const [selectedPhoto, setSelectedPhoto] = useState<string | File | null>('')
   const [sidebarModule, setSidebarModule] = useState<boolean>(false)
   const [isDraftModalOpen, setIsDraftModalOpen] = useState(false)
 
@@ -29,6 +29,7 @@ export const CreatePost = ({client}:any) => {
   const cropEditorModal = useStoreCropEditorModal()
   const filterEditorModal = useStoreFilterEditorModal()
   const useStoreAddFullPostModal = useStoreAddPostModal()
+  const { setImageSelector, imagesSelector } = useImageSelector()
 
   const onAddPhotoClick = () => {
     setSidebarModule(true)
@@ -36,7 +37,6 @@ export const CreatePost = ({client}:any) => {
   }
 
   const onCloseClick = () => {
-    setSelectedPhoto('')
     modalWithContent.setIsModalOpen(false)
     cropEditorModal.setIsModalOpen(false)
     replace(pathname)
@@ -57,6 +57,7 @@ export const CreatePost = ({client}:any) => {
       !useStoreAddFullPostModal.isModalOpen
     ) {
       setSidebarModule(false)
+      replace(pathname)
     }
   }, [
     modalWithContent.isModalOpen,
@@ -78,14 +79,13 @@ export const CreatePost = ({client}:any) => {
         <Image style={{marginRight: "15px"}} src={plusOutline} alt={'Create'} height={24} width={24}/>
         <div>Create</div>
       </Link>
-      {<PhotoUploader setSelectedPhoto={setSelectedPhoto} />}
-      {selectedPhoto && (
+
+      {query.create && <PhotoUploader />}
+      {imagesSelector && (
         <CropEditor
-          setSelectedPhoto={setSelectedPhoto}
           isModalOpen={cropEditorModal.isModalOpen}
           filterEditorModule={filterEditorModal.setIsModalOpen}
           cropEditorModule={cropEditorModal.setIsModalOpen}
-          image={selectedPhoto}
           onClose={onCloseClick}
         />
       )}
@@ -94,13 +94,14 @@ export const CreatePost = ({client}:any) => {
           isModalOpen={filterEditorModal.isModalOpen}
           cropEditorModule={cropEditorModal.setIsModalOpen}
           filterEditorModule={filterEditorModal.setIsModalOpen}
-          useStoreAddFullPostModule={useStoreAddFullPostModal.setIsModalOpen}
+          storeAddFullPostModule={useStoreAddFullPostModal.setIsModalOpen}
           onClose={onCloseClick}
           setIsDraftModalOpen={setIsDraftModalOpen}
         />
       )}
       {useStoreAddFullPostModal.isModalOpen && (
         <AddFullPost
+          location={false}
           isModalOpen={useStoreAddFullPostModal.isModalOpen}
           storeAddFullPostModule={useStoreAddFullPostModal.setIsModalOpen}
           filterEditorModule={filterEditorModal.setIsModalOpen}
@@ -108,12 +109,12 @@ export const CreatePost = ({client}:any) => {
           setIsDraftModalOpen={setIsDraftModalOpen}
         />
       )}
-      {isDraftModalOpen && (
-        <SaveDraftPost
-          isDraftModalOpen={isDraftModalOpen}
-          setIsDraftModalOpen={setIsDraftModalOpen}
-        />
-      )}
+      {/*{isDraftModalOpen && (*/}
+      {/*  <SaveDraftPost*/}
+      {/*    isDraftModalOpen={isDraftModalOpen}*/}
+      {/*    setIsDraftModalOpen={setIsDraftModalOpen}*/}
+      {/*  />*/}
+      {/*)}*/}
     </div>
   )
 }

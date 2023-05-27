@@ -1,6 +1,14 @@
 import axios, {AxiosError, AxiosResponse} from 'axios'
 
-const baseURL = 'https://inctagram-production.up.railway.app/'
+export type ResMe = {
+    userId: number
+    userName: string | null
+    email: string
+    hasBusinessAccount: boolean
+}
+
+// const baseURL = 'https://inctagram-production.up.railway.app/'
+const baseURL = 'http://localhost:3000/'
 export const instagramInstance = axios.create({
     baseURL: baseURL,
     withCredentials: true
@@ -9,11 +17,18 @@ export const instagramInstance = axios.create({
 // interceptors- перехватывает наши запросы на сервер
 // при каждом запросе у нас в header запроса прикрепляется наш токен
 
-instagramInstance.interceptors.request.use((config) => {
-    config.headers.Authorization = `Bearer ${localStorage.getItem('token')}`
-    return config
-})
+export const meSendRequest = () => {
+    return instagramInstance.get<ResMe>('auth/me')
+}
 
+instagramInstance.interceptors.request.use(
+  config => {
+      config.headers.Authorization = `Bearer ${localStorage.getItem('accessToken')}`
+
+      return config
+  },
+  error => Promise.reject(error)
+)
 
 
 

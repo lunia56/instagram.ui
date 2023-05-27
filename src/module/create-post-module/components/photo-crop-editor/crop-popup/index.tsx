@@ -54,9 +54,10 @@ export const CropPopup: FC<PropsType> = ({setAspect}) => {
             padding: "0.75rem",
             borderRadius: "0.125rem",
             opacity: "0.8",
-            top: "-32px",
+            top: "-120px",
             color: "#F4F4F5",
-            width: "40px"
+            width: "100px",
+            zIndex: "1"
           }}
         >
           <div
@@ -71,6 +72,7 @@ export const CropPopup: FC<PropsType> = ({setAspect}) => {
             1:1
             <Image src={rectangle11} alt={'rectangle11'} width={18} height={18}/>
           </div>
+
           <div
             style={{
               display: "flex",

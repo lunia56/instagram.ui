@@ -24,13 +24,13 @@ function rotateSize(width: number, height: number, rotation: number): Size {
 }
 
 export default async function getCroppedImg(
-  imageSrc: string,
-  pixelCrop: Area,
+  imageSrc: string | Blob,
+  pixelCrop: Area | undefined,
   filter: string = 'none',
   rotation = 0,
   flip = { horizontal: false, vertical: false }
 ): Promise<unknown> {
-  const image = await createImage(imageSrc)
+  const image = await createImage(String(imageSrc))
   const canvas = document.createElement('canvas')
   const ctx = canvas.getContext('2d')
 
@@ -53,10 +53,19 @@ export default async function getCroppedImg(
   ctx.filter = filter || 'none'
   ctx.drawImage(image, 0, 0)
 
-  const data = ctx.getImageData(pixelCrop.x, pixelCrop.y, pixelCrop.width, pixelCrop.height)
+  // @ts-ignore
+  const data = ctx.getImageData(pixelCrop.x!, pixelCrop.y!, pixelCrop.width!, pixelCrop.height!)
 
-  canvas.width = pixelCrop.width
-  canvas.height = pixelCrop.height
+  // @ts-ignore
+  if (typeof pixelCrop.width === 'number') {
+    // @ts-ignore
+    canvas.width = pixelCrop.width
+  }
+  // @ts-ignore
+  if (typeof pixelCrop.height === 'number') {
+    // @ts-ignore
+    canvas.height = pixelCrop.height
+  }
 
   ctx.putImageData(data, 0, 0)
 

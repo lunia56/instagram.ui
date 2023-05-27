@@ -2,12 +2,18 @@ import React, { ChangeEvent, FC } from 'react'
 import { usePostStore } from "@/store/postStore";
 import { useQuery } from "@tanstack/react-query";
 import { instagramInstance } from "@/services/instagramInstance";
+import { Textarea } from "@/components/Modal/CreatePost/textarea/Textarea";
+import { Avatar } from "@/components/common/avatar/Avatar";
+import { GlobalButton } from "@/components/Modal/CreatePost/buttons/GlobalButton";
+import { Location } from "@/module/create-post-module/components/location/location";
 
 const MAX_CHARACTERS = 500
 
 type RightDescriptionType = {
-  location: boolean
+  location?: boolean
   callback?: () => void
+  text?: string
+  setText?: (newText: string) => void
 }
 
 type RootProfile = {
@@ -69,42 +75,57 @@ const useGetProfile = () => {
 }
 
 
-export const RightDescription: FC<RightDescriptionType> = ({location, callback}) => {
+export const RightDescription: FC<RightDescriptionType> = ({
+                                                             location = true,
+                                                             callback,
+                                                             text,
+                                                             setText,
+                                                           }) => {
   const {profileData, profileAvatar} = useGetProfile()
   const avatar = profileAvatar && profileAvatar
   const userName = profileData && profileData.userName
 
-  const {setPostDescription, postDescription} = usePostStore()
-
   const handleTextChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
-    setPostDescription(e.currentTarget.value)
+    if (setText) {
+      setText(e.currentTarget.value)
+    }
   }
 
   return (
     <div style={{
       display: "flex",
       flexDirection: "column",
-      width: "536px"
+      gap: "3px",
+      width: "536px",
+      paddingTop: "4px",
+      paddingRight: "4px",
+      paddingBottom: "4px",
+      paddingLeft: "4p",
     }}>
-      <div style={{display: "flex", textAlign: "center"}}>
+      <div style={{display: "flex", textAlign: "center", gap: "3px"}}>
         {/*<Avatar alt={'photoAvatar'} width={55} height={55} src={avatar} />*/}
         <div>{userName}</div>
       </div>
       <div style={{display: "flex"}}>
-        {/*<Textarea*/}
-        {/*  maxLength={MAX_CHARACTERS}*/}
-        {/*  value={postDescription}*/}
-        {/*  onChange={handleTextChange}*/}
-        {/*  label={'Add publication description'}*/}
-        {/*/>*/}
-        <p>{postDescription ? `${postDescription.length} / ${MAX_CHARACTERS}` : '0 / 500'}</p>
-      </div>
+        <Textarea
+          maxLength={MAX_CHARACTERS}
+          value={text}
+          onChange={handleTextChange}
+          label={'Add publication description'}
+        />
+        <p style={{
+          textAlign: "end",
+          fontSize: "12px"
+
+        }}>
+          {text ? `${text.length} / ${MAX_CHARACTERS}` : '0 / 500'}
+        </p></div>
 
       {/*{location ? (*/}
       {/*  <Location />*/}
       {/*) : (*/}
       {/*  <GlobalButton callback={callback} type={'submit'}>*/}
-      {/*    Edit*/}
+      {/*    Save changes*/}
       {/*  </GlobalButton>*/}
       {/*)}*/}
     </div>
