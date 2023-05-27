@@ -1,5 +1,6 @@
 import React, { ButtonHTMLAttributes, FC, ReactNode } from 'react'
 import style from "./GlobalButton.module.css"
+
 type ButtonVariant = 'default' | 'white' | 'transparent' | 'black'
 
 interface PropsType {
@@ -30,7 +31,7 @@ export const GlobalButton: FC<PropsType> = ({
                                             }) => {
   return (
     <button
-      style={{fontSize: "16px", marginTop: "60px", marginBottom: "60px", fontWeight: "600"}}
+      style={{backgroundColor:"#397DF6",width:"77%",fontSize: "16px", marginTop: "60px", marginBottom: "60px", fontWeight: "600"}}
       onClick={callback}
       type={type}
       disabled={disabled}

@@ -1,0 +1,24 @@
+.label {
+
+  @apply block pb-[5px] text-light-900 text-[14px];
+}
+
+.textarea {
+
+  @apply py-[6px] px-[12px] bg-bgLogBorder text-light-900 text-[16px] border-[1px]  border-light-900 rounded-[2px];
+}
+
+.textareaError {
+
+  @apply border-danger-500 border-[1px];
+}
+
+.textareaDisabled {
+
+  @apply text-dark-100 border-dark-100;
+}
+
+.error {
+
+  @apply text-danger-500 text-[14px];
+}
