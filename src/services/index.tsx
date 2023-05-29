@@ -45,7 +45,6 @@ export const InstagramUserApi = {
   getProfile: () => {
     return instagramInstance.get<AxiosResponse<profileData>>('users/profile')
   }
-
 }
 
 type AxiosResponseMe = {
