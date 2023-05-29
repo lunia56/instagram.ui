@@ -3,7 +3,7 @@ import React, { useRef } from 'react'
 import ImagePlaceholder from 'next/image'
 
 import placeholder from '@/assets/Image/modal/img-placeholder.png'
-import { GlobalButton } from "@/components/Modal/buttons/GlobalButton";
+import { GlobalButton } from "@/components/Modal/CreatePost/buttons/GlobalButton";
 
 type PropsType = {
   setSelectedPhoto: (file: File) => void

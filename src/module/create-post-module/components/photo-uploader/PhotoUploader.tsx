@@ -7,11 +7,11 @@ import {
 import { usePostStore } from "@/store/postStore";
 import { ModalWithContent } from "@/components/Modal/CreatePost/modalWithContent/ModalWithContent";
 import { PhotoSelector } from "@/module/create-post-module/components/photoSelector/PhotoSelector";
-import { GlobalButton } from "@/components/Modal/buttons/GlobalButton";
 import { getItemFromDatabase } from "@/module/create-post-module/utils/getImageFromDatabase";
 import { IMAGES } from "@/module/create-post-module/constants/db-image-names";
 import { countData } from "@/components/common/indexedDb/countData";
 import { useRouter } from "next/router";
+import { GlobalButton } from "@/components/Modal/CreatePost/buttons/GlobalButton";
 
 type PropsType = {
   setSelectedPhoto: (photo: string | File | null) => void
