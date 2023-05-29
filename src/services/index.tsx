@@ -38,10 +38,6 @@ export const InstagramAuthApi = {
 
 }
 
-type AxiosResponseNewPassword = {
-    newPassword:string
-    recoveryCode:string
-}
 export const InstagramUserApi={
     updateProfile:(profileData:profileData)=>{
         return instagramInstance.put<AxiosResponse<profileData>>('users/profile',profileData)
