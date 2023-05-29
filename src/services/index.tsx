@@ -2,11 +2,13 @@ import {instagramInstance} from '@/services/instagramInstance'
 import {AxiosResponse} from 'axios'
 
 export const InstagramAuthApi = {
-    signUp:({login,email,password}:RegistrationData):Promise<AxiosResponse>=>{
+    signUp:({login,password, email}:RegistrationData):Promise<AxiosResponse>=>{
+        debugger
         return instagramInstance.post('/auth/registration',{
             login,
+            password,
             email,
-            password
+
         })
     },
     me:():Promise<AxiosResponse<AxiosResponseMe>> =>{
@@ -32,16 +34,13 @@ export const InstagramAuthApi = {
         console.log(email)
         return instagramInstance.post('/auth/password-recovery', {email})
     },
-    newPassword:({newPassword, recoveryCode}) => {
+    newPassword:({newPassword, recoveryCode}:AxiosResponseNewPassword) => {
     return instagramInstance.post('/auth/new-password', {newPassword, recoveryCode})
 }
 
 }
 
-type AxiosResponseNewPassword = {
-    newPassword:string
-    recoveryCode:string
-}
+
 export const InstagramUserApi={
     updateProfile:(profileData:profileData)=>{
         return instagramInstance.put<AxiosResponse<profileData>>('users/profile',profileData)
@@ -50,6 +49,11 @@ export const InstagramUserApi={
         return instagramInstance.get<AxiosResponse<profileData>>('users/profile')
     }
 
+}
+
+type AxiosResponseNewPassword = {
+    newPassword:string
+    recoveryCode:string
 }
 
 type AxiosResponseMe = {

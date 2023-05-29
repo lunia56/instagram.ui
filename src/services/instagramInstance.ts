@@ -1,6 +1,7 @@
 import axios, {AxiosError, AxiosResponse} from 'axios'
 
-const baseURL = 'https://inctagram-production.up.railway.app/'
+// const baseURL = 'https://inctagram-production.up.railway.app/'
+const baseURL = 'http://localhost:3000/'
 export const instagramInstance = axios.create({
     baseURL: baseURL,
     withCredentials: true
