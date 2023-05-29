@@ -22,8 +22,8 @@ const ProfileContent = () => {
             next={fetchMoreData}
             hasMore={true}
             loader={
-            // <Box justifyContent={'center'}>
-                <Spinner size="xl"/>}
+                <Spinner size="xl"/>
+            }
 
         >
             <Wrap spacing={'20px'} mt={'20px'}>
@@ -37,7 +37,6 @@ const ProfileContent = () => {
                 ))}
             </Wrap>
         </InfiniteScroll>
-
     )
 }
 

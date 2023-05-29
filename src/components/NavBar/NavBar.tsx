@@ -1,4 +1,4 @@
-import React, { PropsWithChildren, useState } from 'react'
+import React, { PropsWithChildren } from 'react'
 import { Flex, Grid, GridItem, Icon, Link, VStack } from '@chakra-ui/react'
 
 import { NextPage } from 'next'
@@ -9,7 +9,6 @@ import Trending from '@/assets/Image/NavBar/Trending'
 import Account from '@/assets/Image/NavBar/Account'
 import LogOut from '@/assets/Image/NavBar/LogOut'
 import { CreatePost } from "@/module/create-post-module/CreatePost";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 
 const NavBar: NextPage<PropsWithChildren> = ({children}) => {
@@ -27,7 +26,6 @@ const NavBar: NextPage<PropsWithChildren> = ({children}) => {
       fontWeight="bold"
       position={'relative'}
     >
-
       <GridItem marginLeft={'40px'} area={'nav'} h="95vh" borderRight={'2px #171717 solid'}
                 position={'fixed'} w={'220px'}>
         <Flex direction={'column'} gap={'15px'} alignItems={'flex-start'} h={'100%'}

@@ -7,7 +7,7 @@ import styles from './Textarea.module.css'
 type TextareaType = {
   value: string
   label: string
-  textAreaClassName: string
+  textAreaClassName: any
   error: string | FieldValues | any
   ref: ForwardedRef<any>
   defaultValue: string | undefined
@@ -18,6 +18,7 @@ type TextareaType = {
   disabled?: boolean
 }
 
+// eslint-disable-next-line react/display-name
 export const Textarea: FC<Partial<TextareaType>> = forwardRef(
   (
     {
@@ -43,6 +44,12 @@ export const Textarea: FC<Partial<TextareaType>> = forwardRef(
         {label && <label className={styles.label}>{label}</label>}
 
         <textarea
+          style={{
+            width: "100%",
+            resize: "none",
+            border: "1px solid #718096",
+            outline:"none"
+          }}
           className={textareaStyles}
           onChange={onChange}
           value={value}
@@ -55,7 +62,7 @@ export const Textarea: FC<Partial<TextareaType>> = forwardRef(
           maxLength={maxLength}
         />
 
-        <div className={'h-6'}>
+        <div style={{height: "6px"}}>
           <span className={styles.error}>{error ? error : ''}</span>
         </div>
       </div>

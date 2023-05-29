@@ -4,43 +4,43 @@ import {
   useStoreCropEditorModal,
   useStoreWithContentModal
 } from "@/components/Modal/store/store";
-import { usePostStore } from "@/store/postStore";
 import { ModalWithContent } from "@/components/Modal/CreatePost/modalWithContent/ModalWithContent";
 import { PhotoSelector } from "@/module/create-post-module/components/photoSelector/PhotoSelector";
 import { getItemFromDatabase } from "@/module/create-post-module/utils/getImageFromDatabase";
 import { IMAGES } from "@/module/create-post-module/constants/db-image-names";
 import { countData } from "@/components/common/indexedDb/countData";
 import { useRouter } from "next/router";
+import { IPhoto, useImageSelector } from "@/store/storeSelectorPhoto";
 import { GlobalButton } from "@/components/Modal/CreatePost/buttons/GlobalButton";
 
-type PropsType = {
-  setSelectedPhoto: (photo: string | File | null) => void
-}
-export const PhotoUploader = ({setSelectedPhoto}: PropsType) => {
+type PropsType = {}
+export const PhotoUploader = ({}: PropsType) => {
   const [imageDbCount, setImageDbCount] = useState(0)
 
   const modalWithContent = useStoreWithContentModal()
   const useStoreAddFullPostModal = useStoreAddPostModal()
   const cropEditorModal = useStoreCropEditorModal()
-  const {setPhotoFromDB, clearPostPhotos, setUploadId} = usePostStore()
 
-  const {replace, pathname} = useRouter()
+  const { replace, pathname } = useRouter()
 
-  const onSetSelectedPhotoClick = (file: any) => {
-    setSelectedPhoto(file)
-    setUploadId()
-  }
+  const { setImageSelector, setDescription } = useImageSelector()
+
   const onSuccessOpenDraft = async (data: any) => {
-    let filteredPhoto = URL.createObjectURL(data.filteredPhoto)
-    let croppedPhoto = URL.createObjectURL(data.croppedPhoto)
-    const {uploadId, description, cropSize} = data
+    let { photoArray, description } = data
 
-    await setPhotoFromDB(uploadId, croppedPhoto, filteredPhoto, description, cropSize)
-    useStoreAddFullPostModal.setIsModalOpen(true)
+    photoArray.map((photo: IPhoto) => {
+      // @ts-ignore
+      photo.filteredUrl = URL.createObjectURL(photo.filteredUrl)
+      // @ts-ignore
+      photo.finalUrl = URL.createObjectURL(photo.finalUrl)
+      // @ts-ignore
+      photo.url = URL.createObjectURL(photo.url)
+    })
+    setImageSelector(photoArray)
+    setDescription(description)
   }
   const onOpenDraftClick = async () => {
-    clearPostPhotos()
-
+    setImageSelector([])
     await getItemFromDatabase({
       onSuccess: onSuccessOpenDraft,
       keyPath: IMAGES.KEY_PATH,
@@ -48,6 +48,7 @@ export const PhotoUploader = ({setSelectedPhoto}: PropsType) => {
       dbName: IMAGES.DB_NAME,
     })
     modalWithContent.setIsModalOpen(false)
+    useStoreAddFullPostModal.setIsModalOpen(true)
   }
 
   const onCloseClick = () => {
@@ -75,7 +76,7 @@ export const PhotoUploader = ({setSelectedPhoto}: PropsType) => {
         <PhotoSelector
           cropEditorModule={cropEditorModal.setIsModalOpen}
           modalWithContent={modalWithContent.setIsModalOpen}
-          setSelectedPhoto={onSetSelectedPhotoClick}
+          maxImageSize={5}
         />
         {imageDbCount > 0 && (
           <GlobalButton type={'button'} callback={onOpenDraftClick}>

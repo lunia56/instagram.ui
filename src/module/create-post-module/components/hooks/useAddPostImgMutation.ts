@@ -5,13 +5,11 @@ import { sendPublicationImage } from "@/module/create-post-module/components/api
 export const useUploadPost = (onSuccessPostSent: any, userId: number) => {
   const client = useQueryClient()
 
-
   const { isLoading, mutate, data, isSuccess } = useMutation({
     mutationKey: ['img-add'],
     mutationFn: sendPublicationImage,
     onSuccess: data => {
       onSuccessPostSent(data.data.images)
-      // onSuccessUploadPost && onSuccessUploadPost()
       client.invalidateQueries({ queryKey: ['posts', `user_${userId}`] })
       toast.success('Success')
     },
