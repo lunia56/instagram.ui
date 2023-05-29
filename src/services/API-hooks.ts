@@ -1,8 +1,7 @@
-import {InstagramAuthApi, InstagramUserApi} from '@/services/index'
-import {useMutation, useQuery} from '@tanstack/react-query'
-import {useRouter} from 'next/router'
-import {AxiosError} from 'axios'
-import ModalSendEmail from "@/components/Modal/ModalSendEmail/ModalSendEmail";
+import { InstagramAuthApi, InstagramUserApi } from '@/services/index'
+import { useMutation, useQuery } from '@tanstack/react-query'
+import { useRouter } from 'next/router'
+import { AxiosError } from 'axios'
 import { noRefetch } from "@/components/common/helpers/no-refetch";
 import { meSendRequest } from "@/services/instagramInstance";
 
