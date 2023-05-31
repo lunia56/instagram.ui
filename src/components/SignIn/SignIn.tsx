@@ -23,7 +23,7 @@ import {useRouter} from 'next/router'
 
 
 type  FormValues = {
-    email: string
+    loginOrEmail: string
     password: string
 }
 const SignIn = () => {
@@ -59,12 +59,12 @@ const {push} = useRouter()
                         <form onSubmit={handleSubmit(onSubmit)}>
                             <VStack spacing={2} align="stretch" >
 
-                                <FormControl isInvalid={Boolean(errors.email)} isRequired>
+                                <FormControl isInvalid={Boolean(errors.loginOrEmail)} isRequired>
                                     <FormLabel color={'#4C4C4C'}>Email</FormLabel>
 
                                     <Controller
                                         control={control}
-                                        name="email"
+                                        name="loginOrEmail"
                                         rules={{
                                             required: 'Email is required',
                                             pattern: {
@@ -82,7 +82,7 @@ const {push} = useRouter()
                                         </>)}
                                     />
                                     <FormErrorMessage>
-                                        {errors.email && <span>{errors.email.message}</span>}
+                                        {errors.loginOrEmail && <span>{errors.loginOrEmail.message}</span>}
                                     </FormErrorMessage>
                                 </FormControl>
 

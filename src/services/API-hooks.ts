@@ -1,9 +1,8 @@
-import { useMutation, useQuery } from "@tanstack/react-query";
-import { meSendRequest } from "@/services/instagramInstance";
-import { noRefetch } from "@/components/common/helpers/no-refetch";
-import { InstagramAuthApi, InstagramUserApi } from "@/services/index";
-import { AxiosError } from "axios";
-import { useRouter } from "next/router";
+import {InstagramAuthApi, InstagramUserApi} from '@/services/index'
+import {useMutation, useQuery} from '@tanstack/react-query'
+import {useRouter} from 'next/router'
+import {AxiosError} from 'axios'
+import ModalSendEmail from '@/components/Modal/ModalSendEmail/ModalSendEmail'
 
 
 export const useMeQuery = (
@@ -26,7 +25,6 @@ export const useMeQuery = (
         ...noRefetch,
     })
 }
-
 
 
 
@@ -119,14 +117,16 @@ export const usePasswordRecoveryMutation = (onSuccessHandler: () => void) => {
 }
 
 export const useNewPasswordMutation = () => {
+    const { push } = useRouter();
     return useMutation({
         mutationFn: InstagramAuthApi.newPassword,
-        mutationKey: ['newPassword'],
+        mutationKey:['newPassword'],
         onSuccess: (res) => {
-
+            push('/')
         },
-        onError: (error: AxiosError) => {
-            console.log('recovery error')
+        onError: (error:AxiosError) => {
+            push('/auth/linkExpired')
+
         }
     })
 }

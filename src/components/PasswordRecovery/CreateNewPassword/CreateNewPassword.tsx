@@ -12,23 +12,28 @@ import {
     Input,
     InputGroup,
     InputRightElement,
-    Link,
     Progress,
-    Text,
-    useToast,
     VStack,
 } from '@chakra-ui/react'
 import {AiOutlineEye, AiOutlineEyeInvisible} from 'react-icons/ai'
-import {useRegisterMutation} from '@/services/API-hooks'
+import {useNewPasswordMutation} from '@/services/API-hooks'
 import ModalSendEmail from '@/components/Modal/ModalSendEmail/ModalSendEmail'
+import {useRouter} from "next/router";
 
 
 type  FormValues = {
     password: string
     confirmPassword: string
 }
-const SignUp = () => {
-    // const [isSubmitting, setIsSubmitting] = useState(false);
+const CreateNewPassword = () => {
+    const router = useRouter()
+    const code = router.query.code
+    const email = localStorage.getItem('email')
+
+
+
+    console.log(router.query.code)
+    const {mutate: sentNewPassword,error,variables, isLoading, status} = useNewPasswordMutation()
     const [showPassword, setShowPassword] = useState(false)
     const [isOpen, setIsOpen] = useState(false)
 
@@ -41,17 +46,10 @@ const SignUp = () => {
     } = useForm<FormValues>({mode: 'onChange'})
 
 
-    const {
-        mutate: signUp,
-        isError,
-        error,
-        variables,
-        isLoading,
-        status
-    } = useRegisterMutation(setError, () => setIsOpen(true))
 
     const onSubmit = (data: FormValues) => {
-        signUp(data)
+        sentNewPassword({newPassword: data.password, recoveryCode: String(code)})
+
     }
     const handleClickShowPassword = () => setShowPassword(!showPassword)
 
@@ -175,9 +173,9 @@ const SignUp = () => {
                     </Box>
                 </VStack>
             </Box>
-            {isOpen && <ModalSendEmail modalOnClick={() => setIsOpen(false)} email={variables?.email}/>}
+            {isOpen && <ModalSendEmail modalOnClick={() => setIsOpen(false)} email={email ? email : undefined}/>}
         </>
     )
 }
 
-export default SignUp
+export default CreateNewPassword

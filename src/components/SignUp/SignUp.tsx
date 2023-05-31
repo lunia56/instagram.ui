@@ -55,7 +55,8 @@ const SignUp = () => {
     } = useRegisterMutation(setError, () => setIsOpen(true))
 
     const onSubmit = (data: FormValues) => {
-        signUp(data)
+        debugger
+        signUp({login:data.login,  password:data.password, email:data.email })
     }
     const handleClickShowPassword = () => setShowPassword(!showPassword)
 
