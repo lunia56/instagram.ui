@@ -8,6 +8,8 @@ import { LatestPosts } from "@/module/latest-posts/components/LatestPosts";
 
 const ProfilePage = () => {
     const {push} = useRouter()
+    const [openSubscribers, setOpenSubscribers] = useState(false)
+
 
     return (
         <Container centerContent maxW="90%" textColor={"#ffff"}>
@@ -26,7 +28,7 @@ const ProfilePage = () => {
                         </VStack>
                         <VStack>
                             <Text>кол-во подписчиков</Text>
-                            <Text>Subscribers</Text>
+                            <Button onClick={()=>setOpenSubscribers(!openSubscribers)}>Subscribers</Button>
                         </VStack>
                         <VStack>
                             <Text>кол-во публикация</Text>
@@ -35,8 +37,9 @@ const ProfilePage = () => {
                     </HStack>
                     <Text> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Culpa cupiditate earum harum hic
                         magni molestiae omnis praesentium quas reiciendis tenetur.</Text>
-                </VStack>
+                    {openSubscribers && <ModalListSubscribers modalOnClick={() => setOpenSubscribers(false)} />}
 
+                </VStack>
             </HStack>
             <LatestPosts />
         </Container>
