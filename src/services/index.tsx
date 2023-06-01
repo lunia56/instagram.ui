@@ -65,7 +65,7 @@ type RegistrationData = {
     password: string
 }
 type SignInData = {
-    email: string
+    loginOrEmail: string
     password: string
 }
 type profileData = {
