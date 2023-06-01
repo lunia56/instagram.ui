@@ -3,6 +3,8 @@ import {useMutation, useQuery} from '@tanstack/react-query'
 import {useRouter} from 'next/router'
 import {AxiosError} from 'axios'
 import ModalSendEmail from '@/components/Modal/ModalSendEmail/ModalSendEmail'
+import {meSendRequest} from "@/services/instagramInstance";
+import {noRefetch} from "@/components/common/helpers/no-refetch";
 
 
 export const useMeQuery = (
