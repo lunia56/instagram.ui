@@ -5,6 +5,7 @@ import { NextPageWithLayout } from '@/pages/_app'
 import ProfileContent from '@/components/Profile/ProfileContent'
 import { getBaseLayout } from "@/components/Layout/BaseLayout";
 import { LatestPosts } from "@/module/latest-posts/components/LatestPosts";
+import ModalListSubscribers from "@/components/Modal/ModalListSubscribers/ModalListSubscribers";
 
 const ProfilePage = () => {
     const {push} = useRouter()
